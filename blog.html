@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="sub-page">
+<!-- Navigation -->
+<nav id="nav" class="scrolled">
+    <div class="container">
+        <div class="nav-content">
+            <a href="index.html" class="logo">PORTFOLIO</a>
+
+            <!-- Desktop Navigation -->
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#skills" class="nav-link">Skills</a>
+                <a href="index.html#experience" class="nav-link">Education</a>
+                <a href="index.html#projects" class="nav-link">Projects</a>
+                <a href="blog.html" class="nav-link active">Blog</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span class="menu-icon">☰</span>
+                <span class="close-icon">✕</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-content">
+        <a href="index.html" class="mobile-nav-link">Home</a>
+        <a href="index.html#about" class="mobile-nav-link">About</a>
+        <a href="index.html#skills" class="mobile-nav-link">Skills</a>
+        <a href="index.html#experience" class="mobile-nav-link">Education</a>
+        <a href="index.html#projects" class="mobile-nav-link">Projects</a>
+        <a href="blog.html" class="mobile-nav-link">Blog</a>
+        <a href="index.html#contact" class="mobile-nav-link">Contact</a>
+    </div>
+</div>
+
+<!-- Blog Section -->
+<section id="blog" class="blog page-section">
+    <div class="container">
+        <div class="section-content">
+            <h2 class="section-title animate-on-scroll">BLOG</h2>
+            <p class="section-subtitle animate-on-scroll">
+                Thoughts on development, design, and life as a creator
+            </p>
+
+            <div class="blog-grid">
+                <!-- Blog Post 1 -->
+                <a href="posts/post-1.html" class="blog-card-link">
+                    <article class="blog-card animate-on-scroll">
+                        <div class="blog-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1543058871-74a1d669ba70?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RlJTIwZGV2ZWxvcG1lbnR8ZW58MXx8fHwxNzYxNTg2NTA3fDA&ixlib=rb-4.1.0&q=80&w=1080"
+                                 alt="Modern React Patterns" class="blog-image">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span class="blog-date">October 20, 2025</span>
+                                <span class="blog-read-time">5 min read</span>
+                            </div>
+                            <h3 class="blog-title">Modern React Patterns</h3>
+                            <p class="blog-excerpt">
+                                Exploring advanced React patterns and best practices for building scalable applications in 2025.
+                            </p>
+                            <div class="blog-read-more">Read More</div>
+                        </div>
+                    </article>
+                </a>
+
+                <!-- Blog Post 2 -->
+                <a href="posts/post-2.html" class="blog-card-link">
+                    <article class="blog-card animate-on-scroll">
+                        <div class="blog-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwZGVzaWdufGVufDF8fHx8MTc2MTU2NDczOXww&ixlib=rb-4.1.0&q=80&w=1080"
+                                 alt="Mastering CSS Grid" class="blog-image">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span class="blog-date">October 15, 2025</span>
+                                <span class="blog-read-time">8 min read</span>
+                            </div>
+                            <h3 class="blog-title">Mastering CSS Grid</h3>
+                            <p class="blog-excerpt">
+                                A comprehensive guide to CSS Grid Layout and how to create complex responsive layouts with ease.
+                            </p>
+                            <div class="blog-read-more">Read More</div>
+                        </div>
+                    </article>
+                </a>
+
+                <!-- Add more blog posts here as you write them -->
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer-simple">
+    <div class="container">
+        <p>© 2025 Portfolio. Designed & Built with passion.</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
