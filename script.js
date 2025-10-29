@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", function () {
+
+    // (Toàn bộ code của bạn ở trên)
+
 // Navigation scroll effect
 const nav = document.getElementById('nav');
 let lastScroll = 0;
@@ -300,3 +304,126 @@ if (prefersReducedMotion.matches) {
     // Disable animations for users who prefer reduced motion
     document.documentElement.style.setProperty('--animation-duration', '0s');
 }
+
+// Carousel functionality
+const carousel = document.querySelector('.carousel');
+const projectCardsCarousel = document.querySelectorAll('.project-card-carousel');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const indicatorsContainer = document.querySelector('.carousel-indicators');
+
+let currentIndex = 0;
+
+function updateCarousel() {
+    projectCardsCarousel.forEach((card, i) => {
+        card.classList.remove('active', 'prev', 'next');
+        if (i === currentIndex) {
+            card.classList.add('active');
+        } else if (i === (currentIndex - 1 + projectCardsCarousel.length) % projectCardsCarousel.length) {
+            card.classList.add('prev');
+        } else if (i === (currentIndex + 1) % projectCardsCarousel.length) {
+            card.classList.add('next');
+        }
+    });
+    updateIndicators();
+}
+
+function goToNext() {
+    currentIndex = (currentIndex + 1) % projectCardsCarousel.length;
+    updateCarousel();
+}
+
+function goToPrev() {
+    currentIndex = (currentIndex - 1 + projectCardsCarousel.length) % projectCardsCarousel.length;
+    updateCarousel();
+}
+
+function goToSlide(index) {
+    currentIndex = index;
+    updateCarousel();
+}
+
+function createIndicators() {
+    indicatorsContainer.innerHTML = '';
+    projectCardsCarousel.forEach((_, i) => {
+        const indicator = document.createElement('div');
+        indicator.classList.add('indicator');
+        if (i === currentIndex) {
+            indicator.classList.add('active');
+        }
+        indicator.addEventListener('click', () => goToSlide(i));
+        indicatorsContainer.appendChild(indicator);
+    });
+}
+
+function updateIndicators() {
+    const indicators = document.querySelectorAll('.indicator');
+    indicators.forEach((indicator, i) => {
+        indicator.classList.toggle('active', i === currentIndex);
+    });
+}
+
+// Event Listeners
+prevBtn.addEventListener('click', goToPrev);
+nextBtn.addEventListener('click', goToNext);
+
+// Click on prev/next card to make it active
+projectCardsCarousel.forEach((card, i) => {
+    card.addEventListener('click', () => {
+        if (i === (currentIndex - 1 + projectCardsCarousel.length) % projectCardsCarousel.length) {
+            goToPrev();
+        } else if (i === (currentIndex + 1) % projectCardsCarousel.length) {
+            goToNext();
+        }
+    });
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+        goToPrev();
+    } else if (e.key === 'ArrowRight') {
+        goToNext();
+    }
+});
+
+// Touch/Swipe navigation
+let touchStartX = 0;
+let touchEndX = 0;
+
+carousel.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+});
+
+carousel.addEventListener('touchmove', (e) => {
+    touchEndX = e.touches[0].clientX;
+});
+
+carousel.addEventListener('touchend', () => {
+    if (touchStartX - touchEndX > 50) {
+        // Swiped left
+        goToNext();
+    } else if (touchEndX - touchStartX > 50) {
+        // Swiped right
+        goToPrev();
+    }
+});
+
+// Initialize carousel
+createIndicators();
+updateCarousel();
+
+// Prevent pinch-to-zoom on mobile devices
+document.addEventListener('touchstart', function(event) {
+    if (event.touches.length > 1) {
+        event.preventDefault();
+    }
+}, { passive: false });
+
+document.addEventListener('touchmove', function(event) {
+    if (event.touches.length > 1) {
+        event.preventDefault();
+    }
+}, { passive: false });
+
+    });
