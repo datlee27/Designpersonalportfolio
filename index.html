@@ -4,10 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Portfolio - Website Developer</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20251030">
     <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
 </head>
 <body>
+<div id="preloader">
+    <div class="preloader-logo">
+        <span>P</span>
+        <span>O</span>
+        <span>R</span>
+        <span>T</span>
+        <span>F</span>
+        <span>O</span>
+        <span>L</span>
+        <span>I</span>
+        <span>O</span>
+    </div>
+</div>
 <div class="page-wrapper">
     <!-- Navigation -->
     <nav id="nav">
@@ -63,13 +76,10 @@
                     DEVELOPER
                 </h1>
                 <p class="hero-description fade-in-up">
-                    Passionate about merging web development and graphic design to create engaging digital experiences. Naturally exposed to technology in the 4.0 era, I recognize its essential role in modern life. With a solid foundation in software development, design, AI integration, and data synthesis, I bring both technical expertise and creativity to every project. I am always eager to learn new technologies and improve my skills.
+                    Passionate about merging web development and graphic design to create engaging digital experiences. Naturally exposed to technology in the 4.0 era, I recognize its essential role in modern life. With a solid foundation in software development, design, AI integration, and data synthesis, I bring both technical expertise and creativity to every project.
                 </p>
                 <div class="hero-buttons fade-in-up">
-                    <button class="btn btn-primary" onclick="function scrollToSection(about) {
-
-                    }
-                    scrollToSection('about')">View My Work</button>
+                    <button class="btn btn-primary" onclick="scrollToSection('about')">View My Work</button>
                     <a href="#contact" class="btn btn-secondary">Get In Touch</a>
                 </div>
             </div>
@@ -257,11 +267,41 @@
         </div>
         <div class="carousel-container">
             <div class="carousel">
+
+                <!-- Project 1 -->
+                <div class="project-card-carousel">
+                    <img src="https://res.cloudinary.com/ddwt6nl7s/image/upload/v1764500651/A%CC%89nh_ma%CC%80n_hi%CC%80nh_2025-11-30_lu%CC%81c_18.03.15_drt2kr.png" alt="Project Image" class="project-image-carousel">
+                    <div class="project-details">
+                        <span class="project-number">01</span>
+                        <h3 class="project-title-carousel">P2P Electric Vehicle Rental Platform (EcoDana)</h3>
+                        <p class="project-description-carousel">Developed a comprehensive Peer-to-Peer (P2P) electric vehicle rental system, connecting Vehicle Owners and Customers. The system is built with **Spring Boot** and **MySQL**, integrating essential external services like the **PayOS online payment gateway**, **Cloudinary storage**, and **OCR technology** for customer document verification (CitizenID, Driver's License), ensuring a secure and smooth rental process. The platform also features an **AI Virtual Assistant** to help users with search and navigation.</p>
+                        <div class="project-tags-carousel">
+                            <span class="tag">Java</span>
+                            <span class="tag">Spring Boot</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">Thymeleaf</span>
+                            <span class="tag">PayOS Payment</span>
+                            <span class="tag">Cloudinary</span>
+                            <span class="tag">OCR Verification</span>
+                            <span class="tag">Google OAuth2</span>
+                            <span class="tag">AI Assistant</span>
+                        </div>
+                        <a href="https://github.com/datlee27/ecodanav2" class="github-link" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            GitHub
+                        </a>
+
+<!--                    <a href="https://ecodanav2.onrender.com/" class="github-link" target="_blank">-->
+<!--                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>-->
+<!--                            Website Demo-->
+<!--                    </a>-->
+                    </div>
+                </div>
                 <!-- Project 1 -->
                 <div class="project-card-carousel">
                     <img src="assets/img/projectlearning.png" alt="Project Image" class="project-image-carousel">
                     <div class="project-details">
-                        <span class="project-number">01</span>
+                        <span class="project-number">02</span>
                         <h3 class="project-title-carousel">AI-Integrated Learning Management System</h3>
                         <p class="project-description-carousel">Built a full-stack Learning Management System using Java and MySQL to modernize course management. The platform integrates AI to provide smart recommendations and analyze student performance, creating an enhanced learning experience. The project includes a responsive front-end and a well-documented RESTful API.</p>
                         <div class="project-tags-carousel">
@@ -283,7 +323,7 @@
                 <div class="project-card-carousel">
                     <img src="assets/img/projectpic.png" alt="Project Image" class="project-image-carousel">
                     <div class="project-details">
-                        <span class="project-number">02</span>
+                        <span class="project-number">03</span>
                         <h3 class="project-title-carousel">Smart Recycle Bin (IoT Project)</h3>
                         <p class="project-description-carousel">As team leader, I led the design and development of a smart recycle bin for a university IoT project. The Arduino-powered prototype uses IR, metal, and rain sensors to automatically sort waste into metal, wet, and dry categories. This project successfully simplified the recycling process by creating an efficient, automated solution.</p>
                         <div class="project-tags-carousel">
@@ -302,7 +342,7 @@
                 <div class="project-card-carousel">
                     <img src="assets/img/fruitshop.png" alt="Project Image" class="project-image-carousel">
                     <div class="project-details">
-                        <span class="project-number">03</span>
+                        <span class="project-number">04</span>
                         <h3 class="project-title-carousel">Fruit Shop Web App</h3>
                         <p class="project-description-carousel">Developed a complete e-commerce web application for a fruit shop using Java Servlets, JSP, and SQL Server. The site features user authentication, product management (add/edit/delete), and a session-based shopping cart. The responsive design, built with Bootstrap, ensures a great user experience on any device.</p>
                         <div class="project-tags-carousel">
@@ -321,7 +361,7 @@
                 <div class="project-card-carousel">
                     <img src="assets/img/booking.png" alt="Project Image" class="project-image-carousel">
                     <div class="project-details">
-                        <span class="project-number">04</span>
+                        <span class="project-number">05</span>
                         <h3 class="project-title-carousel">Hotel Booking System</h3>
                         <p class="project-description-carousel">As part of a team project, I developed the core features for a web-based hotel booking system. Using Java and MySQL, I implemented user registration, login, and reservation management. The final result was a fully functional system with a responsive front-end and an admin panel for managing room listings.</p>
                         <div class="project-tags-carousel">
@@ -511,7 +551,7 @@
     </section>
 </div>
 
-<script src="script.js"></script>
+<script src="script.js?v=20251030"></script>
 <script>
     (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="c9zgwCRkU8lje3AUpu6-j";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
 </script>
