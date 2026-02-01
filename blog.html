@@ -1,117 +1,207 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="blog-style.css">
     <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,700;1,900&display=swap"
+        rel="stylesheet">
 </head>
-<body class="sub-page">
-<!-- Navigation -->
-<nav id="nav" class="scrolled">
-    <div class="container">
-        <div class="nav-content">
-            <a href="/#" class="logo">PORTFOLIO</a>
 
-            <!-- Desktop Navigation -->
-            <div class="nav-links">
-                <a href="/" class="nav-link">Home</a>
-                <a href="/#about" class="nav-link">About</a>
-                <a href="/#skills" class="nav-link">Skills</a>
-                <a href="/#experience" class="nav-link">Education</a>
-                <a href="/#projects" class="nav-link">Projects</a>
-                <a href="/blog" class="nav-link active">Blog</a>
-                <a href="/#contact" class="nav-link">Contact</a>
+<body>
+    <!-- Navigation -->
+    <nav class="blog-nav">
+        <div class="nav-container">
+            <a href="/" class="blog-logo">— Portfolio</a>
+            <div class="nav-menu">
+                <a href="/blog" class="nav-item active">Blog</a>
             </div>
-
-            <!-- Mobile Menu Button -->
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <span class="menu-icon">☰</span>
-                <span class="close-icon">✕</span>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
         </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/blog" class="mobile-nav-item active">Blog</a>
     </div>
-</nav>
 
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-menu-content">
-        <a href="/" class="mobile-nav-link">Home</a>
-        <a href="/#about" class="mobile-nav-link">About</a>
-        <a href="/#skills" class="mobile-nav-link">Skills</a>
-        <a href="/#experience" class="mobile-nav-link">Education</a>
-        <a href="/#projects" class="mobile-nav-link">Projects</a>
-        <a href="/blog" class="mobile-nav-link">Blog</a>
-        <a href="/#contact" class="mobile-nav-link">Contact</a>
-    </div>
-</div>
-
-<!-- Blog Section -->
-<section id="blog" class="blog page-section">
-    <div class="container">
-        <div class="section-content">
-            <h2 class="section-title animate-on-scroll">BLOG</h2>
-            <p class="section-subtitle animate-on-scroll">
-                Thoughts on development, design, and life as a creator
-            </p>
-
-            <div class="blog-grid">
-                <!-- Blog Post 1 -->
-                <a href="/posts/post-1" class="blog-card-link">
-                    <article class="blog-card animate-on-scroll">
-                        <div class="blog-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1543058871-74a1d669ba70?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RlJTIwZGV2ZWxvcG1lbnR8ZW58MXx8fHwxNzYxNTg2NTA3fDA&ixlib=rb-4.1.0&q=80&w=1080"
-                                 alt="Modern React Patterns" class="blog-image">
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span class="blog-date">October 20, 2025</span>
-                                <span class="blog-read-time">5 min read</span>
-                            </div>
-                            <h3 class="blog-title">Modern React Patterns</h3>
-                            <p class="blog-excerpt">
-                                Exploring advanced React patterns and best practices for building scalable applications in 2025.
-                            </p>
-                            <div class="blog-read-more">Read More</div>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Blog Post 2 -->
-                <a href="/posts/post-2" class="blog-card-link">
-                    <article class="blog-card animate-on-scroll">
-                        <div class="blog-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwZGVzaWdufGVufDF8fHx8MTc2MTU2NDczOXww&ixlib=rb-4.1.0&q=80&w=1080"
-                                 alt="Mastering CSS Grid" class="blog-image">
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span class="blog-date">October 15, 2025</span>
-                                <span class="blog-read-time">8 min read</span>
-                            </div>
-                            <h3 class="blog-title">Mastering CSS Grid</h3>
-                            <p class="blog-excerpt">
-                                A comprehensive guide to CSS Grid Layout and how to create complex responsive layouts with ease.
-                            </p>
-                            <div class="blog-read-more">Read More</div>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Add more blog posts here as you write them -->
-
+    <!-- Hero Section -->
+    <section class="blog-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="hero-title-main">The Developer's</span>
+                <span class="hero-title-sub">Journey</span>
+            </h1>
+            <div class="hero-badge">
+                <span>Tech Blog & Insights</span>
             </div>
         </div>
-    </div>
-</section>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920"
+                alt="Developer workspace">
+        </div>
+        <div class="hero-social">
+            <a href="https://github.com/datlee27" target="_blank" aria-label="GitHub">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+            </a>
+            <a href="https://www.facebook.com/le.van.at.760768" target="_blank" aria-label="Facebook">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                </svg>
+            </a>
+        </div>
+    </section>
 
-<footer class="footer-simple">
-    <div class="container">
-        <p>© 2025 Portfolio. Designed & Built with passion.</p>
-    </div>
-</footer>
+    <!-- Featured Section -->
+    <section class="featured-section">
+        <div class="container">
+            <div class="featured-header">
+                <div class="featured-line"></div>
+                <h2 class="featured-title">Featured</h2>
+            </div>
+        </div>
+    </section>
 
-<script src="script.js"></script>
+    <!-- Blog Posts -->
+    <section class="blog-posts">
+        <div class="container">
+            <!-- Blog Post 1 -->
+            <article class="blog-post-card" data-post-id="post-1">
+                <a href="/posts/post-1" class="post-image-link">
+                    <div class="post-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1543058871-74a1d669ba70?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RlJTIwZGV2ZWxvcG1lbnR8ZW58MXx8fHwxNzYxNTg2NTA3fDA&ixlib=rb-4.1.0&q=80&w=1080"
+                            alt="Modern React Patterns" class="post-image">
+                    </div>
+                </a>
+                <div class="post-content">
+                    <div class="post-author">
+                        <div class="author-avatar">
+                            <img src="assets/img/about-pic.JPG" alt="Author">
+                        </div>
+                        <div class="author-info">
+                            <span class="author-name">Admin</span>
+                            <span class="post-date">Oct 20, 2025 • 5 min read</span>
+                        </div>
+                    </div>
+                    <a href="/posts/post-1" class="post-link">
+                        <h3 class="post-title">Modern React Patterns</h3>
+                    </a>
+                    <p class="post-excerpt">
+                        Create a blog post subtitle that summarizes your post in a few short, punchy sentences and
+                        entices your audience to continue reading...
+                    </p>
+                    <div class="post-stats">
+                        <span class="stat-item view-count" data-post-id="post-1">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            <span class="view-number">0</span> views
+                        </span>
+                        <button class="like-btn" data-post-id="post-1" aria-label="Like post">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
+                            <span class="like-number">0</span>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Post 2 -->
+            <article class="blog-post-card" data-post-id="post-2">
+                <a href="/posts/post-2" class="post-image-link">
+                    <div class="post-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwZGVzaWdufGVufDF8fHx8MTc2MTU2NDczOXww&ixlib=rb-4.1.0&q=80&w=1080"
+                            alt="Mastering CSS Grid" class="post-image">
+                    </div>
+                </a>
+                <div class="post-content">
+                    <div class="post-author">
+                        <div class="author-avatar">
+                            <img src="assets/img/about-pic.JPG" alt="Author">
+                        </div>
+                        <div class="author-info">
+                            <span class="author-name">Admin</span>
+                            <span class="post-date">Oct 15, 2025 • 8 min read</span>
+                        </div>
+                    </div>
+                    <a href="/posts/post-2" class="post-link">
+                        <h3 class="post-title">Mastering CSS Grid</h3>
+                    </a>
+                    <p class="post-excerpt">
+                        A comprehensive guide to CSS Grid Layout and how to create complex responsive layouts with ease.
+                        Learn the fundamentals and advanced techniques...
+                    </p>
+                    <div class="post-stats">
+                        <span class="stat-item view-count" data-post-id="post-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            <span class="view-number">0</span> views
+                        </span>
+                        <button class="like-btn" data-post-id="post-2" aria-label="Like post">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
+                            <span class="like-number">0</span>
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="blog-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h2 class="footer-logo">Portfolio</h2>
+                    <div class="footer-links">
+                        <a href="/">Home</a>
+                        <a href="/blog">Blog</a>
+                    </div>
+                </div>
+                <div class="footer-newsletter">
+                    <div class="newsletter-header">
+                        <div class="newsletter-line"></div>
+                        <h3 class="newsletter-title">The Developer's Newsletter</h3>
+                    </div>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Email *" required class="newsletter-input">
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Portfolio. Designed & Built with passion.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="blog-script.js"></script>
 </body>
+
 </html>
