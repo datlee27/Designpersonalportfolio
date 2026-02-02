@@ -5,40 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern React Patterns - Blog</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../blog-style.css">
     <link rel="stylesheet" href="../post.css">
+    <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,700;1,900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body class="sub-page">
 
     <!-- Navigation -->
-    <nav id="nav" class="scrolled">
-        <div class="container">
-            <div class="nav-content">
-                <a href="../index.html" class="logo">PORTFOLIO</a>
-
-                <!-- Desktop Navigation -->
-                <div class="nav-links">
-                    <a href="../index.html" class="nav-link">Portfolio</a>
-                    <a href="../blog.html" class="nav-link active">Blog</a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <span class="menu-icon">☰</span>
-                    <span class="close-icon">✕</span>
-                </button>
+    <nav class="blog-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="blog-logo">— Portfolio</a>
+            <div class="nav-menu">
+                <a href="../blog.html" class="nav-item active">Blog</a>
             </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <div class="mobile-menu-content">
-            <a href="../index.html" class="mobile-nav-link">Portfolio</a>
-            <a href="../blog.html" class="mobile-nav-link">Blog</a>
-
-        </div>
+        <a href="../index.html" class="mobile-nav-item">Home</a>
+        <a href="../blog.html" class="mobile-nav-item active">Blog</a>
     </div>
 
 
@@ -108,11 +103,98 @@
             </div>
 
             <div class="post-footer">
-                <a href="../blog.html" class="btn btn-secondary">← Back to Blog</a>
+                <div class="footer-divider"></div>
+
+                <div class="footer-actions">
+                    <a href="../blog.html" class="back-to-blog">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        Back to Blog
+                    </a>
+
+                    <!-- <div class="share-section">
+                        <span class="share-label">Share this article:</span>
+                        <div class="share-buttons">
+                            <a href="#" class="share-btn share-twitter" aria-label="Share on Twitter"
+                                onclick="shareOnTwitter(event)">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                                    </path>
+                                </svg>
+                            </a>
+                            <a href="#" class="share-btn share-facebook" aria-label="Share on Facebook"
+                                onclick="shareOnFacebook(event)">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                                </svg>
+                            </a>
+                            <a href="#" class="share-btn share-linkedin" aria-label="Share on LinkedIn"
+                                onclick="shareOnLinkedIn(event)">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
+                                    </path>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                            </a>
+                            <a href="#" class="share-btn share-copy" aria-label="Copy link" onclick="copyLink(event)">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div> -->
+                </div>
             </div>
+        </div>
         </div>
     </section>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Menu Toggle
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            if (mobileMenuToggle && mobileMenu) {
+                mobileMenuToggle.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    mobileMenu.classList.toggle('active');
+
+                    // Animate hamburger to X
+                    const spans = mobileMenuToggle.querySelectorAll('span');
+                    if (mobileMenu.classList.contains('active')) {
+                        spans[0].style.transform = 'rotate(45deg) translateY(8px)';
+                        spans[1].style.opacity = '0';
+                        spans[2].style.transform = 'rotate(-45deg) translateY(-8px)';
+                    } else {
+                        spans[0].style.transform = 'none';
+                        spans[1].style.opacity = '1';
+                        spans[2].style.transform = 'none';
+                    }
+                });
+
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', function (e) {
+                    if (mobileMenu.classList.contains('active')) {
+                        if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                            mobileMenu.classList.remove('active');
+                            const spans = mobileMenuToggle.querySelectorAll('span');
+                            spans[0].style.transform = 'none';
+                            spans[1].style.opacity = '1';
+                            spans[2].style.transform = 'none';
+                        }
+                    }
+                });
+            }
+        });
+    </script>
     <script src="../blog-analytics-mysql.js"></script>
 </body>
 

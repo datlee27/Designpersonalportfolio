@@ -30,6 +30,7 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
+        <a href="/" class="mobile-nav-item">Home</a>
         <a href="/blog" class="mobile-nav-item active">Blog</a>
     </div>
 
@@ -201,6 +202,45 @@
         </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Menu Toggle
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            if (mobileMenuToggle && mobileMenu) {
+                mobileMenuToggle.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    mobileMenu.classList.toggle('active');
+
+                    // Animate hamburger to X
+                    const spans = mobileMenuToggle.querySelectorAll('span');
+                    if (mobileMenu.classList.contains('active')) {
+                        spans[0].style.transform = 'rotate(45deg) translateY(8px)';
+                        spans[1].style.opacity = '0';
+                        spans[2].style.transform = 'rotate(-45deg) translateY(-8px)';
+                    } else {
+                        spans[0].style.transform = 'none';
+                        spans[1].style.opacity = '1';
+                        spans[2].style.transform = 'none';
+                    }
+                });
+
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', function (e) {
+                    if (mobileMenu.classList.contains('active')) {
+                        if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                            mobileMenu.classList.remove('active');
+                            const spans = mobileMenuToggle.querySelectorAll('span');
+                            spans[0].style.transform = 'none';
+                            spans[1].style.opacity = '1';
+                            spans[2].style.transform = 'none';
+                        }
+                    }
+                });
+            }
+        });
+    </script>
     <script src="blog-analytics-mysql.js"></script>
     <script src="blog-script.js"></script>
 </body>

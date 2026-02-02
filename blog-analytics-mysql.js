@@ -1,11 +1,3 @@
-// ==================== BLOG ANALYTICS SYSTEM (MySQL Version) ====================
-/**
- * Blog Analytics System with MySQL Backend
- * - View tracking with database persistence
- * - Like system with database storage
- * - Works on both blog listing and individual post pages
- */
-
 class BlogAnalytics {
     constructor() {
         this.VIEW_DELAY = 3000; // 3 seconds
