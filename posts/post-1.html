@@ -67,6 +67,30 @@
                         5 min read
                     </span>
                 </div>
+
+                <!-- Post Stats -->
+                <div class="post-stats" style="margin-top: 1rem; display: flex; gap: 1.5rem; align-items: center;">
+                    <span class="stat-item view-count" data-post-id="post-1"
+                        style="display: flex; align-items: center; gap: 0.5rem; color: #666;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <span class="view-number">0</span> views
+                    </span>
+                    <button class="like-btn" data-post-id="post-1" aria-label="Like post"
+                        style="display: flex; align-items: center; gap: 0.5rem; background: none; border: none; cursor: pointer; color: #666; font-size: 1rem; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.3s ease;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                            </path>
+                        </svg>
+                        <span class="like-number">0</span>
+                    </button>
+                </div>
+
                 <img src="https://images.unsplash.com/photo-1543058871-74a1d669ba70?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RlJTIwZGV2ZWxvcG1lbnR8ZW58MXx8fHwxNzYxNTg2NTA3fDA&ixlib=rb-4.1.0&q=80&w=1080"
                     alt="Modern React Patterns" class="post-hero-image">
             </div>
@@ -89,7 +113,7 @@
         </div>
     </section>
 
-    <script src="../script.js"></script>
+    <script src="../blog-analytics-mysql.js"></script>
 </body>
 
 </html>
