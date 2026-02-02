@@ -314,8 +314,10 @@ body {
 
 .post-image-wrapper {
     width: 100%;
-    height: 100%;
+    height: 300px;
+    /* Fixed height để đảm bảo tất cả ảnh có kích thước bằng nhau */
     overflow: hidden;
+    position: relative;
 }
 
 .post-image {
@@ -638,6 +640,11 @@ body {
     .blog-post-card {
         grid-template-columns: 1fr;
         gap: 0;
+    }
+
+    .post-image-wrapper {
+        height: 250px;
+        /* Chiều cao phù hợp cho mobile */
     }
 
     .post-content {

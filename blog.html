@@ -78,99 +78,7 @@
     <!-- Blog Posts -->
     <section class="blog-posts">
         <div class="container">
-            <!-- Blog Post 1 -->
-            <article class="blog-post-card" data-post-id="post-1">
-                <a href="/posts/post-1" class="post-image-link">
-                    <div class="post-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1543058871-74a1d669ba70?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RlJTIwZGV2ZWxvcG1lbnR8ZW58MXx8fHwxNzYxNTg2NTA3fDA&ixlib=rb-4.1.0&q=80&w=1080"
-                            alt="Modern React Patterns" class="post-image">
-                    </div>
-                </a>
-                <div class="post-content">
-                    <div class="post-author">
-                        <div class="author-avatar">
-                            <img src="assets/img/about-pic.JPG" alt="Author">
-                        </div>
-                        <div class="author-info">
-                            <span class="author-name">Admin</span>
-                            <span class="post-date">Oct 20, 2025 • 5 min read</span>
-                        </div>
-                    </div>
-                    <a href="/posts/post-1" class="post-link">
-                        <h3 class="post-title">Modern React Patterns</h3>
-                    </a>
-                    <p class="post-excerpt">
-                        Create a blog post subtitle that summarizes your post in a few short, punchy sentences and
-                        entices your audience to continue reading...
-                    </p>
-                    <div class="post-stats">
-                        <span class="stat-item view-count" data-post-id="post-1">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                            <span class="view-number">0</span> views
-                        </span>
-                        <button class="like-btn" data-post-id="post-1" aria-label="Like post">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path
-                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                                </path>
-                            </svg>
-                            <span class="like-number">0</span>
-                        </button>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Blog Post 2 -->
-            <article class="blog-post-card" data-post-id="post-2">
-                <a href="/posts/post-2" class="post-image-link">
-                    <div class="post-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwZGVzaWdufGVufDF8fHx8MTc2MTU2NDczOXww&ixlib=rb-4.1.0&q=80&w=1080"
-                            alt="Mastering CSS Grid" class="post-image">
-                    </div>
-                </a>
-                <div class="post-content">
-                    <div class="post-author">
-                        <div class="author-avatar">
-                            <img src="assets/img/about-pic.JPG" alt="Author">
-                        </div>
-                        <div class="author-info">
-                            <span class="author-name">Admin</span>
-                            <span class="post-date">Oct 15, 2025 • 8 min read</span>
-                        </div>
-                    </div>
-                    <a href="/posts/post-2" class="post-link">
-                        <h3 class="post-title">Mastering CSS Grid</h3>
-                    </a>
-                    <p class="post-excerpt">
-                        A comprehensive guide to CSS Grid Layout and how to create complex responsive layouts with ease.
-                        Learn the fundamentals and advanced techniques...
-                    </p>
-                    <div class="post-stats">
-                        <span class="stat-item view-count" data-post-id="post-2">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                            <span class="view-number">0</span> views
-                        </span>
-                        <button class="like-btn" data-post-id="post-2" aria-label="Like post">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path
-                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                                </path>
-                            </svg>
-                            <span class="like-number">0</span>
-                        </button>
-                    </div>
-                </div>
-            </article>
+            <!-- Blog posts sẽ được tự động tạo bởi blog-posts-loader.js -->
         </div>
     </section>
 
@@ -241,6 +149,7 @@
             }
         });
     </script>
+    <script src="blog-posts-loader.js"></script>
     <script src="blog-analytics-mysql.js"></script>
     <script src="blog-script.js"></script>
 </body>
