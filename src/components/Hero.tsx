@@ -1,25 +1,38 @@
 import { motion } from 'motion/react';
 import { ArrowDown } from 'lucide-react';
+import { useFluidCursor } from '../hooks/useFluidCursor';
 
 export function Hero() {
+  // Use the fluid cursor hook with default settings
+  const canvasRef = useFluidCursor();
+
   const scrollToAbout = () => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center bg-black text-white relative overflow-hidden font-sans">
+      {/* Canvas for fluid cursor effect */}
+      <canvas
+        ref={canvasRef}
+        id="canvas"
+        className="absolute inset-0 pointer-events-none"
+        style={{ zIndex: 1 }}
+      />
+
       {/* Animated background elements */}
       <motion.div
         className="absolute inset-0 opacity-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.1 }}
         transition={{ duration: 2 }}
+        style={{ zIndex: 2 }}
       >
         <div className="absolute top-1/4 left-1/4 w-96 h-96 border border-white rounded-full" />
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 border border-white rounded-full" />
       </motion.div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative" style={{ zIndex: 10 }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -86,7 +99,8 @@ export function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 cursor-pointer z-20"
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 cursor-pointer"
+        style={{ zIndex: 20 }}
         onClick={scrollToAbout}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
