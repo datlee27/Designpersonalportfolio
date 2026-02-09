@@ -1,32 +1,32 @@
 import { motion } from 'motion/react';
 import { useInView } from 'motion/react';
 import { useRef } from 'react';
-import { Mail, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Github, Facebook, Phone } from 'lucide-react';
 
 const contactLinks = [
   {
     name: "Email",
-    value: "hello@developer.com",
-    href: "mailto:hello@developer.com",
+    value: "lvd27012004@gmail.com",
+    href: "mailto:lvd27012004@gmail.com",
     icon: Mail
   },
   {
     name: "GitHub",
-    value: "github.com/developer",
-    href: "https://github.com",
+    value: "github.com/datlee27",
+    href: "https://github.com/datlee27",
     icon: Github
   },
   {
-    name: "LinkedIn",
-    value: "linkedin.com/in/developer",
-    href: "https://linkedin.com",
-    icon: Linkedin
+    name: "Facebook",
+    value: "facebook.com/le.van.at.760768",
+    href: "https://www.facebook.com/le.van.at.760768",
+    icon: Facebook
   },
   {
-    name: "Twitter",
-    value: "@developer",
-    href: "https://twitter.com",
-    icon: Twitter
+    name: "Phone",
+    value: "0766554586",
+    href: "tel:0766554586",
+    icon: Phone
   }
 ];
 
@@ -35,7 +35,7 @@ export function Contact() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="contact" className="min-h-screen bg-black text-white py-32 flex items-center">
+    <section id="contact" className="min-h-screen bg-black text-white py-32 flex items-center font-sans">
       <div className="container mx-auto px-6">
         <motion.div
           ref={ref}
@@ -49,7 +49,7 @@ export function Contact() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-8"
-            style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: '800' }}
+            style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: '800', letterSpacing: '-0.02em' }}
           >
             LET'S WORK
             <br />
@@ -76,13 +76,13 @@ export function Contact() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                   transition={{ duration: 0.6, delay: 0.1 * index + 0.4 }}
-                  className="border border-gray-800 p-8 hover:border-white hover:bg-white hover:text-black transition-all duration-300 group"
+                  className="border border-gray-800 p-8 hover:border-[#FF5722] hover:bg-[#FF5722]/10 transition-all duration-300 group"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Icon className="w-8 h-8 mb-4 group-hover:scale-110 transition-transform duration-300" />
-                  <h3 className="text-xl mb-2">{link.name}</h3>
-                  <p className="text-gray-400 group-hover:text-gray-700 transition-colors">
+                  <Icon className="w-8 h-8 mb-4 text-white group-hover:text-[#FF5722] group-hover:scale-110 transition-all duration-300" />
+                  <h3 className="text-xl mb-2 font-bold">{link.name}</h3>
+                  <p className="text-gray-400 group-hover:text-white transition-colors">
                     {link.value}
                   </p>
                 </motion.a>
@@ -90,14 +90,7 @@ export function Contact() {
             })}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-16 pt-16 border-t border-gray-800 text-center text-gray-500"
-          >
-            <p>© 2025 Portfolio. Designed & Built with passion.</p>
-          </motion.div>
+
         </motion.div>
       </div>
     </section>

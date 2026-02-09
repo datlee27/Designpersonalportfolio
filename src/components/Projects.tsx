@@ -1,50 +1,111 @@
 import { motion } from 'motion/react';
 import { useInView } from 'motion/react';
-import { useRef } from 'react';
-import { ExternalLink, Github } from 'lucide-react';
+import { useState, useRef, TouchEvent } from 'react';
+import { Github, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 const projects = [
   {
-    title: "E-Commerce Platform",
-    description: "A modern, fully-featured e-commerce solution with real-time inventory management and seamless checkout experience.",
-    image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzYxNjMxODc4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["React", "Next.js", "Stripe", "PostgreSQL"],
-    link: "#",
-    github: "#"
+    id: '01',
+    title: "P2P Electric Vehicle Rental",
+    description: "Developed a comprehensive Peer-to-Peer (P2P) electric vehicle rental system, connecting Vehicle Owners and Customers. Features include PayOS payment, Cloudinary storage, OCR verification, and AI Assistant. The system manages the entire rental lifecycle from booking to payment and vehicle return, ensuring a seamless experience for all users involved in the sustainable transportation ecosystem.",
+    image: "https://res.cloudinary.com/ddwt6nl7s/image/upload/v1764500651/A%CC%89nh_ma%CC%80n_hi%CC%80nh_2025-11-30_lu%CC%81c_18.03.15_drt2kr.png",
+    tags: ["Java", "Spring Boot", "MySQL", "Thymeleaf", "AI Assistant"],
+    link: "https://ecodanav2.onrender.com/",
+    github: "https://github.com/datlee27/ecodanav2"
   },
   {
-    title: "Portfolio CMS",
-    description: "Content management system designed for creatives to showcase their work with beautiful, customizable templates.",
-    image: "https://images.unsplash.com/photo-1590212151175-e58edd96185b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsJTIwZGVzayUyMHNldHVwfGVufDF8fHx8MTc2MTY2Mjk0M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["TypeScript", "React", "Tailwind", "Supabase"],
+    id: '02',
+    title: "AI-Integrated LMS",
+    description: "Built a full-stack Learning Management System using Java and MySQL to modernize course management. Integrates AI for smart recommendations and student performance analysis. The platform supports various user roles including administrators, instructors, and students, providing tailored dashboards and reporting tools to enhance the educational process.",
+    image: "/assets/img/projectlearning.png",
+    tags: ["Java", "MySQL", "RESTful API", "AI Integration"],
     link: "#",
-    github: "#"
+    github: "https://github.com/datlee27/LearningWebsite-1"
   },
   {
-    title: "Task Management App",
-    description: "Intuitive task manager with team collaboration features, real-time updates, and advanced filtering capabilities.",
-    image: "https://images.unsplash.com/photo-1519217651866-847339e674d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMHdvcmtzcGFjZXxlbnwxfHx8fDE3NjE1NzU0NjZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["React", "Node.js", "MongoDB", "Socket.io"],
+    id: '03',
+    title: "Smart Recycle Bin (IoT)",
+    description: "Led the design and development of a smart recycle bin using Arduino. Features IR, metal, and rain sensors to automatically sort waste into metal, wet, and dry categories. This IoT solution aims to improve waste management efficiency by automating the segregation process at the source, reducing manual labor and contamination rates.",
+    image: "/assets/img/projectpic.png",
+    tags: ["Arduino", "IoT", "Sensors", "Motors"],
     link: "#",
-    github: "#"
+    github: "https://github.com/datlee27/iot102-smart-recycle-bin"
   },
   {
-    title: "Analytics Dashboard",
-    description: "Real-time analytics platform with interactive charts, custom reports, and data visualization tools.",
-    image: "https://images.unsplash.com/photo-1644088379091-d574269d422f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWNobm9sb2d5JTIwYWJzdHJhY3R8ZW58MXx8fHwxNzYxNTk2OTIwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["React", "D3.js", "Express", "Redis"],
+    id: '04',
+    title: "Fruit Shop Web App",
+    description: "Developed a complete e-commerce web application for a fruit shop using Java Servlets, JSP, and SQL Server. Features user authentication, product management, and cart system. The application allows customers to browse fresh produce, add items to their cart, and securely checkout, while administrators can manage inventory and orders through a dedicated backend interface.",
+    image: "/assets/img/fruitshop.png",
+    tags: ["Java Servlets", "JSP", "SQL Server", "Bootstrap"],
     link: "#",
-    github: "#"
+    github: "https://github.com/datlee27/FruitShopOnline"
+  },
+  {
+    id: '05',
+    title: "Hotel Booking System",
+    description: "Developed core features for a web-based hotel booking system. Implemented user registration, login, and reservation management with a responsive front-end. The system handles room availability in real-time and allows guests to filter rooms based on amenities and price, providing a user-friendly booking experience.",
+    image: "/assets/img/booking.png",
+    tags: ["Java", "MySQL", "HTML5", "CSS3"],
+    link: "#",
+    github: "https://github.com/datlee27/HotelBookingSystem"
   }
 ];
 
 export function Projects() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  const nextProject = () => {
+    setActiveIndex((prev) => (prev + 1) % projects.length);
+  };
+
+  const prevProject = () => {
+    setActiveIndex((prev) => (prev - 1 + projects.length) % projects.length);
+  };
+
+  const handleTouchStart = (e: TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      nextProject();
+    }
+    if (isRightSwipe) {
+      prevProject();
+    }
+
+    // Reset
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
+
+  const getCardClass = (index: number) => {
+    if (index === activeIndex) return 'active';
+    const len = projects.length;
+    const nextIndex = (activeIndex + 1) % len;
+    const prevIndex = (activeIndex - 1 + len) % len;
+
+    if (index === nextIndex) return 'next';
+    if (index === prevIndex) return 'prev';
+    return 'hidden-card';
+  };
 
   return (
-    <section className="min-h-screen bg-black text-white py-32">
+    <section id="projects" className="min-h-screen bg-black text-white py-32 overflow-hidden">
       <div className="container mx-auto px-6">
         <motion.div
           ref={ref}
@@ -56,63 +117,127 @@ export function Projects() {
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-16"
+            className="mb-16 text-center"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: '800' }}
           >
             PROJECTS
           </motion.h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ duration: 0.6, delay: 0.1 * index }}
-                className="group relative overflow-hidden border border-gray-800 hover:border-white transition-all duration-300"
+          <div
+            className="carousel-container relative h-[640px] w-full flex justify-center items-center perspective-1000"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            {/* Navigation Buttons - Hidden on Mobile */}
+            <div className="absolute w-full hidden md:flex justify-between px-12 z-50 pointer-events-none">
+              <button
+                onClick={prevProject}
+                className="pointer-events-auto rounded-full p-4 border border-white/30 bg-white/10 hover:bg-white/30 hover:scale-110 transition-all text-white backdrop-blur-sm"
               >
-                <div className="aspect-video overflow-hidden">
-                  <ImageWithFallback
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
-                  />
-                </div>
-                
-                <div className="p-8">
-                  <h3 className="text-2xl mb-3">{project.title}</h3>
-                  <p className="text-gray-400 mb-6 leading-relaxed">{project.description}</p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 border border-gray-700 text-sm text-gray-300"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                <ChevronLeft className="w-8 h-8" />
+              </button>
+              <button
+                onClick={nextProject}
+                className="pointer-events-auto rounded-full p-4 border border-white/30 bg-white/10 hover:bg-white/30 hover:scale-110 transition-all text-white backdrop-blur-sm"
+              >
+                <ChevronRight className="w-8 h-8" />
+              </button>
+            </div>
 
-                  <div className="flex gap-4">
-                    <a
-                      href={project.link}
-                      className="flex items-center gap-2 hover:text-gray-400 transition-colors"
-                    >
-                      <ExternalLink className="w-5 h-5" />
-                      <span>View Project</span>
-                    </a>
-                    <a
-                      href={project.github}
-                      className="flex items-center gap-2 hover:text-gray-400 transition-colors"
-                    >
-                      <Github className="w-5 h-5" />
-                      <span>Code</span>
-                    </a>
+            <div className="carousel relative w-full h-full transform-style-3d">
+              {projects.map((project, index) => {
+                const cardClass = getCardClass(index);
+                let transform = '';
+                let opacity = 0;
+                let zIndex = 0;
+
+                if (cardClass === 'active') {
+                  transform = 'translateX(-50%) translateZ(0) rotateY(0deg) scale(1)';
+                  opacity = 1;
+                  zIndex = 10;
+                } else if (cardClass === 'prev') {
+                  transform = 'translateX(-150%) translateZ(-200px) rotateY(35deg) scale(0.85)';
+                  opacity = 0.5;
+                  zIndex = 5;
+                } else if (cardClass === 'next') {
+                  transform = 'translateX(50%) translateZ(-200px) rotateY(-35deg) scale(0.85)';
+                  opacity = 0.5;
+                  zIndex = 5;
+                } else {
+                  transform = 'translateX(-50%) translateZ(-400px) scale(0)';
+                  opacity = 0;
+                  zIndex = 0;
+                }
+
+                return (
+                  <div
+                    key={project.id}
+                    className={`absolute top-0 left-1/2 w-[300px] sm:w-[500px] h-[580px] rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl transition-all duration-700 ease-out`}
+                    style={{
+                      transform,
+                      opacity,
+                      zIndex,
+                    }}
+                  >
+                    <div className="h-[200px] overflow-hidden rounded-t-2xl flex-shrink-0">
+                      <ImageWithFallback
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+
+                    <div className="p-6 sm:p-8 flex flex-col h-[calc(100%-200px)]">
+                      <div className="flex justify-between items-baseline mb-2 flex-shrink-0">
+                        <span className="text-xl font-bold text-white/50">{project.id}</span>
+                      </div>
+
+                      <h3 className="text-xl sm:text-2xl font-bold mb-3 flex-shrink-0">{project.title}</h3>
+
+                      {/* Scrollable Description Container */}
+                      <div className="flex-grow overflow-y-auto pr-2 mb-4 scrollbar-thin scrollbar-thumb-[#FF5722] scrollbar-track-white/10 rounded">
+                        <p className="text-gray-300 text-sm leading-relaxed">
+                          {project.description}
+                        </p>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 mb-6 flex-shrink-0">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2 py-1 bg-[#FF5722]/10 text-[#FF5722] text-xs font-medium rounded"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 text-white hover:text-[#FF5722] transition-colors self-start flex-shrink-0"
+                      >
+                        <Github className="w-5 h-5" />
+                        <span>GitHub</span>
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                );
+              })}
+            </div>
+
+            {/* Indicators */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3 z-50">
+              {projects.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveIndex(idx)}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${idx === activeIndex ? 'w-8 bg-[#FF5722]' : 'w-2 bg-gray-600 hover:bg-gray-400'}`}
+                />
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>

@@ -7,12 +7,12 @@ export function Hero() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-black text-white relative overflow-hidden">
+    <section id="hero" className="min-h-screen flex items-center justify-center bg-black text-white relative overflow-hidden font-sans">
       {/* Animated background elements */}
       <motion.div
-        className="absolute inset-0 opacity-5"
+        className="absolute inset-0 opacity-10"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.05 }}
+        animate={{ opacity: 0.1 }}
         transition={{ duration: 2 }}
       >
         <div className="absolute top-1/4 left-1/4 w-96 h-96 border border-white rounded-full" />
@@ -30,17 +30,17 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mb-6 text-gray-400 tracking-widest uppercase"
+            className="mb-6 text-gray-400 tracking-widest uppercase font-medium"
           >
             Portfolio
           </motion.p>
-          
+
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             className="mb-8"
-            style={{ 
+            style={{
               fontSize: 'clamp(3rem, 10vw, 7rem)',
               lineHeight: '1.1',
               fontWeight: '800',
@@ -51,31 +51,32 @@ export function Hero() {
             <br />
             DEVELOPER
           </motion.h1>
-          
+
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-xl text-gray-300 max-w-2xl mx-auto mb-12"
+            className="text-xl text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed"
           >
-            Crafting minimalist, modern web experiences with precision and creativity
+            Passionate about merging web development and graphic design to create engaging digital experiences.
+            With a solid foundation in software development and design, I bring both technical expertise and creativity to every project.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1 }}
-            className="flex gap-4 justify-center"
+            className="flex gap-4 justify-center flex-wrap"
           >
             <button
               onClick={scrollToAbout}
-              className="px-8 py-4 bg-white text-black hover:bg-gray-200 transition-all duration-300 hover:scale-105"
+              className="px-8 py-4 bg-white text-black font-medium hover:bg-[#FF5722] hover:text-white transition-all duration-300 transform hover:scale-105"
             >
               View My Work
             </button>
             <a
               href="#contact"
-              className="px-8 py-4 border border-white hover:bg-white hover:text-black transition-all duration-300"
+              className="px-8 py-4 border border-white font-medium hover:bg-white hover:text-black transition-all duration-300"
             >
               Get In Touch
             </a>
@@ -85,7 +86,7 @@ export function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 cursor-pointer z-20"
         onClick={scrollToAbout}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -94,8 +95,9 @@ export function Hero() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
+          className="text-gray-400 hover:text-[#FF5722] transition-colors duration-300"
         >
-          <ArrowDown className="w-6 h-6 text-gray-400" />
+          <ArrowDown className="w-8 h-8" />
         </motion.div>
       </motion.div>
     </section>
