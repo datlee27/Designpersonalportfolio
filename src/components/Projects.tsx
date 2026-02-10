@@ -3,6 +3,7 @@ import { useInView } from 'motion/react';
 import { useState, useRef, TouchEvent } from 'react';
 import { Github, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import '../styles/animations.css';
 
 const projects = [
   {
@@ -173,55 +174,59 @@ export function Projects() {
                 return (
                   <div
                     key={project.id}
-                    className={`absolute top-0 left-1/2 w-[300px] sm:w-[500px] h-[580px] rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl transition-all duration-700 ease-out`}
+                    className={`absolute top-0 left-1/2 w-[300px] sm:w-[500px] h-[580px] rounded-2xl transition-all duration-700 ease-out ${cardClass === 'active' ? 'animated-border' : 'bg-white/10 backdrop-blur-md border border-white/20'}`}
                     style={{
                       transform,
                       opacity,
                       zIndex,
                     }}
                   >
-                    <div className="h-[200px] overflow-hidden rounded-t-2xl flex-shrink-0">
-                      <ImageWithFallback
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-
-                    <div className="p-6 sm:p-8 flex flex-col h-[calc(100%-200px)]">
-                      <div className="flex justify-between items-baseline mb-2 flex-shrink-0">
-                        <span className="text-xl font-bold text-white/50">{project.id}</span>
+                    <div className="h-full w-full rounded-2xl bg-black/90 shadow-2xl overflow-hidden flex flex-col">
+                      <div className="h-[200px] overflow-hidden rounded-t-2xl flex-shrink-0">
+                        <ImageWithFallback
+                          src={project.image}
+                          alt={project.title}
+                          width={500}
+                          height={200}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
 
-                      <h3 className="text-xl sm:text-2xl font-bold mb-3 flex-shrink-0">{project.title}</h3>
+                      <div className="p-6 sm:p-8 flex flex-col h-[calc(100%-200px)]">
+                        <div className="flex justify-between items-baseline mb-2 flex-shrink-0">
+                          <span className="text-xl font-bold text-white/50">{project.id}</span>
+                        </div>
 
-                      {/* Scrollable Description Container */}
-                      <div className="flex-grow overflow-y-auto pr-2 mb-4 scrollbar-thin scrollbar-thumb-[#FF5722] scrollbar-track-white/10 rounded">
-                        <p className="text-gray-300 text-sm leading-relaxed">
-                          {project.description}
-                        </p>
+                        <h3 className="text-xl sm:text-2xl font-bold mb-3 flex-shrink-0">{project.title}</h3>
+
+                        {/* Scrollable Description Container */}
+                        <div className="flex-grow overflow-y-auto pr-2 mb-4 scrollbar-thin scrollbar-thumb-[#FF5722] scrollbar-track-white/10 rounded">
+                          <p className="text-gray-300 text-sm leading-relaxed">
+                            {project.description}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2 mb-6 flex-shrink-0">
+                          {project.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-2 py-1 bg-[#FF5722]/10 text-[#FF5722] text-xs font-medium rounded"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-2 text-white hover:text-[#FF5722] transition-colors self-start flex-shrink-0"
+                        >
+                          <Github className="w-5 h-5" />
+                          <span>GitHub</span>
+                        </a>
                       </div>
-
-                      <div className="flex flex-wrap gap-2 mb-6 flex-shrink-0">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2 py-1 bg-[#FF5722]/10 text-[#FF5722] text-xs font-medium rounded"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-2 text-white hover:text-[#FF5722] transition-colors self-start flex-shrink-0"
-                      >
-                        <Github className="w-5 h-5" />
-                        <span>GitHub</span>
-                      </a>
                     </div>
                   </div>
                 );

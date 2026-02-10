@@ -61,6 +61,8 @@ export function About() {
                 <ImageWithFallback
                   src="/assets/img/about-pic.JPG"
                   alt="Professional portrait"
+                  width={300}
+                  height={400}
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                 />
                 <div className="absolute inset-0 border-4 border-black group-hover:border-[#FF5722] transition-colors duration-300 -translate-x-4 -translate-y-4 -z-10" />

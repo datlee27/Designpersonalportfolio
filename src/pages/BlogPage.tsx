@@ -35,6 +35,8 @@ export function BlogPage() {
                     <ImageWithFallback
                         src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920"
                         alt="Background"
+                        width={1920}
+                        height={1080}
                         className="w-full h-full object-cover"
                     />
                 </div>
@@ -90,6 +92,8 @@ export function BlogPage() {
                                             <ImageWithFallback
                                                 src={post.image}
                                                 alt={post.title}
+                                                width={400}
+                                                height={300}
                                                 className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
                                             />
                                         </div>

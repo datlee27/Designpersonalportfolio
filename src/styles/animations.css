@@ -1,0 +1,51 @@
+/* CSS Custom Property for border animation */
+@property --border-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes border {
+    to {
+        --border-angle: 360deg;
+    }
+}
+
+/* Reusable animated border class */
+.animated-border {
+    --border-angle: 0deg;
+    position: relative;
+    background: linear-gradient(var(--border-angle),
+            #000000,
+            #ff7333,
+            #000000);
+    animation: border 6s linear infinite;
+    padding: 1px;
+    border-radius: inherit;
+}
+
+/* Variant with different colors */
+.animated-border-blue {
+    --border-angle: 0deg;
+    position: relative;
+    background: linear-gradient(var(--border-angle),
+            #3B82F6,
+            #9333EA,
+            #3B82F6);
+    animation: border 4s linear infinite;
+    padding: 3px;
+    border-radius: inherit;
+}
+
+/* Variant with green colors */
+.animated-border-green {
+    --border-angle: 0deg;
+    position: relative;
+    background: linear-gradient(var(--border-angle),
+            #22C55E,
+            #10B981,
+            #22C55E);
+    animation: border 4s linear infinite;
+    padding: 3px;
+    border-radius: inherit;
+}

@@ -55,6 +55,8 @@ export function Blog() {
                     <ImageWithFallback
                       src={post.image}
                       alt={post.title}
+                      width={400}
+                      height={300}
                       className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
                     />
                   </div>
