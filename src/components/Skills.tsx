@@ -2,8 +2,8 @@ import { motion } from 'motion/react';
 
 const skills = [
   {
-    category: "WEB DEV & PROG",
-    items: ["JAVA", "JS", "HTML5", "CSS3", "SPRING"]
+    category: "WEB DEV",
+    items: ["JAVA", "JS", "HTML5", "CSS3", "SPRING", "TYPESCRIPT", "C#"]
   },
   {
     category: "DATA & API",
@@ -11,14 +11,14 @@ const skills = [
   },
   {
     category: "AI & DESIGN",
-    items: ["LM STUDIO", "FIGMA", "SUMI-E"]
+    items: ["LM STUDIO", "FIGMA"]
   },
   {
     category: "HARDWARE (IOT)",
     items: ["ARDUINO", "SENSORS", "MOTORS"]
   },
   {
-    category: "TOOLS & MISC",
+    category: "TOOLS ",
     items: ["GIT", "BOOTSTRAP", "VITE"]
   }
 ];
@@ -30,7 +30,7 @@ export function Skills() {
     <section id="skills" className="py-32 bg-paper text-ink overflow-hidden border-t-8 border-ink">
       <div className="container mx-auto px-6">
         <div className="mb-24">
-          <motion.h2 
+          <motion.h2
             initial={{ clipPath: 'inset(0 0 100% 0)' }}
             whileInView={{ clipPath: 'inset(0 0 0% 0)' }}
             viewport={{ once: true }}
@@ -56,7 +56,7 @@ export function Skills() {
                 <span className="text-huge leading-none font-heading text-accent/20 group-hover:text-accent transition-colors duration-100">0{index + 1}</span>
                 <h3 className="text-5xl font-heading mb-2 leading-none tracking-tighter">{skill.category}</h3>
               </div>
-              
+
               <div className="flex flex-wrap gap-4">
                 {skill.items.map((item) => (
                   <motion.span
@@ -68,12 +68,12 @@ export function Skills() {
                   </motion.span>
                 ))}
               </div>
-              
+
               <div className="w-full h-1 bg-ink/10 mt-12" />
             </motion.div>
           ))}
         </div>
-        
+
         {/* Large Background Subject Element */}
         <div className="absolute -bottom-20 -left-20 opacity-5 pointer-events-none select-none">
           <p className="text-[20rem] font-heading leading-none">CORE</p>

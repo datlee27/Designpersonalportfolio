@@ -8,7 +8,9 @@ const navItems = [
   { name: 'ABOUT', href: '/#about' },
   { name: 'SKILLS', href: '/#skills' },
   { name: 'PROJECTS', href: '/#projects' },
+  { name: 'BLOG', href: '/blog' },
   { name: 'CONTACT', href: '/#contact' },
+
 ];
 
 export function Navigation() {
@@ -31,9 +33,8 @@ export function Navigation() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.4, ease: chiselEasing }}
-        className={`fixed top-0 left-0 right-0 z-[999] border-b-4 border-ink transition-colors duration-100 ${
-          isScrolled || location.pathname !== '/' ? 'bg-ink py-4' : 'bg-ink py-6'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-[999] border-b-4 border-ink transition-colors duration-100 ${isScrolled || location.pathname !== '/' ? 'bg-ink py-4' : 'bg-ink py-6'
+          }`}
 
       >
         <div className="container mx-auto px-6">
