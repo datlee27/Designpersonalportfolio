@@ -1,68 +1,50 @@
 import { motion } from 'motion/react';
-import { useInView } from 'motion/react';
-import { useRef } from 'react';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { blogPosts } from '../data/blogPosts';
 
 export function Blog() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  // Only show first 2 posts
+  const chiselEasing = [0.2, 0, 0, 1];
   const featuredPosts = blogPosts.slice(0, 2);
 
   return (
-    <section id="blog" className="min-h-screen bg-white text-black py-32 font-sans">
+    <section id="blog" className="py-32 bg-paper text-ink overflow-hidden border-t-8 border-ink">
       <div className="container mx-auto px-6">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.h2
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-4"
-            style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: '800', letterSpacing: '-0.02em' }}
+        <div className="flex flex-col md:flex-row justify-between items-end mb-24">
+          <motion.h2 
+            initial={{ clipPath: 'inset(100% 0 0 0)' }}
+            whileInView={{ clipPath: 'inset(0% 0 0 0)' }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: chiselEasing }}
+            className="text-huge leading-none"
           >
-            LATEST INSIGHTS
+            LATEST<br />INSIGHTS
           </motion.h2>
+          <div className="text-right hidden md:block">
+            <Link 
+              to="/blog" 
+              className="group flex items-center gap-4 bg-ink text-paper px-8 py-4 font-heading text-2xl hover:bg-accent hover:text-ink transition-colors duration-100"
+            >
+              ALL POSTS <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+            </Link>
+          </div>
+        </div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-xl text-gray-600 mb-16 max-w-2xl"
-          >
-            Thoughts on development, design, and life as a creator
-          </motion.p>
-
-          <div className="grid grid-cols-1 gap-12">
-            {featuredPosts.map((post, index) => (
-              <motion.article
-                key={post.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ duration: 0.6, delay: 0.1 * index }}
-                className="group bg-white rounded-lg overflow-hidden border border-transparent hover:shadow-2xl transition-all duration-300"
-              >
-                <Link to={`/blog/${post.id}`} className="grid md:grid-cols-[400px_1fr] gap-0 md:gap-10">
-                  <div className="h-[250px] md:h-[300px] overflow-hidden relative">
-                    <ImageWithFallback
-                      src={post.image}
-                      alt={post.title}
-                      width={400}
-                      height={300}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
-                    />
-                  </div>
-
-                  <div className="p-8 md:p-0 md:py-8 md:pr-8 flex flex-col justify-center">
-                    <div className="flex items-center gap-4 text-sm text-gray-500 mb-5">
+        <div className="flex flex-col gap-24">
+          {featuredPosts.map((post, index) => (
+            <motion.article
+              key={post.id}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease: chiselEasing, delay: index * 0.1 }}
+              className={`relative group ${index % 2 !== 0 ? 'md:self-end' : ''}`}
+            >
+              <Link to={`/blog/${post.id}`} className="block max-w-5xl">
+                <div className="grid md:grid-cols-[1fr_400px] gap-8 bg-paper border-4 border-ink p-4 hover:misaligned-right transition-transform duration-100">
+                  <div className="order-2 md:order-1 flex flex-col justify-center">
+                    <div className="flex items-center gap-6 mb-6 font-bold text-sm tracking-tighter text-accent">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
                         <span>{post.date}</span>
@@ -73,34 +55,37 @@ export function Blog() {
                       </div>
                     </div>
 
-                    <h3 className="text-3xl font-bold font-serif italic mb-4 text-black group-hover:text-[#FF5722] transition-colors duration-300 leading-tight">
+                    <h3 className="text-5xl font-heading mb-6 leading-[0.95] tracking-tighter group-hover:text-accent transition-colors">
                       {post.title}
                     </h3>
 
-                    <p className="text-gray-600 mb-6 leading-relaxed line-clamp-2 md:line-clamp-3">
+                    <p className="text-xl font-medium leading-tight mb-8 line-clamp-3">
                       {post.excerpt}
                     </p>
 
-                    <div className="flex items-center gap-2 text-[#FF5722] font-semibold group-hover:gap-4 transition-all">
-                      <span>Read More</span>
-                      <ArrowRight className="w-5 h-5" />
+                    <div className="flex items-center gap-4 text-2xl font-heading tracking-widest group-hover:gap-8 transition-all">
+                      <span>READ TRANSCRIPT</span>
+                      <ArrowRight className="w-6 h-6" />
                     </div>
                   </div>
-                </Link>
-              </motion.article>
-            ))}
-          </div>
 
-          <div className="mt-16 text-center">
-            <Link
-              to="/blog"
-              className="inline-block px-10 py-4 bg-black text-white font-medium hover:bg-[#FF5722] hover:scale-105 transition-all duration-300 shadow-lg"
-            >
-              View All Posts
-            </Link>
-          </div>
-        </motion.div>
+                  <div className="order-1 md:order-2 h-80 overflow-hidden border-4 border-ink misaligned-left">
+                    <ImageWithFallback
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
+                    />
+                  </div>
+                </div>
+                
+                {/* Asymmetrical Accent block for depth */}
+                <div className={`absolute -z-10 w-32 h-32 bg-accent/20 -bottom-8 ${index % 2 === 0 ? '-left-8' : '-right-8'} chisel-block-accent`} />
+              </Link>
+            </motion.article>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
+

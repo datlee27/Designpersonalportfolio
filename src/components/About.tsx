@@ -1,76 +1,78 @@
 import { motion } from 'motion/react';
-import { useInView } from 'motion/react';
-import { useRef } from 'react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function About() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const chiselEasing = [0.2, 0, 0, 1];
 
   return (
-    <section id="about" className="min-h-screen bg-white text-black py-32 font-sans">
+    <section id="about" className="py-32 bg-paper text-ink overflow-hidden border-t-8 border-ink relative">
       <div className="container mx-auto px-6">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.h2
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-16"
-            style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: '800', letterSpacing: '-0.02em' }}
-          >
-            ABOUT ME
-          </motion.h2>
-
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="space-y-6"
-            >
-              <p className="text-xl leading-relaxed text-gray-700">
-                Hi, I'm <span className="font-bold text-[#FF5722]">Dat Lee</span>. I'm a passionate web developer dedicated to creating beautiful, functional,
-                and user-centered digital experiences. With a focus on minimalist design
-                and modern technologies, I bring ideas to life through clean code and
-                thoughtful interfaces.
-              </p>
-              <p className="text-xl leading-relaxed text-gray-700">
-                My approach combines technical expertise with creative problem-solving,
-                ensuring every project not only looks stunning but performs flawlessly
-                across all devices and platforms.
-              </p>
-              <p className="text-xl leading-relaxed text-gray-700">
-                When I'm not coding, you'll find me exploring new technologies,
-                contributing to open-source projects, or sharing my knowledge through
-                writing and mentoring.
-              </p>
-            </motion.div>
+        <div className="flex flex-col md:flex-row gap-24 items-start">
+          <div className="flex-1 space-y-12">
+            <div className="overflow-hidden">
+              <motion.h2 
+                initial={{ y: "100%" }}
+                whileInView={{ y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, ease: chiselEasing }}
+                className="text-huge leading-none"
+              >
+                THE<br />MAKER
+              </motion.h2>
+            </div>
+            
+            <div className="w-full h-2 bg-ink" />
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="relative"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, ease: chiselEasing, delay: 0.3 }}
+              className="space-y-8"
             >
-              <div className="relative aspect-[3/4] overflow-hidden group">
-                <ImageWithFallback
-                  src="/assets/img/about-pic.JPG"
-                  alt="Professional portrait"
-                  width={300}
-                  height={400}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                />
-                <div className="absolute inset-0 border-4 border-black group-hover:border-[#FF5722] transition-colors duration-300 -translate-x-4 -translate-y-4 -z-10" />
+              <p className="text-3xl font-bold leading-none tracking-tighter uppercase">
+                HI, I'M <span className="text-accent">DAT LEE</span>.
+              </p>
+              <p className="text-xl font-bold leading-tight">
+                I'M A PASSIONATE DEVELOPER DEDICATED TO CREATING BOLD, FUNCTIONAL, AND USER-CENTERED DIGITAL EXPERIENCES. 
+                I DON'T JUST CODE; I STAMP BRAND IDENTITY INTO THE WEB.
+              </p>
+              <p className="text-lg font-medium leading-tight text-ink/80">
+                MY APPROACH COMBINES TECHNICAL RIGOR WITH BRUTALIST AESTHETICS, ENSURING EVERY PROJECT IS A RAW STATEMENT OF INTENT.
+              </p>
+              
+              <div className="flex gap-4 pt-12">
+                <div className="w-12 h-12 bg-accent chisel-block-accent" />
+                <div className="w-24 h-12 bg-ink chisel-block" />
               </div>
             </motion.div>
           </div>
-        </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 50, rotate: 2 }}
+            whileInView={{ opacity: 1, x: 0, rotate: -2 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: chiselEasing }}
+            className="flex-1 relative"
+          >
+            <div className="relative z-10 border-8 border-ink p-4 bg-paper misaligned-right">
+              <ImageWithFallback
+                src="/assets/img/about-pic.JPG"
+                alt="Professional portrait"
+                className="w-full aspect-[3/4] object-cover"
+              />
+            </div>
+            {/* Chisel Accent Underlay */}
+            <div className="absolute top-10 -right-10 w-full h-full bg-accent -z-10 chisel-block-accent" />
+          </motion.div>
+        </div>
+      </div>
+      
+      {/* Decorative Stamp */}
+      <div className="absolute bottom-20 right-10 rotate-12 opacity-10 pointer-events-none hidden md:block">
+        <p className="font-heading text-9xl">DAT LEE</p>
       </div>
     </section>
   );
 }
+

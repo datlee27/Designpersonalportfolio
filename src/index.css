@@ -1,49 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --ink: #111111;
+    --paper: #F5F5F5;
+    --accent: #4DA3FF;
+    --chisel-easing: cubic-bezier(0.2, 0, 0, 1);
+  }
+
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto; /* Use manual scroll logic in Layout.tsx */
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    height: 100%;
   }
 
   body {
-    @apply font-sans antialiased text-gray-900 bg-white;
+    @apply antialiased overflow-x-hidden;
+    position: relative;
+    height: 100%;
+    margin: 0;
+  }
+
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--ink);
+  }
+
+  ::-moz-selection {
+    background-color: var(--accent);
+    color: var(--ink);
+  }
+
+
+  /* Grain Texture Overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    line-height: 0.9;
   }
 }
 
 @layer components {
 
-  /* 3D Carousel Styles */
-  .carousel-container {
-    perspective: 1000px;
+  /* Chisel Block Shape */
+  .chisel-block {
+    @apply bg-ink text-paper p-4 relative;
+    clip-path: polygon(0.5% 1%, 99% 0%, 100% 98%, 1% 100%, 0% 2%);
   }
 
-  .carousel {
-    transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  .chisel-block-accent {
+    @apply bg-accent text-ink p-4 relative;
+    clip-path: polygon(0% 1.5%, 98.5% 0%, 100% 97%, 1.5% 100%, 0.5% 3%);
   }
 
-  .transform-style-3d {
-    transform-style: preserve-3d;
+  /* Mechanical Marquee */
+  .marquee-content {
+    @apply flex whitespace-nowrap animate-marquee;
   }
 
-  /* Timeline Styles */
-  .timeline-line {
-    @apply absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-gray-200 transform -translate-x-1/2;
+  /* Hard Reveal Animations */
+  .reveal-cut-left {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.6s var(--chisel-easing);
+  }
+
+  .reveal-cut-left.active {
+    clip-path: inset(0 0 0 0);
+  }
+
+  .reveal-cut-right {
+    clip-path: inset(0 0 0 100%);
+    transition: clip-path 0.6s var(--chisel-easing);
+  }
+
+  .reveal-cut-right.active {
+    clip-path: inset(0 0 0 0);
+  }
+
+  .reveal-block-slam {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.4s var(--chisel-easing), opacity 0.01s linear;
+  }
+
+  .reveal-block-slam.active {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
 @layer utilities {
-  .text-shadow {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  .dry-drag {
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
   }
 
-  .text-shadow-lg {
-    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+  .text-huge {
+    font-size: clamp(4rem, 15vw, 12rem);
   }
 
-  .perspective-1000 {
-    perspective: 1000px;
+  .text-tight {
+    letter-spacing: -0.05em;
+  }
+
+  .misaligned-right {
+    transform: rotate(1deg) translate(5px, 2px);
+  }
+
+  .misaligned-left {
+    transform: rotate(-0.5deg) translate(-3px, 1px);
   }
 }

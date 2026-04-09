@@ -1,20 +1,18 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { Calendar, Clock, ArrowLeft, Eye, Heart } from 'lucide-react';
+import { Calendar, Clock, ArrowLeft, Heart } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { blogPosts } from '../data/blogPosts';
 import { useEffect } from 'react';
-import { BlogNavigation } from '../components/BlogNavigation';
-import { BlogFooter } from '../components/BlogFooter';
+import { Navigation } from '../components/Navigation';
 import { usePostAnalytics } from '../hooks/useBlogAnalytics';
 
 export function BlogPostPage() {
     const { id } = useParams();
     const post = blogPosts.find(p => p.id === Number(id));
-
-    // Map numeric ID to legacy string ID format
     const analyticsId = `post-${id}`;
     const { stats, toggleLike } = usePostAnalytics(analyticsId);
+    const chiselEasing = [0.2, 0, 0, 1];
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -22,107 +20,111 @@ export function BlogPostPage() {
 
     if (!post) {
         return (
-            <div className="min-h-screen flex items-center justify-center text-black font-sans bg-[#F5F5F5]">
+            <div className="min-h-screen flex items-center justify-center text-ink font-heading bg-paper">
                 <div className="text-center">
-                    <h2 className="text-2xl font-bold mb-4">Post not found</h2>
-                    <Link to="/blog" className="text-[#FF5722] hover:underline font-medium">Back to Blog</Link>
+                    <h2 className="text-huge mb-4">404</h2>
+                    <Link to="/blog" className="text-accent underline font-bold text-2xl uppercase">Back to Archive</Link>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#F5F5F5] font-sans text-[#333333]">
-            <BlogNavigation />
+        <div className="min-h-screen bg-paper text-ink selection:bg-accent selection:text-ink pb-32">
+            <Navigation />
 
-            <section className="py-20">
-                <div className="container mx-auto px-6 max-w-4xl">
+            <section className="pt-40 pb-20">
+                <div className="container mx-auto px-6 max-w-6xl">
                     <Link
                         to="/blog"
-                        className="inline-flex items-center gap-2 mb-12 text-[#666666] hover:text-[#FF5722] transition-colors font-medium group"
+                        className="inline-flex items-center gap-4 mb-16 text-ink/40 hover:text-ink transition-colors font-heading text-2xl group"
                     >
-                        <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                        Back to Blog
+                        <ArrowLeft className="w-6 h-6 group-hover:-translate-x-2 transition-transform" />
+                        BACK TO INDEX
                     </Link>
 
                     <motion.article
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                     >
-                        <header className="mb-12 text-center">
-                            <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-[#666666] mb-6 font-medium">
-                                <div className="flex items-center gap-2">
-                                    <Calendar className="w-4 h-4 text-[#999999]" />
-                                    <span>{post.date}</span>
-                                </div>
-                                <span className="w-1 h-1 bg-[#999999] rounded-full"></span>
-                                <div className="flex items-center gap-2">
-                                    <Clock className="w-4 h-4 text-[#999999]" />
-                                    <span>{post.readTime}</span>
-                                </div>
-                                <span className="w-1 h-1 bg-[#999999] rounded-full hidden sm:block"></span>
-                                <div className="flex items-center gap-4">
-                                    <div className="flex items-center gap-1.5" title="Views">
-                                        <Eye className="w-4 h-4 text-[#999999]" />
-                                        <span>{stats.views.toLocaleString()}</span>
+                        <header className="mb-24 relative">
+                            <motion.h1 
+                                initial={{ clipPath: 'inset(100% 0 0 0)' }}
+                                animate={{ clipPath: 'inset(0% 0 0 0)' }}
+                                transition={{ duration: 0.6, ease: chiselEasing }}
+                                className="text-huge md:text-[10rem] leading-[0.85] tracking-tighter mb-12 mix-blend-multiply"
+                            >
+                                {post.title}
+                            </motion.h1>
+
+                            <div className="grid md:grid-cols-3 gap-8 items-start">
+                                <div className="chisel-block-accent p-6 misaligned-left">
+                                    <h2 className="text-xs font-bold uppercase tracking-widest mb-2 opacity-60">Metadata</h2>
+                                    <div className="flex flex-col gap-2 font-heading text-2xl">
+                                      <div className="flex items-center gap-2">
+                                          <Calendar className="w-5 h-5" />
+                                          <span>{post.date}</span>
+                                      </div>
+                                      <div className="flex items-center gap-2">
+                                          <Clock className="w-5 h-5" />
+                                          <span>{post.readTime}</span>
+                                      </div>
                                     </div>
-                                    <button
-                                        onClick={toggleLike}
-                                        className={`flex items-center gap-1.5 transition-colors ${stats.isLiked ? 'text-[#FF5722]' : 'hover:text-[#FF5722]'}`}
-                                        title="Like this post"
-                                    >
-                                        <Heart className={`w-4 h-4 ${stats.isLiked ? 'fill-current' : ''}`} />
-                                        <span>{stats.likes.toLocaleString()}</span>
-                                    </button>
+                                </div>
+
+                                <div className="md:col-span-2">
+                                    <div className="flex items-center gap-8 border-l-8 border-ink pl-8 py-4">
+                                        <button
+                                            onClick={toggleLike}
+                                            className={`flex items-center gap-4 transition-colors font-heading text-4xl ${stats.isLiked ? 'text-accent' : 'hover:text-accent'}`}
+                                        >
+                                            <Heart className={`w-8 h-8 ${stats.isLiked ? 'fill-current' : ''}`} />
+                                            <span>{stats.likes.toLocaleString()} INTERESTED</span>
+                                        </button>
+                                        <div className="h-1 flex-1 bg-ink/10" />
+                                    </div>
                                 </div>
                             </div>
-
-                            <h1 className="text-[40px] md:text-[56px] font-black italic text-[#333333] leading-tight mb-8">
-                                {post.title}
-                            </h1>
-
-                            <div className="w-[60px] h-[3px] bg-[#FF5722] mx-auto"></div>
                         </header>
 
-                        <div className="relative h-[400px] md:h-[600px] w-full mb-16 rounded-lg overflow-hidden shadow-2xl">
+                        <div className="relative mb-24 chisel-block p-1 md:p-4 overflow-hidden min-h-[500px]">
+                           <div className="absolute inset-0 bg-accent/20 mix-blend-hard-light z-10 pointer-events-none" />
                             <ImageWithFallback
                                 src={post.image}
                                 alt={post.title}
-                                width={1200}
-                                height={600}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover filter grayscale"
                             />
                         </div>
 
-                        <div className="prose prose-lg max-w-none text-[#333333] 
-                            prose-headings:font-bold prose-headings:italic prose-headings:text-[#333333]
-                            prose-p:leading-relaxed prose-p:mb-6
-                            prose-a:text-[#FF5722] prose-a:no-underline hover:prose-a:underline
-                            prose-strong:text-[#333333]
-                            prose-blockquote:border-l-4 prose-blockquote:border-[#FF5722] prose-blockquote:bg-white prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:italic prose-blockquote:text-[#666666]
-                            prose-code:text-[#FF5722] prose-code:bg-[#fff] prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-code:text-sm
-                            prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-6
-                            prose-ol:list-decimal prose-ol:pl-6 prose-ol:mb-6
-                            prose-li:mb-2
-                        ">
-                            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                        <div className="max-w-4xl mx-auto">
+                            <div 
+                              className="brutalist-content font-medium text-2xl leading-[1.3] text-ink/90 
+                                [&_h2]:text-6xl [&_h2]:font-heading [&_h2]:mt-20 [&_h2]:mb-8 [&_h2]:leading-none
+                                [&_h3]:text-4xl [&_h3]:font-heading [&_h3]:mt-16 [&_h3]:mb-6
+                                [&_p]:mb-10
+                                [&_blockquote]:border-l-[12px] [&_blockquote]:border-accent [&_blockquote]:pl-10 [&_blockquote]:my-16 [&_blockquote]:font-heading [&_blockquote]:text-5xl [&_blockquote]:leading-tight [&_blockquote]:text-ink
+                                [&_code]:bg-accent [&_code]:text-ink [&_code]:px-2 [&_code]:py-1 [&_code]:font-bold [&_code]:text-xl
+                                [&_ul]:list-none [&_ul_li]:before:content-['■'] [&_ul_li]:before:text-accent [&_ul_li]:before:mr-4 [&_ul_li]:mb-4
+                              "
+                              dangerouslySetInnerHTML={{ __html: post.content }} 
+                            />
                         </div>
 
-                        <div className="mt-16 pt-8 border-t border-[#E0E0E0] flex justify-between items-center">
-                            <div className="text-sm text-[#999999] italic">
-                                Thanks for reading!
-                            </div>
-                            <div className="flex gap-4">
-                                {/* Share buttons placeholder */}
-                            </div>
-                        </div>
-
+                        <footer className="mt-32 pt-16 border-t-8 border-ink flex flex-col md:flex-row justify-between items-center gap-12">
+                            <div className="text-huge leading-none font-heading opacity-10 select-none">END TRANSCRIPT</div>
+                            <Link 
+                                to="/blog" 
+                                className="group flex items-center gap-4 bg-ink text-paper px-12 py-6 font-heading text-4xl hover:bg-accent hover:text-ink transition-colors"
+                            >
+                                INDEX <ArrowLeft className="group-hover:-translate-x-2 transition-transform" />
+                            </Link>
+                        </footer>
                     </motion.article>
                 </div>
             </section>
-
-            <BlogFooter />
         </div>
     );
 }
+

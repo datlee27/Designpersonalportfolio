@@ -1,119 +1,107 @@
 import { motion } from 'motion/react';
 import { ArrowDown } from 'lucide-react';
-import { useFluidCursor } from '../hooks/useFluidCursor';
 
 export function Hero() {
-  // Use the fluid cursor hook with default settings
-  const canvasRef = useFluidCursor();
-
-  const scrollToAbout = () => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToWork = () => {
+    document.getElementById('projects')?.scrollIntoView({ behavior: 'auto' });
   };
 
+  const chiselEasing = [0.2, 0, 0, 1];
+
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center bg-black text-white relative overflow-hidden font-sans">
-      {/* Canvas for fluid cursor effect */}
-      <canvas
-        ref={canvasRef}
-        id="canvas"
-        className="absolute inset-0 pointer-events-none"
-        style={{ zIndex: 1 }}
+    <section id="hero" className="min-h-screen flex flex-col justify-between bg-paper text-ink relative overflow-hidden">
+      {/* Background Accent Block */}
+      <motion.div 
+        initial={{ clipPath: 'inset(0 0 100% 0)' }}
+        animate={{ clipPath: 'inset(0 0 0% 0)' }}
+        transition={{ duration: 0.6, ease: chiselEasing, delay: 0.2 }}
+        className="absolute top-20 right-[10%] w-[30vw] h-[40vh] bg-accent chisel-block-accent opacity-20 -z-10"
       />
 
-      {/* Animated background elements */}
-      <motion.div
-        className="absolute inset-0 opacity-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.1 }}
-        transition={{ duration: 2 }}
-        style={{ zIndex: 2 }}
-      >
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 border border-white rounded-full" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 border border-white rounded-full" />
-      </motion.div>
-
-      <div className="container mx-auto px-6 relative" style={{ zIndex: 10 }}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="max-w-4xl mx-auto text-center"
-        >
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mb-6 text-gray-400 tracking-widest uppercase font-medium"
-          >
-            Portfolio
-          </motion.p>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="mb-8"
-            style={{
-              fontSize: 'clamp(3rem, 10vw, 7rem)',
-              lineHeight: '1.1',
-              fontWeight: '800',
-              letterSpacing: '-0.02em'
-            }}
-          >
-            WEBSITE
-            <br />
-            DEVELOPER
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-xl text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed"
-          >
-            Passionate about merging web development and graphic design to create engaging digital experiences.
-            With a solid foundation in software development and design, I bring both technical expertise and creativity to every project.
-          </motion.p>
-
+      <div className="container mx-auto px-6 pt-32 pb-20 flex-grow flex flex-col justify-center">
+        <div className="relative group">
+          {/* Main Title Section */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            className="flex gap-4 justify-center flex-wrap"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, ease: chiselEasing }}
+            className="flex flex-col items-start"
           >
-            <button
-              onClick={scrollToAbout}
-              className="px-8 py-4 bg-white text-black font-medium hover:bg-[#FF5722] hover:text-white transition-all duration-300 transform hover:scale-105"
+            <motion.span 
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.4, ease: chiselEasing }}
+              className="px-2 bg-ink text-paper text-sm font-bold uppercase tracking-widest mb-4 misaligned-left"
             >
-              View My Work
-            </button>
-            <a
-              href="#contact"
-              className="px-8 py-4 border border-white font-medium hover:bg-white hover:text-black transition-all duration-300"
-            >
-              Get In Touch
-            </a>
+              Independent Developer
+            </motion.span>
+            
+            <h1 className="text-huge text-tight leading-[0.85] flex flex-col">
+              <motion.span 
+                initial={{ clipPath: 'inset(100% 0 0 0)' }}
+                animate={{ clipPath: 'inset(0% 0 0 0)' }}
+                transition={{ delay: 0.5, duration: 0.5, ease: chiselEasing }}
+                className="relative z-10"
+              >
+                HEAVY
+              </motion.span>
+              <motion.span 
+                initial={{ clipPath: 'inset(100% 0 0 0)' }}
+                animate={{ clipPath: 'inset(0% 0 0 0)' }}
+                transition={{ delay: 0.6, duration: 0.5, ease: chiselEasing }}
+                className="relative z-20 text-accent misaligned-right"
+              >
+                CHISEL
+              </motion.span>
+              <motion.span 
+                initial={{ clipPath: 'inset(100% 0 0 0)' }}
+                animate={{ clipPath: 'inset(0% 0 0 0)' }}
+                transition={{ delay: 0.7, duration: 0.5, ease: chiselEasing }}
+                className="relative z-30"
+              >
+                MARKER
+              </motion.span>
+            </h1>
           </motion.div>
-        </motion.div>
+
+          {/* Overlapping Description Block */}
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.9, duration: 0.6, ease: chiselEasing }}
+            className="mt-8 md:mt-0 md:absolute md:top-1/2 md:right-0 md:max-w-md bg-paper p-8 border-4 border-ink misaligned-right z-40"
+          >
+            <p className="text-lg font-bold leading-tight mb-6">
+              BOLD INK-BASED BRUTALIST DESIGN. JAPANESE SUMI-E MEETS MODERN EDITORIAL LAYOUT. 
+              NAIVE BUT AGGRESSIVE. CLEAN BUT IMPERFECT.
+            </p>
+            <button
+              onClick={scrollToWork}
+              className="group relative px-6 py-3 bg-ink text-paper font-bold uppercase tracking-tighter hover:bg-accent hover:text-ink transition-colors duration-100 flex items-center gap-2"
+            >
+              <span>Explore My Work</span>
+              <ArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
+            </button>
+          </motion.div>
+        </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 cursor-pointer"
-        style={{ zIndex: 20 }}
-        onClick={scrollToAbout}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.2 }}
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="text-gray-400 hover:text-[#FF5722] transition-colors duration-300"
-        >
-          <ArrowDown className="w-8 h-8" />
-        </motion.div>
-      </motion.div>
+      {/* Mechanical Marquee System */}
+      <div className="relative w-full bg-ink text-paper py-4 border-t-8 border-accent overflow-hidden z-10">
+        <div className="flex whitespace-nowrap animate-marquee">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="flex items-center gap-8 px-4 font-heading text-4xl uppercase tracking-tighter italic">
+              <span>Fullstack Developer</span>
+              <span className="text-accent">★</span>
+              <span>UI Designer</span>
+              <span className="text-accent px-4 opacity-50">/ / /</span>
+              <span>Digital Artisan</span>
+              <span className="text-accent px-8">●</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
+
   );
 }
