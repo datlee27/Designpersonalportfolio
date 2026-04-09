@@ -49,14 +49,14 @@ export function Chatbot() {
 
     return (
         <>
-            <style dangerouslySetInnerHTML={{ __html: `
-                #chatbase-bubble-button, 
-                .chatbase-bubble-window,
-                [id^="chatbase-"] { 
+            <style dangerouslySetInnerHTML={{
+                __html: `
+                #chatbase-bubble-button { 
                     display: none !important; 
                 }
-                /* Ensure our button is the only one visible */
+                /* Only hide the default button, not the chat window itself */
             `}} />
+
             <AnimatePresence>
                 {isVisible && (
                     <motion.button
@@ -68,16 +68,18 @@ export function Chatbot() {
                         className="fixed bottom-8 right-8 z-[1000] group"
                         aria-label="Open Chat"
                     >
-                        <div className="chisel-block-accent w-20 h-20 p-2 group-hover:misaligned-right transition-transform duration-100 flex items-center justify-center">
-                            <img 
-                              src="/Users/mac/.gemini/antigravity/brain/ba3d752a-1c6c-4723-99ba-07e13944aa45/brutalist_bot_logo_1775745617617.png" 
-                              alt="AI Bot" 
-                              className="w-full h-full object-contain filter brightness-0"
-                            />
+                        <div className="electric-border w-24 h-24 p-[2px] group-hover:misaligned-right transition-transform duration-100">
+                            <div className="electric-border-inner bg-accent flex items-center justify-center p-2">
+                                <img
+                                    src="/Users/mac/.gemini/antigravity/brain/ba3d752a-1c6c-4723-99ba-07e13944aa45/brutalist_bot_logo_1775745617617.png"
+                                    alt="AI Bot"
+                                    className="w-full h-full object-contain filter brightness-0"
+                                />
+                            </div>
                         </div>
                         {/* Status Label */}
                         <div className="absolute top-0 right-full mr-4 opacity-0 group-hover:opacity-100 transition-opacity bg-ink text-paper px-4 py-2 font-heading text-xl whitespace-nowrap misaligned-left">
-                          TALK TO INTEL
+                            TALK TO INTEL
                         </div>
                     </motion.button>
                 )}

@@ -13,7 +13,8 @@
   }
 
   html {
-    scroll-behavior: auto; /* Use manual scroll logic in Layout.tsx */
+    scroll-behavior: auto;
+    /* Use manual scroll logic in Layout.tsx */
     background-color: var(--paper);
     color: var(--ink);
     font-family: 'Inter', sans-serif;
@@ -49,7 +50,7 @@
     height: 100vh;
     pointer-events: none;
     z-index: 9999;
-    opacity: 0.04;
+    opacity: 0.08;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
@@ -135,5 +136,62 @@
 
   .misaligned-left {
     transform: rotate(-0.5deg) translate(-3px, 1px);
+  }
+
+  /* Brutalist Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(17, 17, 17, 0.05);
+    /* Very faint ink bar */
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--ink);
+  }
+
+  /* Electric Running Light Animation */
+  @keyframes border-run {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  .electric-border {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .electric-border::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: conic-gradient(transparent,
+        rgba(77, 163, 255, 0.4),
+        var(--accent),
+        transparent 20%);
+    animation: border-run 4s linear infinite;
+    z-index: 0;
+  }
+
+  .electric-border>* {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Inner background to keep content clean */
+  .electric-border-inner {
+    margin: 2px;
+    height: calc(100% - 4px);
+    width: calc(100% - 4px);
   }
 }

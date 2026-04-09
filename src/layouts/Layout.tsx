@@ -47,28 +47,28 @@ export function Layout({ children }: LayoutProps) {
     }, [pathname, hash]);
 
     return (
-      <div className="flex flex-col min-h-screen overflow-x-hidden selection:bg-accent selection:text-ink bg-paper">
-          <Navigation />
-          <main className="flex-grow">
-              {children}
-          </main>
-          <footer className="bg-ink text-paper border-t-8 border-accent mt-auto relative z-10">
-              <div className="container mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
-                  <p className="font-heading text-2xl tracking-tighter">© {new Date().getFullYear()} DAT LEE</p>
-                  <p className="text-accent font-bold uppercase tracking-widest text-xs">BRUTALIST SYSTEM v1.0</p>
-              </div>
-              
-              {/* Official Branding Marquee at the very bottom */}
-              <div className="w-full bg-paper text-ink py-2 overflow-hidden border-t-2 border-ink">
-                <div className="flex whitespace-nowrap animate-marquee">
-                  {[...Array(10)].map((_, i) => (
-                    <span key={i} className="mx-4 font-bold text-[10px] uppercase tracking-widest">
-                      DAT LEE © 2026 ・ BRUTALIST BY DESIGN ・ INK ON PAPER ・ TRUTH IN ARCHITECTURE ・ 
-                    </span>
-                  ))}
+        <div className="flex flex-col min-h-screen overflow-x-hidden selection:bg-accent selection:text-ink bg-paper">
+            <Navigation />
+            <main className="flex-grow">
+                {children}
+            </main>
+            <footer className="bg-ink text-paper border-t-8 border-accent mt-auto relative z-10">
+                <div className="container mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
+                    <p className="font-heading text-2xl tracking-tighter">© {new Date().getFullYear()} DAT LEE</p>
+                    {/* <p className="text-accent font-bold uppercase tracking-widest text-xs">BRUTALIST SYSTEM v1.0</p> */}
                 </div>
-              </div>
-          </footer>
-      </div>
+
+                {/* Official Branding Marquee at the very bottom */}
+                <div className="w-full bg-paper text-ink py-2 overflow-hidden border-t-2 border-ink">
+                    <div className="flex whitespace-nowrap animate-marquee">
+                        {[...Array(10)].map((_, i) => (
+                            <span key={i} className="mx-4 font-bold text-[10px] uppercase tracking-widest">
+                                DAT LEE © 2026 ・ BRUTALIST BY DESIGN ・ INK ON PAPER ・ TRUTH IN ARCHITECTURE ・
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            </footer>
+        </div>
     );
 }

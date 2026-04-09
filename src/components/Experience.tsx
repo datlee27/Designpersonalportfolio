@@ -23,7 +23,7 @@ export function Experience() {
     <section id="experience" className="py-32 bg-paper text-ink overflow-hidden border-t-8 border-ink">
       <div className="container mx-auto px-6">
         <div className="mb-24 flex items-center gap-8">
-          <motion.h2 
+          <motion.h2
             initial={{ clipPath: 'inset(0 100% 0 0)' }}
             whileInView={{ clipPath: 'inset(0 0 0 0)' }}
             viewport={{ once: true }}

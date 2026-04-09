@@ -10,7 +10,7 @@ export function About() {
         <div className="flex flex-col md:flex-row gap-24 items-start">
           <div className="flex-1 space-y-12">
             <div className="overflow-hidden">
-              <motion.h2 
+              <motion.h2
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
@@ -20,7 +20,7 @@ export function About() {
                 THE<br />MAKER
               </motion.h2>
             </div>
-            
+
             <div className="w-full h-2 bg-ink" />
 
             <motion.div
@@ -34,13 +34,13 @@ export function About() {
                 HI, I'M <span className="text-accent">DAT LEE</span>.
               </p>
               <p className="text-xl font-bold leading-tight">
-                I'M A PASSIONATE DEVELOPER DEDICATED TO CREATING BOLD, FUNCTIONAL, AND USER-CENTERED DIGITAL EXPERIENCES. 
+                I'M A PASSIONATE DEVELOPER DEDICATED TO CREATING BOLD, FUNCTIONAL, AND USER-CENTERED DIGITAL EXPERIENCES.
                 I DON'T JUST CODE; I STAMP BRAND IDENTITY INTO THE WEB.
               </p>
               <p className="text-lg font-medium leading-tight text-ink/80">
                 MY APPROACH COMBINES TECHNICAL RIGOR WITH BRUTALIST AESTHETICS, ENSURING EVERY PROJECT IS A RAW STATEMENT OF INTENT.
               </p>
-              
+
               <div className="flex gap-4 pt-12">
                 <div className="w-12 h-12 bg-accent chisel-block-accent" />
                 <div className="w-24 h-12 bg-ink chisel-block" />
@@ -67,7 +67,7 @@ export function About() {
           </motion.div>
         </div>
       </div>
-      
+
       {/* Decorative Stamp */}
       <div className="absolute bottom-20 right-10 rotate-12 opacity-10 pointer-events-none hidden md:block">
         <p className="font-heading text-9xl">DAT LEE</p>
