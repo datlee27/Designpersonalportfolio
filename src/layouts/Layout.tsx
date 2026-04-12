@@ -21,7 +21,7 @@ export function Layout({ children }: LayoutProps) {
                     e.preventDefault();
                     const element = document.getElementById(id);
                     if (element) {
-                        element.scrollIntoView({ behavior: 'auto' });
+                        element.scrollIntoView({ behavior: 'smooth' });
                         window.history.pushState(null, '', anchor.hash);
                     }
                 }
@@ -38,11 +38,11 @@ export function Layout({ children }: LayoutProps) {
             setTimeout(() => {
                 const element = document.getElementById(hash.replace('#', ''));
                 if (element) {
-                    element.scrollIntoView({ behavior: 'auto' });
+                    element.scrollIntoView({ behavior: 'smooth' });
                 }
             }, 100);
         } else {
-            window.scrollTo({ top: 0, behavior: 'auto' });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }, [pathname, hash]);
 

@@ -12,6 +12,19 @@
 -- SỬ DỤNG DATABASE CÓ SẴN (không cần tạo mới)
 -- USE ryxeydlbhosting_datdocidvn;  -- Chọn database của bạn
 
+-- ==================== TABLE: admins ====================
+-- Lưu thông tin quản trị viên
+CREATE TABLE IF NOT EXISTS admins (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Mật khẩu mặc định là 'admin123' (hash bên dưới là cho admin123)
+INSERT IGNORE INTO admins (username, password_hash) 
+VALUES ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
+
 -- ==================== TABLE: posts ====================
 -- Lưu thông tin các bài viết
 CREATE TABLE IF NOT EXISTS posts (

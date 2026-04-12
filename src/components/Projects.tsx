@@ -1,27 +1,51 @@
 import { motion } from 'motion/react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { Github, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Github, ArrowRight, ArrowLeft, ExternalLink } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 const projects = [
   {
+    id: '05',
+    title: "Dev Roadmap Tracking System",
+    description: "An advanced learning management platform designed for developers to track a 3-month personalized roadmap. Featuring a dynamic task manager across multiple phases, an interactive weekly schedule with drag-and-drop functionality, and a persistent data synchronization system using LocalStorage.",
+    image: "https://res.cloudinary.com/ddwt6nl7s/image/upload/v1775903083/A%CC%89nh_ma%CC%80n_hi%CC%80nh_2026-04-11_lu%CC%81c_17.23.35_z4qpji.png",
+    tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "FE"],
+    github: "https://github.com/datlee27/dev-roadmap",
+    deploy: "https://dev-roadmap-brown.vercel.app/",
+    accent: "bg-blue-500",
+    status: "Latest"
+  },
+  {
+    id: '06',
+    title: "IELTS Writing Typing Practice",
+    description: "A specialized training tool designed to simulate the IELTS Computer-based Writing environment. It focuses on improving typing speed and accuracy under exam conditions, featuring a split-screen interface for task prompts and real-time text editing, integrated word counting, and customizable practice sessions.",
+    image: "https://res.cloudinary.com/ddwt6nl7s/image/upload/v1775904892/A%CC%89nh_ma%CC%80n_hi%CC%80nh_2026-04-11_lu%CC%81c_17.52.52_cb9myu.png",
+    tags: ["React", "TypeScript", "Tailwind CSS", "Vite", "Educational", "FE"],
+    github: "https://github.com/datlee27/Practice-ielts-writing-typing-react",
+    // deploy: "https://practice-ielts-writing-typing-react.vercel.app/", // Link deploy mặc định từ repo
+    accent: "bg-emerald-500",
+    status: "Latest"
+  },
+  {
     id: '01',
     title: "P2P Electric EV Rental",
     description: "Developed a comprehensive Peer-to-Peer (P2P) electric vehicle rental system with PayOS, OCR, and AI Assistant. A revolutionary approach to urban mobility connecting EV owners with environmentally conscious commuters through a secure, industrial-grade backend.",
     image: "https://res.cloudinary.com/ddwt6nl7s/image/upload/v1764500651/A%CC%89nh_ma%CC%80n_hi%CC%80nh_2025-11-30_lu%CC%81c_18.03.15_drt2kr.png",
-    tags: ["Spring Boot", "MySQL", "AI"],
+    tags: ["Spring Boot", "MySQL", "AI", "FullStack"],
     github: "https://github.com/datlee27/ecodanav2",
-    accent: "bg-accent"
+    accent: "bg-accent",
+    status: "2025"
   },
   {
     id: '02',
     title: "AI-Integrated LMS",
     description: "Built a full-stack Learning Management System designed to modernize digital course management. Integrates advanced AI logic for personalized student recommendations, automated content tagging, and high-performance industrial learning workflows.",
     image: "/assets/img/projectlearning.png",
-    tags: ["Java", "MySQL", "AI"],
+    tags: ["Java", "MySQL", "AI", "FullStack"],
     github: "https://github.com/datlee27/LearningWebsite-1",
-    accent: "bg-ink"
+    accent: "bg-ink",
+    status: "2025"
   },
   {
     id: '03',
@@ -30,16 +54,18 @@ const projects = [
     image: "/assets/img/projectpic.png",
     tags: ["Arduino", "IoT", "Sensors"],
     github: "https://github.com/datlee27/iot102-smart-recycle-bin",
-    accent: "bg-accent"
+    accent: "bg-accent",
+    status: "2025"
   },
   {
     id: '04',
     title: "Fruit Shop Web App",
     description: "E-commerce web application for a high-traffic fruit marketplace using Java Servlets, JSP, and SQL Server. Features complex cart logic, session management, and a high-contrast industrial UI built for speed and reliability.",
     image: "/assets/img/fruitshop.png",
-    tags: ["Java Servlets", "JSP", "SQL"],
+    tags: ["Java Servlets", "JSP", "SQL", "FullStack"],
     github: "https://github.com/datlee27/FruitShopOnline",
-    accent: "bg-ink"
+    accent: "bg-ink",
+    status: "2025"
   }
 ];
 
@@ -67,7 +93,7 @@ export function Projects() {
     emblaApi.on('reInit', onScroll);
   }, [emblaApi, onScroll]);
 
-  const chiselEasing = [0.2, 0, 0, 1];
+  const chiselEasing: [number, number, number, number] = [0.2, 0, 0, 1];
 
   return (
     <section id="projects" className="py-24 bg-paper text-ink overflow-hidden border-t-8 border-ink min-h-screen flex flex-col justify-center">
@@ -85,7 +111,7 @@ export function Projects() {
 
           <div className="text-right hidden md:block opacity-40">
             <p className="font-bold uppercase text-xl tracking-tighter">PROJECT ARCHIVE (2024—2025)</p>
-            <p className="font-heading text-lg">RECORDS_INDEX_FINAL_v1.0.1</p>
+            {/* <p className="font-heading text-lg">RECORDS_INDEX_FINAL_v1.0.1</p> */}
           </div>
         </div>
 
@@ -108,14 +134,26 @@ export function Projects() {
                     <div className="absolute top-4 left-4 bg-ink text-paper px-3 py-1 font-heading text-xl">
                       #{project.id}
                     </div>
+                    {project.status && (
+                      <div className={`absolute top-4 right-4 px-3 py-1 font-bold text-sm uppercase tracking-wider border-2 border-ink shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${project.status.toLowerCase() === 'latest' ? 'bg-[#e84c4c] text-ink' : 'bg-accent text-ink'}`}>
+                        {project.status}
+                      </div>
+                    )}
                   </div>
 
                   <div className="p-8 flex-grow flex flex-col">
                     <div className="flex justify-between items-center mb-6">
-                      <h3 className="text-4xl font-heading tracking-tighter leading-none">{project.title}</h3>
-                      <a href={project.github} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors active:scale-90 transform">
-                        <Github className="w-8 h-8" />
-                      </a>
+                      <h3 className="text-4xl font-heading tracking-tighter leading-none pr-4">{project.title}</h3>
+                      <div className="flex gap-4">
+                        {project.deploy && (
+                          <a href={project.deploy} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors active:scale-90 transform">
+                            <ExternalLink className="w-8 h-8" />
+                          </a>
+                        )}
+                        <a href={project.github} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors active:scale-90 transform">
+                          <Github className="w-8 h-8" />
+                        </a>
+                      </div>
                     </div>
 
                     <div className="text-lg font-bold leading-tight mb-8 opacity-80 flex-grow overflow-y-auto max-h-[3.75em] md:max-h-[5em] pr-2 custom-scrollbar">

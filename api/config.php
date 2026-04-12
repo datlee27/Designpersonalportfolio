@@ -5,11 +5,11 @@
  */
 
 // Database credentials
-define('DB_HOST', 'localhost');  // hoặc 'onehost-webhn072403.000nethost.com' nếu dùng remote
+define('DB_HOST', 'localhost');  // Hosting yêu cầu dùng localhost cho nội bộ
 define('DB_PORT', '3306');
-define('DB_NAME', 'ryxeydibhosting_datdocidvn');  // Thay bằng tên database của bạn
-define('DB_USER', 'ryxeydibhosting_datdocidvn');  // Phải GIỐNG DB_NAME
-define('DB_PASS', 'Levandat2004*');  // Thay bằng password của bạn
+define('DB_NAME', 'ryxeydibhosting_datdocidvn');
+define('DB_USER', 'ryxeydibhosting_datdocidvn');
+define('DB_PASS', 'Levandat2004*');
 define('DB_CHARSET', 'utf8mb4');
 
 // Error reporting (tắt trong production)
@@ -135,3 +135,13 @@ function validatePostID($postId)
 {
     return preg_match('/^post-\d+$/', $postId);
 }
+
+// Check if user is logged in as admin
+function isAdmin()
+{
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    return isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true;
+}
+

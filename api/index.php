@@ -15,9 +15,149 @@ $endpoint = isset($_GET['endpoint']) ? $_GET['endpoint'] : '';
 
 try {
     switch ($endpoint) {
+        // ==================== GET ALL POSTS (New) ====================
+        case 'posts':
+            if ($method === 'GET') {
+                try {
+                    // Thử lấy bài viết và nối với các bảng thống kê
+                    $sql = "SELECT p.*, 
+                            COALESCE(s.total_likes, 0) as total_likes, 
+                            COALESCE(s.total_views, 0) as total_views 
+                            FROM posts p 
+                            LEFT JOIN post_stats s ON p.post_id = s.post_id 
+                            ORDER BY p.published_date DESC";
+                    
+                    $stmt = $db->query($sql);
+                    if (!$stmt) {
+                        // Nếu JOIN lỗi, thử lấy bài viết thuần túy
+                        $stmt = $db->query("SELECT * FROM posts ORDER BY published_date DESC");
+                    }
+                    
+                    $posts = $stmt->fetchAll();
+                    sendResponse(true, $posts, 'Posts retrieved successfully');
+                } catch (Exception $e) {
+                    sendResponse(false, [], 'SQL Error: ' . $e->getMessage(), 500);
+                }
+            } elseif ($method === 'POST') {
+                if (!isAdmin()) {
+                    sendResponse(false, [], 'Unauthorized', 401);
+                }
+
+                $input = json_decode(file_get_contents('php://input'), true);
+                $title = $input['title'] ?? '';
+                $slug = $input['slug'] ?? '';
+                $excerpt = $input['excerpt'] ?? '';
+                $content = $input['content'] ?? '';
+                $author = $input['author'] ?? 'Admin';
+                $published_date = $input['published_date'] ?? date('Y-m-d');
+                $read_time = $input['read_time'] ?? 5;
+                $image_url = $input['image_url'] ?? '';
+
+                // Generate a unique post_id
+                $stmt = $db->query("SELECT MAX(CAST(SUBSTRING(post_id, 6) AS UNSIGNED)) as max_id FROM posts");
+                $maxId = $stmt->fetch()['max_id'] ?? 0;
+                $postId = 'post-' . ($maxId + 1);
+
+                $db->beginTransaction();
+                try {
+                    $insertPost = $db->prepare("
+                        INSERT INTO posts (post_id, title, slug, excerpt, content, author, published_date, read_time, image_url) 
+                        VALUES (:post_id, :title, :slug, :excerpt, :content, :author, :published_date, :read_time, :image_url)
+                    ");
+                    $insertPost->execute([
+                        'post_id' => $postId,
+                        'title' => $title,
+                        'slug' => $slug,
+                        'excerpt' => $excerpt,
+                        'content' => $content,
+                        'author' => $author,
+                        'published_date' => $published_date,
+                        'read_time' => $read_time,
+                        'image_url' => $image_url
+                    ]);
+
+                    $insertStats = $db->prepare("INSERT INTO post_stats (post_id) VALUES (:post_id)");
+                    $insertStats->execute(['post_id' => $postId]);
+
+                    $db->commit();
+                    sendResponse(true, ['post_id' => $postId], 'Post created successfully', 201);
+                } catch (Exception $e) {
+                    $db->rollBack();
+                    throw $e;
+                }
+            }
+            break;
+
+        // ==================== SINGLE POST CRUD (New) ====================
+        case 'post':
+            $postId = $_GET['post_id'] ?? '';
+            $slug = $_GET['slug'] ?? '';
+
+            if ($method === 'GET') {
+                if ($postId) {
+                    $stmt = $db->prepare("SELECT * FROM posts WHERE post_id = :post_id");
+                    $stmt->execute(['post_id' => $postId]);
+                } elseif ($slug) {
+                    $stmt = $db->prepare("SELECT * FROM posts WHERE slug = :slug");
+                    $stmt->execute(['slug' => $slug]);
+                } else {
+                    sendResponse(false, [], 'Missing post_id or slug', 400);
+                }
+
+                $post = $stmt->fetch();
+                if ($post) {
+                    sendResponse(true, $post);
+                } else {
+                    sendResponse(false, [], 'Post not found', 404);
+                }
+            } elseif ($method === 'PUT') {
+                if (!isAdmin()) {
+                    sendResponse(false, [], 'Unauthorized', 401);
+                }
+
+                $input = json_decode(file_get_contents('php://input'), true);
+                if (!$postId) {
+                    sendResponse(false, [], 'Missing post_id', 400);
+                }
+
+                $stmt = $db->prepare("
+                    UPDATE posts SET 
+                        title = :title, slug = :slug, excerpt = :excerpt, content = :content, 
+                        author = :author, published_date = :published_date, read_time = :read_time, image_url = :image_url 
+                    WHERE post_id = :post_id
+                ");
+                $stmt->execute([
+                    'title' => $input['title'],
+                    'slug' => $input['slug'],
+                    'excerpt' => $input['excerpt'],
+                    'content' => $input['content'],
+                    'author' => $input['author'] ?? 'Admin',
+                    'published_date' => $input['published_date'],
+                    'read_time' => $input['read_time'],
+                    'image_url' => $input['image_url'],
+                    'post_id' => $postId
+                ]);
+
+                sendResponse(true, [], 'Post updated successfully');
+            } elseif ($method === 'DELETE') {
+                if (!isAdmin()) {
+                    sendResponse(false, [], 'Unauthorized', 401);
+                }
+
+                if (!$postId) {
+                    sendResponse(false, [], 'Missing post_id', 400);
+                }
+
+                $stmt = $db->prepare("DELETE FROM posts WHERE post_id = :post_id");
+                $stmt->execute(['post_id' => $postId]);
+
+                sendResponse(true, [], 'Post deleted successfully');
+            }
+            break;
 
         // ==================== GET ALL POST STATS ====================
         case 'stats':
+
             if ($method === 'GET') {
                 $stmt = $db->query("
                     SELECT 

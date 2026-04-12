@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 
 export function Preloader() {
   const [isLoading, setIsLoading] = useState(true);
-  const chiselEasing = [0.2, 0, 0, 1];
+  const chiselEasing: [number, number, number, number] = [0.2, 0, 0, 1];
 
   useEffect(() => {
     const timer = setTimeout(() => {

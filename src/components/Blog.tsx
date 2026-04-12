@@ -1,12 +1,26 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import { blogPosts } from '../data/blogPosts';
+import { blogService, Post } from '../services/blogService';
 
 export function Blog() {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
   const chiselEasing = [0.2, 0, 0, 1];
-  const featuredPosts = blogPosts.slice(0, 2);
+
+  useEffect(() => {
+    const fetchFeatured = async () => {
+      const data = await blogService.getAllPosts();
+      setPosts(data.slice(0, 2));
+      setLoading(false);
+    };
+    fetchFeatured();
+  }, []);
+
+  if (loading) return null;
+
 
   return (
     <section id="blog" className="py-32 bg-paper text-ink overflow-hidden border-t-8 border-ink">
@@ -32,26 +46,26 @@ export function Blog() {
         </div>
 
         <div className="flex flex-col gap-24">
-          {featuredPosts.map((post, index) => (
+          {posts.map((post, index) => (
             <motion.article
-              key={post.id}
+              key={post.post_id}
               initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease: chiselEasing, delay: index * 0.1 }}
               className={`relative group ${index % 2 !== 0 ? 'md:self-end' : ''}`}
             >
-              <Link to={`/blog/${post.id}`} className="block max-w-5xl">
+              <Link to={`/blog/${post.slug}`} className="block max-w-5xl">
                 <div className="grid md:grid-cols-[1fr_400px] gap-8 bg-paper border-4 border-ink p-4 hover:misaligned-right transition-transform duration-100">
                   <div className="order-2 md:order-1 flex flex-col justify-center">
                     <div className="flex items-center gap-6 mb-6 font-bold text-sm tracking-tighter text-accent">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
-                        <span>{post.date}</span>
+                        <span>{post.published_date}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Clock className="w-4 h-4" />
-                        <span>{post.readTime}</span>
+                        <span>{post.read_time} min read</span>
                       </div>
                     </div>
 
@@ -71,7 +85,7 @@ export function Blog() {
 
                   <div className="order-1 md:order-2 h-80 overflow-hidden border-4 border-ink misaligned-left">
                     <ImageWithFallback
-                      src={post.image}
+                      src={post.image_url}
                       alt={post.title}
                       className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
                     />

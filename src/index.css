@@ -13,7 +13,7 @@
   }
 
   html {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
     /* Use manual scroll logic in Layout.tsx */
     background-color: var(--paper);
     color: var(--ink);

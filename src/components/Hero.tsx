@@ -3,7 +3,7 @@ import { ArrowDown } from 'lucide-react';
 
 export function Hero() {
   const scrollToWork = () => {
-    document.getElementById('projects')?.scrollIntoView({ behavior: 'auto' });
+    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const chiselEasing = [0.2, 0, 0, 1];
