@@ -24,7 +24,7 @@ const skills = [
 ];
 
 export function Skills() {
-  const chiselEasing = [0.2, 0, 0, 1];
+  const chiselEasing = [0.2, 0, 0, 1] as const;
 
   return (
     <section id="skills" className="py-32 bg-paper text-ink overflow-hidden border-t-8 border-ink">
@@ -75,7 +75,7 @@ export function Skills() {
         </div>
 
         {/* Large Background Subject Element */}
-        <div className="absolute -bottom-20 -left-20 opacity-5 pointer-events-none select-none">
+        <div className="absolute -bottom-20 left-0 -translate-x-10 md:-translate-x-20 opacity-5 pointer-events-none select-none">
           <p className="text-[20rem] font-heading leading-none">CORE</p>
         </div>
       </div>

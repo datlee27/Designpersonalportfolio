@@ -25,7 +25,7 @@ export function AdminLoginPage() {
     }
   };
 
-  const chiselEasing = [0.2, 0, 0, 1];
+  const chiselEasing = [0.2, 0, 0, 1] as const;
 
   return (
     <div className="min-h-screen bg-ink flex items-center justify-center p-6 selection:bg-accent selection:text-ink">
@@ -99,14 +99,14 @@ export function AdminLoginPage() {
           {/* Decorative misalignment element */}
           <div className="absolute -z-10 bg-accent w-full h-full top-4 left-4" />
         </motion.div>
-        
+
         <div className="mt-12 text-center">
-            <button 
-                onClick={() => navigate('/')}
-                className="text-paper/40 hover:text-accent font-bold uppercase tracking-widest text-xs transition-colors"
-            >
-                ← Return to Public Terminal
-            </button>
+          <button
+            onClick={() => navigate('/')}
+            className="text-paper/40 hover:text-accent font-bold uppercase tracking-widest text-xs transition-colors"
+          >
+            ← Return to Public Terminal
+          </button>
         </div>
       </div>
     </div>

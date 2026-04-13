@@ -6,7 +6,7 @@ export function Hero() {
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const chiselEasing = [0.2, 0, 0, 1];
+  const chiselEasing = [0.2, 0, 0, 1] as const;
 
   return (
     <section id="hero" className="min-h-screen flex flex-col justify-between bg-paper text-ink relative overflow-hidden">

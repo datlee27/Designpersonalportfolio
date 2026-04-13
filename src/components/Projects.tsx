@@ -171,7 +171,7 @@ export function Projects() {
                 </div>
 
                 {/* Misaligned back shadow */}
-                <div className="absolute -z-10 bg-accent/5 -bottom-4 -right-4 w-full h-full border-2 border-ink/10" />
+                <div className="absolute -z-10 bg-accent/5 -bottom-4 right-0 w-full h-full border-2 border-ink/10 translate-x-2 md:translate-x-4" />
               </div>
             ))}
           </div>

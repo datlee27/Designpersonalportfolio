@@ -8,7 +8,7 @@ import { blogService, Post } from '../services/blogService';
 export function Blog() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
-  const chiselEasing = [0.2, 0, 0, 1];
+  const chiselEasing = [0.2, 0, 0, 1] as const;
 
   useEffect(() => {
     const fetchFeatured = async () => {
@@ -26,7 +26,7 @@ export function Blog() {
     <section id="blog" className="py-32 bg-paper text-ink overflow-hidden border-t-8 border-ink">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-24">
-          <motion.h2 
+          <motion.h2
             initial={{ clipPath: 'inset(100% 0 0 0)' }}
             whileInView={{ clipPath: 'inset(0% 0 0 0)' }}
             viewport={{ once: true }}
@@ -36,8 +36,8 @@ export function Blog() {
             LATEST<br />INSIGHTS
           </motion.h2>
           <div className="text-right hidden md:block">
-            <Link 
-              to="/blog" 
+            <Link
+              to="/blog"
               className="group flex items-center gap-4 bg-ink text-paper px-8 py-4 font-heading text-2xl hover:bg-accent hover:text-ink transition-colors duration-100"
             >
               ALL POSTS <ArrowRight className="group-hover:translate-x-2 transition-transform" />
@@ -91,9 +91,9 @@ export function Blog() {
                     />
                   </div>
                 </div>
-                
+
                 {/* Asymmetrical Accent block for depth */}
-                <div className={`absolute -z-10 w-32 h-32 bg-accent/20 -bottom-8 ${index % 2 === 0 ? '-left-8' : '-right-8'} chisel-block-accent`} />
+                <div className={`absolute -z-10 w-32 h-32 bg-accent/20 -bottom-8 ${index % 2 === 0 ? 'left-0 -translate-x-4 md:-translate-x-8' : 'right-0 translate-x-4 md:translate-x-8'} chisel-block-accent`} />
               </Link>
             </motion.article>
           ))}

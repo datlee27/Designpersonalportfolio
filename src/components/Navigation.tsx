@@ -17,7 +17,7 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const chiselEasing = [0.2, 0, 0, 1];
+  const chiselEasing = [0.2, 0, 0, 1] as const;
 
   useEffect(() => {
     const handleScroll = () => {

@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { blogService, Post, PostCreateInput } from '../services/blogService';
 import { authService } from '../services/authService';
-import { 
-  Plus, Edit2, Trash2, Save, X, Eye, 
-  LogOut, LayoutDashboard, FileText, Settings, 
+import {
+  Plus, Edit2, Trash2, Save, X, Eye,
+  LogOut, LayoutDashboard,
   AlertTriangle, CheckCircle, Search
 } from 'lucide-react';
 
@@ -15,8 +15,8 @@ export function AdminDashboard() {
   const [editingPost, setEditingPost] = useState<Post | null>(null);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [notification, setNotification] = useState<{type: 'success' | 'error', message: string} | null>(null);
-  
+  const [notification, setNotification] = useState<{ type: 'success' | 'error', message: string } | null>(null);
+
   const navigate = useNavigate();
 
   // Form State
@@ -41,7 +41,7 @@ export function AdminDashboard() {
       navigate('/intel-access');
       return;
     }
-    
+
     await fetchPosts();
     setLoading(false);
   };
@@ -93,7 +93,7 @@ export function AdminDashboard() {
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     let result;
-    
+
     if (editingPost) {
       result = await blogService.updatePost(editingPost.post_id, formData);
     } else {
@@ -121,16 +121,16 @@ export function AdminDashboard() {
     }
   };
 
-  const filteredPosts = posts.filter(p => 
-    p.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+  const filteredPosts = posts.filter(p =>
+    p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p.post_id.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const chiselEasing = [0.2, 0, 0, 1];
+  const chiselEasing = [0.2, 0, 0, 1] as const;
 
   if (loading) return (
     <div className="min-h-screen bg-paper flex items-center justify-center font-heading text-4xl uppercase tracking-widest animate-pulse">
-        Initializing Secure Environment...
+      Initializing Secure Environment...
     </div>
   );
 
@@ -145,8 +145,8 @@ export function AdminDashboard() {
             <span className="hover:text-paper cursor-pointer flex items-center gap-2" onClick={() => navigate('/blog')}><Eye className="w-4 h-4" /> Live Site</span>
           </nav>
         </div>
-        
-        <button 
+
+        <button
           onClick={handleLogout}
           className="bg-accent text-ink px-6 py-2 font-heading text-xl hover:bg-paper transition-colors flex items-center gap-2"
         >
@@ -160,8 +160,8 @@ export function AdminDashboard() {
             <h2 className="text-8xl font-heading leading-none tracking-tighter mb-4">POST<br />MANAGEMENT</h2>
             <p className="font-bold text-ink/40 uppercase tracking-widest text-sm">ARCHIVE STATUS: {posts.length} RECORDS INDEXED</p>
           </div>
-          
-          <button 
+
+          <button
             onClick={() => openEditor()}
             className="bg-ink text-paper p-6 font-heading text-4xl hover:bg-accent hover:text-ink transition-all flex items-center gap-4 misaligned-right"
           >
@@ -172,9 +172,9 @@ export function AdminDashboard() {
         {/* Filters and Search */}
         <div className="mb-12 flex items-center gap-6 border-4 border-ink p-4 bg-ink/5 misaligned-left">
           <Search className="w-8 h-8 opacity-40" />
-          <input 
-            type="text" 
-            placeholder="SEARCH RECORDS..." 
+          <input
+            type="text"
+            placeholder="SEARCH RECORDS..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full bg-transparent font-heading text-4xl uppercase tracking-tighter focus:outline-none"
@@ -184,13 +184,12 @@ export function AdminDashboard() {
         {/* Notification */}
         <AnimatePresence>
           {notification && (
-            <motion.div 
+            <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
-              className={`fixed top-32 left-1/2 -translate-x-1/2 z-[100] px-8 py-4 border-4 border-ink font-bold uppercase flex items-center gap-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] ${
-                notification.type === 'success' ? 'bg-[#76e5b1] text-ink' : 'bg-accent/40 text-ink'
-              }`}
+              className={`fixed top-32 left-1/2 -translate-x-1/2 z-[100] px-8 py-4 border-4 border-ink font-bold uppercase flex items-center gap-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] ${notification.type === 'success' ? 'bg-[#76e5b1] text-ink' : 'bg-accent/40 text-ink'
+                }`}
             >
               {notification.type === 'success' ? <CheckCircle className="w-6 h-6" /> : <AlertTriangle className="w-6 h-6" />}
               {notification.message}
@@ -227,14 +226,14 @@ export function AdminDashboard() {
                   </td>
                   <td className="p-6 border-4 border-ink">
                     <div className="flex gap-4">
-                      <button 
+                      <button
                         onClick={() => openEditor(post)}
                         className="p-3 border-2 border-ink hover:bg-ink hover:text-paper transition-all"
                         title="Edit Record"
                       >
                         <Edit2 className="w-6 h-6" />
                       </button>
-                      <button 
+                      <button
                         onClick={() => handleDelete(post.post_id)}
                         className="p-3 border-2 border-ink hover:bg-[#e84c4c] hover:text-ink transition-all"
                         title="Delete Record"
@@ -261,14 +260,14 @@ export function AdminDashboard() {
       <AnimatePresence>
         {isEditorOpen && (
           <>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsEditorOpen(false)}
               className="fixed inset-0 bg-ink/80 z-[60] backdrop-blur-sm"
             />
-            <motion.div 
+            <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
@@ -293,21 +292,21 @@ export function AdminDashboard() {
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-4">
                     <label className="block font-heading text-2xl uppercase tracking-tighter">Title</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       required
                       value={formData.title}
-                      onChange={(e) => setFormData({...formData, title: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                       className="w-full bg-ink/5 border-4 border-ink p-4 font-bold focus:bg-accent/5 focus:outline-none"
                     />
                   </div>
                   <div className="space-y-4">
                     <label className="block font-heading text-2xl uppercase tracking-tighter">Slug (URL)</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       required
                       value={formData.slug}
-                      onChange={(e) => setFormData({...formData, slug: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
                       className="w-full bg-ink/5 border-4 border-ink p-4 font-bold focus:bg-accent/5 focus:outline-none"
                     />
                   </div>
@@ -315,22 +314,22 @@ export function AdminDashboard() {
 
                 <div className="space-y-4">
                   <label className="block font-heading text-2xl uppercase tracking-tighter">Excerpt / Summary</label>
-                  <textarea 
+                  <textarea
                     rows={3}
                     required
                     value={formData.excerpt}
-                    onChange={(e) => setFormData({...formData, excerpt: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
                     className="w-full bg-ink/5 border-4 border-ink p-4 font-bold focus:bg-accent/5 focus:outline-none resize-none"
                   />
                 </div>
 
                 <div className="space-y-4">
                   <label className="block font-heading text-2xl uppercase tracking-tighter">Full Content (HTML/TEXT)</label>
-                  <textarea 
+                  <textarea
                     rows={12}
                     required
                     value={formData.content}
-                    onChange={(e) => setFormData({...formData, content: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                     className="w-full bg-ink/5 border-4 border-ink p-6 font-bold focus:bg-accent/5 focus:outline-none min-h-[400px]"
                   />
                 </div>
@@ -338,41 +337,41 @@ export function AdminDashboard() {
                 <div className="grid md:grid-cols-3 gap-8">
                   <div className="space-y-4">
                     <label className="block font-heading text-2xl uppercase tracking-tighter">Publish Date</label>
-                    <input 
-                      type="date" 
+                    <input
+                      type="date"
                       required
                       value={formData.published_date}
-                      onChange={(e) => setFormData({...formData, published_date: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, published_date: e.target.value })}
                       className="w-full bg-ink/5 border-4 border-ink p-4 font-bold focus:bg-accent/5 focus:outline-none"
                     />
                   </div>
                   <div className="space-y-4">
                     <label className="block font-heading text-2xl uppercase tracking-tighter">Read Time (Mins)</label>
-                    <input 
-                      type="number" 
+                    <input
+                      type="number"
                       required
                       value={formData.read_time}
-                      onChange={(e) => setFormData({...formData, read_time: parseInt(e.target.value)})}
+                      onChange={(e) => setFormData({ ...formData, read_time: parseInt(e.target.value) })}
                       className="w-full bg-ink/5 border-4 border-ink p-4 font-bold focus:bg-accent/5 focus:outline-none"
                     />
                   </div>
                   <div className="space-y-4">
                     <label className="block font-heading text-2xl uppercase tracking-tighter">Image URL</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       value={formData.image_url}
-                      onChange={(e) => setFormData({...formData, image_url: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
                       className="w-full bg-ink/5 border-4 border-ink p-4 font-bold focus:bg-accent/5 focus:outline-none"
                     />
                   </div>
                 </div>
 
-                <button 
+                <button
                   type="submit"
                   className="w-full bg-ink text-paper p-8 font-heading text-5xl hover:bg-accent hover:text-ink transition-all flex items-center justify-between"
                 >
-                   <span>{editingPost ? 'SYNCHRONIZE' : 'COMMIT_RECORDS'}</span>
-                   <Save className="w-12 h-12" />
+                  <span>{editingPost ? 'SYNCHRONIZE' : 'COMMIT_RECORDS'}</span>
+                  <Save className="w-12 h-12" />
                 </button>
               </form>
             </motion.div>

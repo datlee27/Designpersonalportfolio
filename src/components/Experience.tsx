@@ -17,7 +17,7 @@ const experiences = [
 ];
 
 export function Experience() {
-  const chiselEasing = [0.2, 0, 0, 1];
+  const chiselEasing = [0.2, 0, 0, 1] as const;
 
   return (
     <section id="experience" className="py-32 bg-paper text-ink overflow-hidden border-t-8 border-ink">

@@ -9,7 +9,7 @@ declare global {
 
 export function Chatbot() {
     const [isVisible, setIsVisible] = useState(false);
-    const chiselEasing = [0.2, 0, 0, 1];
+    const chiselEasing = [0.2, 0, 0, 1] as const;
 
     useEffect(() => {
         if (document.getElementById('c9zgwCRkU8lje3AUpu6-j')) return;

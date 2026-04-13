@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function About() {
-  const chiselEasing = [0.2, 0, 0, 1];
+  const chiselEasing = [0.2, 0, 0, 1] as const;
 
   return (
     <section id="about" className="py-32 bg-paper text-ink overflow-hidden border-t-8 border-ink relative">
@@ -63,7 +63,7 @@ export function About() {
               />
             </div>
             {/* Chisel Accent Underlay */}
-            <div className="absolute top-10 -right-10 w-full h-full bg-accent -z-10 chisel-block-accent" />
+            <div className="absolute top-10 right-0 w-full h-full bg-accent -z-10 chisel-block-accent translate-x-4 md:translate-x-10" />
           </motion.div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Calendar, Clock, ArrowRight, Eye, Heart, MessageSquare, Share2, MoreHorizontal } from 'lucide-react';
+import { Eye, Heart, MessageSquare, Share2, MoreHorizontal } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { blogService, Post } from '../services/blogService';
@@ -16,7 +16,7 @@ export function BlogPage() {
         const fetchPosts = async () => {
             const data = await blogService.getAllPosts();
             setPosts(data);
-            
+
             // Check like status for all posts safely
             const likeStatusMap: Record<string, boolean> = {};
             await Promise.all(data.map(async (post) => {
@@ -33,7 +33,7 @@ export function BlogPage() {
         const result = await blogService.toggleLike(postId);
         if (result.success) {
             setLikedPosts(prev => ({ ...prev, [postId]: !!result.is_liked }));
-            setPosts(prev => prev.map(p => 
+            setPosts(prev => prev.map(p =>
                 p.post_id === postId ? { ...p, total_likes: result.total_likes } : p
             ));
         }
@@ -108,15 +108,15 @@ export function BlogPage() {
                                                 <h2 className="text-3xl md:text-5xl font-bold leading-[1.1] mb-6 group-hover:text-accent transition-colors duration-100 font-sans tracking-normal">
                                                     {post.title}
                                                 </h2>
-                                                
+
                                                 <p className="text-lg md:text-xl font-medium text-ink/70 leading-relaxed mb-8">
                                                     {post.excerpt}
                                                 </p>
 
                                                 {post.image_url && (
                                                     <div className="mb-6 md:mb-8 border-[3px] md:border-4 border-ink misaligned-right overflow-hidden transition-all duration-500">
-                                                        <ImageWithFallback 
-                                                            src={post.image_url} 
+                                                        <ImageWithFallback
+                                                            src={post.image_url}
                                                             alt={post.title}
                                                             className="w-full h-auto aspect-video object-cover"
                                                         />
@@ -126,7 +126,7 @@ export function BlogPage() {
 
                                             {/* Interactivity Bar - Threads Style */}
                                             <div className="flex items-center gap-6 md:gap-10">
-                                                <button 
+                                                <button
                                                     onClick={() => handleLike(post.post_id)}
                                                     className="flex items-center gap-2 group/btn"
                                                 >

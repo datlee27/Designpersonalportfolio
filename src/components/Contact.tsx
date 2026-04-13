@@ -9,14 +9,14 @@ const contactLinks = [
 ];
 
 export function Contact() {
-  const chiselEasing = [0.2, 0, 0, 1];
+  const chiselEasing = [0.2, 0, 0, 1] as const;
 
   return (
     <section id="contact" className="py-40 bg-paper text-ink overflow-hidden border-t-8 border-ink">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-24 w-full">
           <div className="flex-1">
-            <motion.h2 
+            <motion.h2
               initial={{ clipPath: 'inset(100% 0 0 0)' }}
               whileInView={{ clipPath: 'inset(0% 0 0 0)' }}
               viewport={{ once: true }}
@@ -25,7 +25,7 @@ export function Contact() {
             >
               LET'S<br />WORK<br /><span className="text-accent misaligned-right inline-block">FIX</span>
             </motion.h2>
-            
+
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
