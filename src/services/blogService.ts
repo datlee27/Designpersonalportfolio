@@ -13,6 +13,7 @@ export interface Post {
     created_at?: string;
     total_views?: number;
     total_likes?: number;
+    total_comments?: number;
 }
 
 export type PostCreateInput = Omit<Post, 'post_id' | 'created_at' | 'total_views' | 'total_likes'>;
@@ -97,6 +98,48 @@ export const blogService = {
             return result.success;
         } catch (error) {
             console.error('Failed to delete post:', error);
+            return false;
+        }
+    },
+
+    async recordView(postId: string): Promise<void> {
+        try {
+            await fetch(`${BLOG_API_URL}?endpoint=view`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ post_id: postId })
+            });
+        } catch (error) {
+            console.error('Failed to record view:', error);
+        }
+    },
+
+    async toggleLike(postId: string): Promise<{ success: boolean; is_liked?: boolean; total_likes?: number }> {
+        try {
+            const response = await fetch(`${BLOG_API_URL}?endpoint=like`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ post_id: postId })
+            });
+            const result = await response.json();
+            return {
+                success: result.success,
+                is_liked: result.data?.is_liked,
+                total_likes: result.data?.total_likes
+            };
+        } catch (error) {
+            console.error('Failed to toggle like:', error);
+            return { success: false };
+        }
+    },
+
+    async checkLikeStatus(postId: string): Promise<boolean> {
+        try {
+            const response = await fetch(`${BLOG_API_URL}?endpoint=check-like&post_id=${postId}`);
+            const result = await response.json();
+            return result.success ? result.data.is_liked : false;
+        } catch (error) {
+            console.error('Failed to check like status:', error);
             return false;
         }
     }

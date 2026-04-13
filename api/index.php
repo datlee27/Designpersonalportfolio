@@ -420,6 +420,101 @@ try {
             }
             break;
 
+        // ==================== COMMENTS ENDPOINT ====================
+        case 'comments':
+            if ($method === 'GET') {
+                $postId = $_GET['post_id'] ?? '';
+                if (!$postId) {
+                    sendResponse(false, [], 'Missing post_id', 400);
+                }
+
+                $stmt = $db->prepare("SELECT * FROM post_comments WHERE post_id = :post_id ORDER BY created_at ASC");
+                $stmt->execute(['post_id' => $postId]);
+                $comments = $stmt->fetchAll();
+
+                sendResponse(true, $comments);
+            } elseif ($method === 'POST') {
+                $input = json_decode(file_get_contents('php://input'), true);
+                $postId = $input['post_id'] ?? '';
+                $parentId = $input['parent_id'] ?? null;
+                $authorName = $input['author_name'] ?? '';
+                $content = $input['content'] ?? '';
+                $sessionId = getSessionID();
+
+                if (!$postId || !$authorName || !$content) {
+                    sendResponse(false, [], 'Missing required fields', 400);
+                }
+
+                // CHECK FOR BANNED WORDS
+                $lowercaseContent = mb_strtolower($content, 'UTF-8');
+                foreach (BANNED_WORDS as $word) {
+                    if (strpos($lowercaseContent, mb_strtolower($word, 'UTF-8')) !== false) {
+                        sendResponse(false, [], 'Bình luận chứa nội dung không phù hợp (Banned word: ' . $word . ')', 403);
+                    }
+                }
+
+                $db->beginTransaction();
+                try {
+                    $stmt = $db->prepare("
+                        INSERT INTO post_comments (post_id, parent_id, author_name, content, session_id) 
+                        VALUES (:post_id, :parent_id, :author_name, :content, :session_id)
+                    ");
+                    $stmt->execute([
+                        'post_id' => $postId,
+                        'parent_id' => $parentId,
+                        'author_name' => $authorName,
+                        'content' => $content,
+                        'session_id' => $sessionId
+                    ]);
+
+                    // Update comment count in stats
+                    $updateStats = $db->prepare("UPDATE post_stats SET total_comments = total_comments + 1 WHERE post_id = :post_id");
+                    $updateStats->execute(['post_id' => $postId]);
+
+                    $db->commit();
+                    sendResponse(true, ['id' => $db->lastInsertId()], 'Comment posted successfully');
+                } catch (Exception $e) {
+                    $db->rollBack();
+                    throw $e;
+                }
+            } elseif ($method === 'DELETE') {
+                if (!isAdmin()) {
+                    sendResponse(false, [], 'Unauthorized', 401);
+                }
+
+                $commentId = $_GET['id'] ?? '';
+                if (!$commentId) {
+                    sendResponse(false, [], 'Missing comment id', 400);
+                }
+
+                $db->beginTransaction();
+                try {
+                    // Get post_id first to update stats
+                    $stmt = $db->prepare("SELECT post_id FROM post_comments WHERE id = :id");
+                    $stmt->execute(['id' => $commentId]);
+                    $comment = $stmt->fetch();
+
+                    if (!$comment) {
+                        sendResponse(false, [], 'Comment not found', 404);
+                    }
+
+                    // Delete comment (Cascade will handle replies if set up, or we do it manually)
+                    $stmt = $db->prepare("DELETE FROM post_comments WHERE id = :id");
+                    $stmt->execute(['id' => $commentId]);
+
+                    // Update stats
+                    $updateStats = $db->prepare("UPDATE post_stats SET total_comments = GREATEST(0, total_comments - 1) WHERE post_id = :post_id");
+                    $updateStats->execute(['post_id' => $comment['post_id']]);
+
+                    $db->commit();
+                    sendResponse(true, [], 'Comment deleted successfully');
+                } catch (Exception $e) {
+                    $db->rollBack();
+                    throw $e;
+                }
+            }
+            break;
+
         // ==================== GET ANALYTICS ====================
         case 'analytics':
             if ($method === 'GET') {

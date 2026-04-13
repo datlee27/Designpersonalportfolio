@@ -65,11 +65,11 @@ export function Chatbot() {
                         exit={{ scale: 0, rotate: 45, opacity: 0 }}
                         transition={{ duration: 0.5, ease: chiselEasing }}
                         onClick={openChat}
-                        className="fixed bottom-8 right-8 z-[1000] group"
+                        className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[1000] group"
                         aria-label="Open Chat"
                     >
-                        <div className="electric-border w-24 h-24 p-[2px] group-hover:misaligned-right transition-transform duration-100">
-                            <div className="electric-border-inner bg-accent flex items-center justify-center p-2">
+                        <div className="electric-border w-16 h-16 md:w-24 md:h-24 p-[1px] md:p-[2px] group-hover:misaligned-right transition-transform duration-100">
+                            <div className="electric-border-inner bg-accent flex items-center justify-center p-1 md:p-2">
                                 <img
                                     src="/Users/mac/.gemini/antigravity/brain/ba3d752a-1c6c-4723-99ba-07e13944aa45/brutalist_bot_logo_1775745617617.png"
                                     alt="AI Bot"

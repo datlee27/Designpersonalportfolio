@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS post_stats (
     post_id VARCHAR(50) NOT NULL,
     total_views INT DEFAULT 0,
     total_likes INT DEFAULT 0,
+    total_comments INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (post_id) REFERENCES posts(post_id) ON DELETE CASCADE,
@@ -86,6 +87,22 @@ CREATE TABLE IF NOT EXISTS post_likes (
     UNIQUE KEY unique_user_like (post_id, session_id),
     INDEX idx_post_id (post_id),
     INDEX idx_session_id (session_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ==================== TABLE: post_comments ====================
+-- Lưu bình luận và phản hồi của bài viết
+CREATE TABLE IF NOT EXISTS post_comments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    post_id VARCHAR(50) NOT NULL,
+    parent_id INT DEFAULT NULL,
+    author_name VARCHAR(100) NOT NULL,
+    content TEXT NOT NULL,
+    session_id VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (post_id) REFERENCES posts(post_id) ON DELETE CASCADE,
+    FOREIGN KEY (parent_id) REFERENCES post_comments(id) ON DELETE CASCADE,
+    INDEX idx_post_id (post_id),
+    INDEX idx_parent_id (parent_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ==================== INSERT SAMPLE DATA ====================
@@ -169,10 +186,11 @@ SELECT
     p.published_date,
     ps.total_views,
     ps.total_likes,
+    ps.total_comments,
     (SELECT COUNT(*) FROM post_views pv WHERE pv.post_id = p.post_id AND pv.viewed_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)) as views_last_7_days,
     (SELECT COUNT(*) FROM post_likes pl WHERE pl.post_id = p.post_id AND pl.is_liked = TRUE AND pl.updated_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)) as likes_last_7_days
 FROM posts p
-LEFT JOIN post_stats ps ON p.post_id = ps.post_id;
+LEFT JOIN post_stats ps ON p.post_id = p.post_id;
 
 -- ==================== INDEXES FOR PERFORMANCE ====================
 -- Đã tạo indexes trong các table definitions ở trên

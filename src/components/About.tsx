@@ -57,7 +57,7 @@ export function About() {
           >
             <div className="relative z-10 border-8 border-ink p-4 bg-paper misaligned-right">
               <ImageWithFallback
-                src="/assets/img/about-pic.JPG"
+                src="https://res.cloudinary.com/ddwt6nl7s/image/upload/v1775989709/IMG_6098_fuhsm3.jpg"
                 alt="Professional portrait"
                 className="w-full aspect-[3/4] object-cover"
               />

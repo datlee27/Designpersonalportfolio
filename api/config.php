@@ -12,6 +12,12 @@ define('DB_USER', 'ryxeydibhosting_datdocidvn');
 define('DB_PASS', 'Levandat2004*');
 define('DB_CHARSET', 'utf8mb4');
 
+// Comment Moderation: Banned words list
+define('BANNED_WORDS', [
+    'dm', 'dit', 'cl', 'lon', 'cac', 'buoi', 'cmm', 'fuck', 'shit', 'pussy', 'dick', 'asshole',
+    ' ngu ', 'ngu vcl', 'oc cho', 'ranh con'
+]);
+
 // Error reporting (tắt trong production)
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
