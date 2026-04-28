@@ -1,6 +1,7 @@
 import { ReactNode, useEffect } from 'react';
 import { Navigation } from '../components/Navigation';
 import { useLocation } from 'react-router-dom';
+import Lenis from 'lenis';
 
 interface LayoutProps {
     children: ReactNode;
@@ -45,6 +46,25 @@ export function Layout({ children }: LayoutProps) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }, [pathname, hash]);
+
+    // Initialize Lenis for global smooth scrolling
+    useEffect(() => {
+        const lenis = new Lenis({
+            lerp: 0.07,
+            smoothWheel: true,
+        });
+
+        function raf(time: number) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        return () => {
+            lenis.destroy();
+        };
+    }, []);
 
     return (
         <div className="flex flex-col min-h-screen overflow-x-clip selection:bg-accent selection:text-ink bg-paper">

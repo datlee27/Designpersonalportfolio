@@ -1,7 +1,19 @@
-import { motion } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowDown } from 'lucide-react';
+import { useRef } from 'react';
 
 export function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  });
+
+  // Cinematic 3D Parallax Fade
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+
   const scrollToWork = () => {
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -9,16 +21,20 @@ export function Hero() {
   const chiselEasing = [0.2, 0, 0, 1] as const;
 
   return (
-    <section id="hero" className="min-h-screen flex flex-col justify-between bg-paper text-ink relative overflow-hidden">
+    <section id="hero" ref={ref} className="min-h-screen flex flex-col justify-between bg-paper text-ink relative overflow-hidden">
       {/* Background Accent Block */}
       <motion.div
         initial={{ clipPath: 'inset(0 0 100% 0)' }}
         animate={{ clipPath: 'inset(0 0 0% 0)' }}
         transition={{ duration: 0.6, ease: chiselEasing, delay: 0.2 }}
+        style={{ y, opacity, scale }}
         className="absolute top-20 right-[10%] w-[30vw] h-[40vh] bg-accent chisel-block-accent opacity-20 -z-10"
       />
 
-      <div className="container mx-auto px-6 pt-32 pb-20 flex-grow flex flex-col justify-center">
+      <motion.div 
+        style={{ y, opacity, scale }}
+        className="container mx-auto px-6 pt-32 pb-20 flex-grow flex flex-col justify-center"
+      >
         <div className="relative group">
           {/* Main Title Section */}
           <motion.div
@@ -85,7 +101,7 @@ export function Hero() {
             </div>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Mechanical Marquee System */}
       <div className="relative w-full bg-ink text-paper py-4 border-t-8 border-accent overflow-hidden z-10">

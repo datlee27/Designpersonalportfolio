@@ -1,7 +1,6 @@
-import { motion } from 'motion/react';
-import useEmblaCarousel from 'embla-carousel-react';
-import { Github, ArrowRight, ArrowLeft, ExternalLink } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
+import { motion, useScroll, useTransform, useMotionValue } from 'motion/react';
+import { useRef, useEffect, useState } from 'react';
+import { Github, ExternalLink } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 const projects = [
@@ -23,7 +22,6 @@ const projects = [
     image: "https://res.cloudinary.com/ddwt6nl7s/image/upload/v1775904892/A%CC%89nh_ma%CC%80n_hi%CC%80nh_2026-04-11_lu%CC%81c_17.52.52_cb9myu.png",
     tags: ["React", "TypeScript", "Tailwind CSS", "Vite", "Educational", "FE"],
     github: "https://github.com/datlee27/Practice-ielts-writing-typing-react",
-    // deploy: "https://practice-ielts-writing-typing-react.vercel.app/", // Link deploy mặc định từ repo
     accent: "bg-emerald-500",
     status: "Latest"
   },
@@ -69,158 +67,182 @@ const projects = [
   }
 ];
 
+// Theme generator for alternating brutalist backgrounds
+const getTheme = (index: number) => {
+  const themes = [
+    { bg: 'bg-paper', text: 'text-ink', border: 'border-ink' },
+    { bg: 'bg-ink', text: 'text-paper', border: 'border-paper' },
+    { bg: 'bg-accent', text: 'text-ink', border: 'border-ink' },
+  ];
+  return themes[index % themes.length];
+};
+
+const getTagTheme = (bg: string) => {
+  if (bg === 'bg-ink') return 'bg-paper text-ink';
+  return 'bg-ink text-paper';
+};
+
 export function Projects() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: 'start',
-    skipSnaps: false,
-    dragFree: true
-  });
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
-
-  const onScroll = useCallback(() => {
-    if (!emblaApi) return;
-    const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));
-    setScrollProgress(progress * 100);
-  }, [emblaApi]);
+  const sectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if (!emblaApi) return;
-    onScroll();
-    emblaApi.on('scroll', onScroll);
-    emblaApi.on('reInit', onScroll);
-  }, [emblaApi, onScroll]);
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
-  const chiselEasing: [number, number, number, number] = [0.2, 0, 0, 1];
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'],
+  });
 
+  // Total slides = 1 (Title Page) + all projects
+  const totalSlides = projects.length + 1;
+  const translateEnd = -((totalSlides - 1) * 100);
+  
+  const x = useTransform(scrollYProgress, [0, 1], ['0vw', `${translateEnd}vw`]);
+  const progressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+
+  // ─── MOBILE: Vertical stacking full-screen blocks ───
+  if (isMobile) {
+    return (
+      <section id="projects" className="bg-paper text-ink border-t-8 border-ink overflow-hidden">
+        {/* Title Page */}
+        <div className="min-h-[60vh] flex items-center justify-center border-b-8 border-ink bg-paper p-6">
+           <h2 className="text-[18vw] leading-none font-heading text-center tracking-tighter">
+             SELECTED<br />WORKS
+           </h2>
+        </div>
+
+        {/* Project Pages */}
+        <div className="flex flex-col">
+          {projects.map((project, index) => (
+            <ProjectSlide key={project.id} project={project} index={index} isMobile={true} />
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  // ─── DESKTOP: Sticky horizontal full-screen scroll ───
   return (
-    <section id="projects" className="py-24 bg-paper text-ink overflow-hidden border-t-8 border-ink min-h-screen flex flex-col justify-center">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b-4 border-ink pb-8">
-          <motion.h2
-            initial={{ clipPath: 'inset(0 100% 0 0)' }}
-            whileInView={{ clipPath: 'inset(0 0 0 0)' }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: chiselEasing }}
-            className="text-huge leading-none"
-          >
-            SELECTED<br />WORKS
-          </motion.h2>
-
-          <div className="text-right hidden md:block opacity-40">
-            <p className="font-bold uppercase text-xl tracking-tighter">PROJECT ARCHIVE (2024—2025)</p>
-            {/* <p className="font-heading text-lg">RECORDS_INDEX_FINAL_v1.0.1</p> */}
+    <section
+      id="projects"
+      ref={sectionRef}
+      className="relative bg-paper text-ink border-t-8 border-ink"
+      style={{ height: `${totalSlides * 100}vh` }}
+    >
+      <div className="sticky top-0 h-screen w-full flex" style={{ overflow: 'clip' }}>
+        
+        {/* Horizontal scroll track */}
+        <motion.div
+          ref={trackRef}
+          style={{ x }}
+          className="flex h-full w-full"
+        >
+          {/* Slide 0: Title Page */}
+          <div className="w-screen h-screen flex-shrink-0 flex items-center justify-center bg-paper text-ink border-r-8 border-ink p-12">
+             <h2 className="text-[15vw] leading-[0.8] font-heading text-center tracking-tighter">
+               SELECTED<br />WORKS
+             </h2>
           </div>
-        </div>
 
-        <div className="embla mb-12" ref={emblaRef}>
-          <div className="flex gap-12 cursor-grab active:cursor-grabbing py-4">
-            {projects.map((project, index) => (
-              <div
-                key={project.id}
-                className="flex-[0_0_85%] md:flex-[0_0_50%] lg:flex-[0_0_40%] xl:flex-[0_0_35%] relative group"
-              >
-                <div className={`absolute -left-2 top-0 w-2 h-full ${project.accent} group-hover:w-4 transition-all duration-100 z-10`} />
+          {/* Slide 1+: Project Pages */}
+          {projects.map((project, index) => (
+             <ProjectSlide key={project.id} project={project} index={index} />
+          ))}
+        </motion.div>
 
-                <div className="relative border-4 border-ink bg-paper overflow-hidden hover:rotate-[0.5deg] transition-transform duration-100 h-full flex flex-col">
-                  <div className="h-[25vh] md:h-[30vh] overflow-hidden border-b-4 border-ink grayscale group-hover:grayscale-0 transition-all duration-300 relative">
-                    <ImageWithFallback
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute top-4 left-4 bg-ink text-paper px-3 py-1 font-heading text-xl">
-                      #{project.id}
-                    </div>
-                    {project.status && (
-                      <div className={`absolute top-4 right-4 px-3 py-1 font-bold text-sm uppercase tracking-wider border-2 border-ink shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] ${project.status.toLowerCase() === 'latest' ? 'bg-[#e84c4c] text-ink' : 'bg-accent text-ink'}`}>
-                        {project.status}
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="p-8 flex-grow flex flex-col">
-                    <div className="flex justify-between items-center mb-6">
-                      <h3 className="text-4xl font-heading tracking-tighter leading-none pr-4">{project.title}</h3>
-                      <div className="flex gap-4">
-                        {project.deploy && (
-                          <a href={project.deploy} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors active:scale-90 transform">
-                            <ExternalLink className="w-8 h-8" />
-                          </a>
-                        )}
-                        <a href={project.github} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors active:scale-90 transform">
-                          <Github className="w-8 h-8" />
-                        </a>
-                      </div>
-                    </div>
-
-                    <div className="text-lg font-bold leading-tight mb-8 opacity-80 flex-grow overflow-y-auto max-h-[3.75em] md:max-h-[5em] pr-2 custom-scrollbar">
-                      {project.description}
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 mt-auto">
-                      {project.tags.map(tag => (
-                        <span key={tag} className="px-4 py-1 border-2 border-ink text-xs font-bold uppercase tracking-tighter bg-ink text-paper">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Misaligned back shadow */}
-                <div className="absolute -z-10 bg-accent/5 -bottom-4 right-0 w-full h-full border-2 border-ink/10 translate-x-2 md:translate-x-4" />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* CONTROLS SECTION */}
-        <div className="mt-16 border-t-4 border-ink pt-12">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            {/* Progress Bar Container */}
-            <div className="flex-grow w-full">
-              <div className="h-6 bg-ink/10 relative overflow-hidden border-2 border-ink">
-                <motion.div
-                  className="absolute top-0 left-0 h-full bg-accent"
-                  style={{ width: `${scrollProgress}%` }}
-                  transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-                />
-                <div className="absolute inset-0 flex justify-between pointer-events-none">
-                  {[...Array(20)].map((_, i) => (
-                    <div key={i} className="w-0.5 h-full bg-ink/10" />
-                  ))}
-                </div>
-              </div>
-              <div className="mt-4 flex justify-between font-heading text-xl tracking-tighter opacity-40">
-                <span>START_00%</span>
-                <span>MID_50%</span>
-                <span>END_100%</span>
-              </div>
-            </div>
-
-            {/* Navigation Buttons */}
-            <div className="flex items-center gap-4">
-              <button
-                onClick={scrollPrev}
-                className="w-20 h-20 border-4 border-ink flex items-center justify-center hover:bg-ink hover:text-paper hover:misaligned-left transition-all active:scale-95 bg-paper"
-                aria-label="Previous Project"
-              >
-                <ArrowLeft className="w-10 h-10" />
-              </button>
-              <button
-                onClick={scrollNext}
-                className="w-20 h-20 border-4 border-ink flex items-center justify-center hover:bg-ink hover:text-paper hover:misaligned-right transition-all active:scale-95 bg-paper"
-                aria-label="Next Project"
-              >
-                <ArrowRight className="w-10 h-10" />
-              </button>
+        {/* Global Progress Bar Overlay (mix-blend-difference allows it to be visible on any background) */}
+        <div className="absolute bottom-8 left-8 right-8 z-50 pointer-events-none mix-blend-difference">
+          <div className="h-4 bg-white/20 relative overflow-hidden border-2 border-white">
+            <motion.div
+              className="absolute top-0 left-0 h-full bg-white"
+              style={{ width: progressWidth }}
+            />
+            <div className="absolute inset-0 flex justify-between pointer-events-none">
+              {[...Array(totalSlides)].map((_, i) => (
+                <div key={i} className="w-0.5 h-full bg-white/20" />
+              ))}
             </div>
           </div>
+          <div className="mt-2 flex justify-between font-heading text-lg tracking-tighter text-white/50">
+            <span>START_00%</span>
+            <span>SLIDE_{Math.round(progressWidth.get() as number)}%</span>
+            <span>END_100%</span>
+          </div>
         </div>
+
       </div>
     </section>
+  );
+}
+
+// ─── Project Full-Screen Slide Component ───
+function ProjectSlide({ project, index, isMobile }: { project: typeof projects[0], index: number, isMobile?: boolean }) {
+  // Theme starts from index 1 because Title is index 0
+  const theme = getTheme(index + 1);
+  const tagTheme = getTagTheme(theme.bg);
+
+  return (
+    <div className={`${isMobile ? 'w-full min-h-screen border-b-8' : 'w-screen h-screen border-r-8'} flex-shrink-0 flex flex-col md:flex-row ${theme.bg} ${theme.text} ${theme.border}`}>
+      
+      {/* Left/Top: Image Side */}
+      <div className={`w-full md:w-1/2 ${isMobile ? 'h-[45vh]' : 'h-full'} border-b-8 md:border-b-0 relative flex items-center justify-center p-8 md:p-16 lg:p-24`}>
+         <div className={`relative w-full h-full overflow-hidden border-8 ${theme.border} shadow-[8px_8px_0px_0px_currentColor] grayscale hover:grayscale-0 transition-all duration-500 group`}>
+             <ImageWithFallback
+               src={project.image}
+               alt={project.title}
+               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+             />
+             {/* Brutalist Decorators inside Image */}
+             <div className={`absolute top-4 left-4 ${theme.bg} ${theme.text} px-3 py-1 font-heading text-2xl border-4 ${theme.border}`}>
+                #{project.id}
+             </div>
+             {project.status && (
+                <div className={`absolute top-4 right-4 px-3 py-1 font-bold text-xs uppercase tracking-widest border-4 ${theme.border} shadow-[4px_4px_0px_0px_currentColor] ${project.status.toLowerCase() === 'latest' ? 'bg-[#e84c4c] text-ink' : theme.bg}`}>
+                   {project.status}
+                </div>
+             )}
+         </div>
+      </div>
+
+      {/* Right/Bottom: Content Side */}
+      <div className="w-full md:w-1/2 flex flex-col justify-center px-8 py-12 md:p-16 lg:px-24 h-full relative">
+         <div className="max-w-2xl">
+             <div className="flex justify-between items-start mb-8">
+                <h3 className="text-4xl lg:text-6xl font-heading tracking-tighter leading-none pr-8 uppercase">
+                   {project.title}
+                </h3>
+                <div className="flex gap-4 shrink-0">
+                   {project.deploy && (
+                     <a href={project.deploy} target="_blank" rel="noopener noreferrer" className="hover:opacity-50 transition-opacity active:scale-90 transform">
+                       <ExternalLink className="w-8 h-8 lg:w-10 lg:h-10" />
+                     </a>
+                   )}
+                   <a href={project.github} target="_blank" rel="noopener noreferrer" className="hover:opacity-50 transition-opacity active:scale-90 transform">
+                     <Github className="w-8 h-8 lg:w-10 lg:h-10" />
+                   </a>
+                </div>
+             </div>
+
+             <div className="text-lg lg:text-xl font-bold leading-relaxed mb-12 opacity-90">
+                {project.description}
+             </div>
+
+             <div className="flex flex-wrap gap-3 mt-auto">
+                {project.tags.map(tag => (
+                   <span key={tag} className={`px-5 py-2 border-4 ${theme.border} text-xs lg:text-sm font-bold uppercase tracking-widest ${tagTheme}`}>
+                     {tag}
+                   </span>
+                ))}
+             </div>
+         </div>
+      </div>
+
+    </div>
   );
 }

@@ -13,38 +13,38 @@ export function About() {
 
   // ── Slide 1: "THE MAKER" ──
   // Immediately visible, fades out as user scrolls
-  const slide1Opacity = useTransform(scrollYProgress, [0, 0.25, 0.33], [1, 1, 0]);
-  const slide1Y = useTransform(scrollYProgress, [0, 0.25, 0.33], [0, 0, -80]);
-  const slide1Scale = useTransform(scrollYProgress, [0.25, 0.33], [1, 0.92]);
+  const slide1Opacity = useTransform(scrollYProgress, [0, 0.20, 0.30], [1, 1, 0]);
+  const slide1Y = useTransform(scrollYProgress, [0, 0.20, 0.30], [0, 0, -80]);
+  const slide1Scale = useTransform(scrollYProgress, [0.20, 0.30], [1, 0.92]);
 
   // ── Slide 2: Introduction + Image ──
   // Fades in after slide 1 exits
-  const slide2Opacity = useTransform(scrollYProgress, [0.28, 0.38, 0.62, 0.70], [0, 1, 1, 0]);
-  const slide2LeftX = useTransform(scrollYProgress, [0.28, 0.40, 0.62, 0.70], [-150, 0, 0, -100]);
-  const slide2RightX = useTransform(scrollYProgress, [0.28, 0.40, 0.62, 0.70], [150, 0, 0, 100]);
+  const slide2Opacity = useTransform(scrollYProgress, [0.30, 0.45, 0.60, 0.70], [0, 1, 1, 0]);
+  const slide2LeftX = useTransform(scrollYProgress, [0.30, 0.45, 0.60, 0.70], [-100, 0, 0, -100]);
+  const slide2RightX = useTransform(scrollYProgress, [0.30, 0.45, 0.60, 0.70], [100, 0, 0, 100]);
 
   // ── Slide 3: Summary ──
   // Fades in after slide 2 exits, stays visible
-  const slide3Opacity = useTransform(scrollYProgress, [0.65, 0.78, 0.95, 1], [0, 1, 1, 1]);
-  const slide3Y = useTransform(scrollYProgress, [0.65, 0.78], [60, 0]);
+  const slide3Opacity = useTransform(scrollYProgress, [0.70, 0.85, 1], [0, 1, 1]);
+  const slide3Y = useTransform(scrollYProgress, [0.70, 0.85], [40, 0]);
 
   // Divider line in slide 1
-  const dividerScaleX = useTransform(scrollYProgress, [0, 0.12], [0, 1]);
+  const dividerScaleX = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
 
   // Divider line in slide 3
-  const divider3ScaleX = useTransform(scrollYProgress, [0.78, 0.88], [0, 1]);
+  const divider3ScaleX = useTransform(scrollYProgress, [0.85, 0.95], [0, 1]);
 
   // Parallax for accent block behind image
-  const accentY = useTransform(scrollYProgress, [0.28, 0.70], [80, -80]);
+  const accentY = useTransform(scrollYProgress, [0.30, 0.70], [60, -60]);
 
   return (
     <section id="about" className="relative border-t-8 border-ink">
       {/*
-        Scroll container: 300vh tall creates the scrollable area.
+        Scroll container: 400vh tall creates the scrollable area.
         The sticky child inside stays pinned to viewport.
       */}
-      <div ref={containerRef} style={{ height: '300vh' }} className="relative">
-        {/* Sticky viewport — stays pinned while user scrolls through the 300vh */}
+      <div ref={containerRef} style={{ height: '400vh' }} className="relative">
+        {/* Sticky viewport — stays pinned while user scrolls through the 400vh */}
         <div
           className="sticky top-0 h-screen bg-paper text-ink"
           style={{ overflow: 'clip' }}

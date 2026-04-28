@@ -12,8 +12,10 @@ export function Contact() {
   const chiselEasing = [0.2, 0, 0, 1] as const;
 
   return (
-    <section id="contact" className="py-40 bg-paper text-ink overflow-hidden border-t-8 border-ink">
-      <div className="container mx-auto px-6">
+    <section
+      className="w-full h-full flex items-center bg-paper text-ink overflow-hidden border-t-8 border-ink"
+    >
+      <div className="container mx-auto px-6 py-24">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-24 w-full">
           <div className="flex-1">
             <motion.h2
@@ -67,8 +69,5 @@ export function Contact() {
         </div>
       </div>
     </section>
-
-
   );
 }
-

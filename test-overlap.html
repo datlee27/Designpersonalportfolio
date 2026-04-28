@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body style="margin:0;">
+  <div style="position: relative;">
+    <!-- Fixed Contact Layer -->
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1;">
+      <div style="height: 100vh; background: red; display: flex; align-items: flex-end;">
+        <h1 style="margin:0;">Contact</h1>
+      </div>
+    </div>
+
+    <!-- Curtain Layer -->
+    <div style="position: relative; z-index: 10; background: rgba(0,0,255,0.8); margin-bottom: 100vh;">
+      <div style="height: 300vh;">Curtain Content</div>
+    </div>
+  </div>
+  <div style="height: 50vh; background: green; position: relative; z-index: 10;">Footer</div>
+</body>
+</html>
