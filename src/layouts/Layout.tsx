@@ -47,7 +47,7 @@ export function Layout({ children }: LayoutProps) {
     }, [pathname, hash]);
 
     return (
-        <div className="flex flex-col min-h-screen overflow-x-hidden selection:bg-accent selection:text-ink bg-paper">
+        <div className="flex flex-col min-h-screen overflow-x-clip selection:bg-accent selection:text-ink bg-paper">
             <Navigation />
             <main className="flex-grow">
                 {children}
