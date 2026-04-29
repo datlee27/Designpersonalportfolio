@@ -111,8 +111,8 @@ export function Projects() {
     return (
       <section id="projects" className="bg-paper text-ink border-t-8 border-ink overflow-hidden">
         {/* Title Page */}
-        <div className="min-h-[60vh] flex items-center justify-center border-b-8 border-ink bg-paper p-6">
-           <h2 className="text-[18vw] leading-none font-heading text-center tracking-tighter">
+        <div className="min-h-[60vh] flex items-center justify-center border-b-8 border-paper bg-ink text-paper p-6">
+           <h2 className="text-[12vw] leading-none font-heading text-center tracking-tighter">
              SELECTED<br />WORKS
            </h2>
         </div>
@@ -132,7 +132,7 @@ export function Projects() {
     <section
       id="projects"
       ref={sectionRef}
-      className="relative bg-paper text-ink border-t-8 border-ink"
+      className="relative bg-ink text-paper border-t-8 border-ink"
       style={{ height: `${totalSlides * 100}vh` }}
     >
       <div className="sticky top-0 h-screen w-full flex" style={{ overflow: 'clip' }}>
@@ -144,8 +144,8 @@ export function Projects() {
           className="flex h-full w-full"
         >
           {/* Slide 0: Title Page */}
-          <div className="w-screen h-screen flex-shrink-0 flex items-center justify-center bg-paper text-ink border-r-8 border-ink p-12">
-             <h2 className="text-[15vw] leading-[0.8] font-heading text-center tracking-tighter">
+          <div className="w-screen h-screen flex-shrink-0 flex items-center justify-center bg-ink text-paper border-r-8 border-paper p-12">
+             <h2 className="text-[10vw] leading-[0.8] font-heading text-center tracking-tighter">
                SELECTED<br />WORKS
              </h2>
           </div>
@@ -171,7 +171,6 @@ export function Projects() {
           </div>
           <div className="mt-2 flex justify-between font-heading text-lg tracking-tighter text-white/50">
             <span>START_00%</span>
-            <span>SLIDE_{Math.round(progressWidth.get() as number)}%</span>
             <span>END_100%</span>
           </div>
         </div>
@@ -192,18 +191,23 @@ function ProjectSlide({ project, index, isMobile }: { project: typeof projects[0
       
       {/* Left/Top: Image Side */}
       <div className={`w-full md:w-1/2 ${isMobile ? 'h-[45vh]' : 'h-full'} border-b-8 md:border-b-0 relative flex items-center justify-center p-8 md:p-16 lg:p-24`}>
-         <div className={`relative w-full h-full overflow-hidden border-8 ${theme.border} shadow-[8px_8px_0px_0px_currentColor] grayscale hover:grayscale-0 transition-all duration-500 group`}>
+         <div className={`group relative w-full h-full overflow-hidden border-8 ${theme.border} shadow-[16px_16px_0px_0px_currentColor] hover:-translate-y-2 hover:translate-x-2 hover:shadow-[8px_8px_0px_0px_currentColor] transition-all duration-300 cursor-pointer`}>
              <ImageWithFallback
                src={project.image}
                alt={project.title}
-               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+               width={1200}
+               height={800}
+               className="w-full h-full object-cover blur-[12px] opacity-60 group-hover:opacity-100 group-hover:blur-none group-hover:scale-105 transition-all duration-700"
              />
+             <div className="absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-500 opacity-100 group-hover:opacity-0 mix-blend-difference z-20">
+                 <span className="text-6xl md:text-8xl lg:text-9xl font-heading tracking-widest text-white uppercase drop-shadow-xl">PROJECT</span>
+             </div>
              {/* Brutalist Decorators inside Image */}
              <div className={`absolute top-4 left-4 ${theme.bg} ${theme.text} px-3 py-1 font-heading text-2xl border-4 ${theme.border}`}>
                 #{project.id}
              </div>
              {project.status && (
-                <div className={`absolute top-4 right-4 px-3 py-1 font-bold text-xs uppercase tracking-widest border-4 ${theme.border} shadow-[4px_4px_0px_0px_currentColor] ${project.status.toLowerCase() === 'latest' ? 'bg-[#e84c4c] text-ink' : theme.bg}`}>
+                <div className={`absolute top-4 right-4 px-3 py-1 font-bold text-xs uppercase tracking-widest border-4 ${theme.border} shadow-[8px_8px_0px_0px_currentColor] ${project.status.toLowerCase() === 'latest' ? 'bg-[#e84c4c] text-ink' : theme.bg}`}>
                    {project.status}
                 </div>
              )}
@@ -219,11 +223,11 @@ function ProjectSlide({ project, index, isMobile }: { project: typeof projects[0
                 </h3>
                 <div className="flex gap-4 shrink-0">
                    {project.deploy && (
-                     <a href={project.deploy} target="_blank" rel="noopener noreferrer" className="hover:opacity-50 transition-opacity active:scale-90 transform">
+                     <a href={project.deploy} target="_blank" rel="noopener noreferrer" className="hover:opacity-50 transition-opacity active:scale-90 transform focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ink">
                        <ExternalLink className="w-8 h-8 lg:w-10 lg:h-10" />
                      </a>
                    )}
-                   <a href={project.github} target="_blank" rel="noopener noreferrer" className="hover:opacity-50 transition-opacity active:scale-90 transform">
+                   <a href={project.github} target="_blank" rel="noopener noreferrer" className="hover:opacity-50 transition-opacity active:scale-90 transform focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ink">
                      <Github className="w-8 h-8 lg:w-10 lg:h-10" />
                    </a>
                 </div>

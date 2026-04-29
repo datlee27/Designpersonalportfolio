@@ -95,7 +95,7 @@ export function Experience() {
     <section
       id="experience"
       ref={containerRef}
-      className="relative bg-paper text-ink border-t-8 border-ink"
+      className="relative bg-accent text-ink border-t-8 border-ink"
       style={{ height: `${(experiences.length) * 100}vh` }}
     >
       <div className="sticky top-0">
@@ -112,7 +112,7 @@ export function Experience() {
               JOURNEY
             </motion.h2>
             <div className="flex-1 h-1 bg-ink" />
-            <div className="hidden md:block chisel-block-accent w-24 h-12" />
+            <div className="hidden md:block chisel-block w-24 h-12" />
           </div>
         </div>
       </div>

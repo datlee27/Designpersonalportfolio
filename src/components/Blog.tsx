@@ -69,7 +69,7 @@ export function Blog() {
                       </div>
                     </div>
 
-                    <h3 className="text-5xl font-heading mb-6 leading-[0.95] tracking-tighter group-hover:text-accent transition-colors">
+                    <h3 className="text-4xl md:text-5xl font-bold uppercase mb-6 leading-tight tracking-tight group-hover:text-accent transition-colors">
                       {post.title}
                     </h3>
 

@@ -5,7 +5,6 @@ const contactLinks = [
   { name: "EMAIL", value: "LVD27012004@GMAIL.COM", href: "mailto:lvd27012004@gmail.com", icon: Mail },
   { name: "GITHUB", value: "DATLEE27", href: "https://github.com/datlee27", icon: Github },
   { name: "FACEBOOK", value: "DAT LEE", href: "https://www.facebook.com/le.van.at.760768", icon: Facebook },
-  { name: "PHONE", value: "0766554586", href: "tel:0766554586", icon: Phone }
 ];
 
 export function Contact() {
@@ -53,7 +52,7 @@ export function Contact() {
                   whileInView={{ transform: 'translateX(0%)', opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, ease: chiselEasing, delay: 0.1 * index }}
-                  className="block group"
+                  className="block group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent"
                 >
                   <div className="chisel-block p-8 flex items-center justify-between group-hover:bg-accent group-hover:text-ink transition-colors duration-100">
                     <div>

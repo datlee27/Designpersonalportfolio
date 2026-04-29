@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform, useVelocity, useSpring } from 'motion/react';
 import { useRef } from 'react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
@@ -6,10 +6,17 @@ export function About() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Track scroll progress through the tall scrollable area
-  const { scrollYProgress } = useScroll({
+  const { scrollYProgress, scrollY } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
+
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 50,
+    stiffness: 400
+  });
+  const skewVelocity = useTransform(smoothVelocity, [-1000, 1000], [15, -15]);
 
   // ── Slide 1: "THE MAKER" ──
   // Immediately visible, fades out as user scrolls
@@ -38,7 +45,7 @@ export function About() {
   const accentY = useTransform(scrollYProgress, [0.30, 0.70], [60, -60]);
 
   return (
-    <section id="about" className="relative border-t-8 border-ink">
+    <section id="about" className="relative border-t-8 border-ink bg-ink text-paper">
       {/*
         Scroll container: 400vh tall creates the scrollable area.
         The sticky child inside stays pinned to viewport.
@@ -46,9 +53,13 @@ export function About() {
       <div ref={containerRef} style={{ height: '400vh' }} className="relative">
         {/* Sticky viewport — stays pinned while user scrolls through the 400vh */}
         <div
-          className="sticky top-0 h-screen bg-paper text-ink"
+          className="sticky top-0 h-screen bg-ink text-paper"
           style={{ overflow: 'clip' }}
         >
+          {/* Background Image Overlay */}
+          <div className="absolute inset-0 z-0 opacity-30 pointer-events-none mix-blend-screen">
+            <img src="/assets/img/screen2.png" alt="" className="w-full h-full object-cover" />
+          </div>
 
           {/* ═══════════════════════════════════════════════
               SLIDE 1 — "THE MAKER" title, centered
@@ -58,6 +69,7 @@ export function About() {
               opacity: slide1Opacity,
               y: slide1Y,
               scale: slide1Scale,
+              skew: skewVelocity
             }}
             className="absolute inset-0 flex flex-col justify-center items-center text-center px-6 z-10"
           >
@@ -65,7 +77,7 @@ export function About() {
 
             <motion.div
               style={{ scaleX: dividerScaleX }}
-              className="w-48 h-2 bg-ink mt-8 origin-left"
+              className="w-48 h-2 bg-paper mt-8 origin-left"
             />
           </motion.div>
 
@@ -88,19 +100,19 @@ export function About() {
                     HI, I'M <span className="text-accent">DAT LEE</span>.
                   </p>
 
-                  <div className="w-full h-2 bg-ink" />
+                  <div className="w-full h-2 bg-paper" />
 
-                  <p className="text-xl md:text-2xl font-bold leading-tight">
+                  <p className="text-xl md:text-2xl font-bold leading-tight uppercase tracking-tight">
                     I'M A PASSIONATE DEVELOPER DEDICATED TO CREATING BOLD, FUNCTIONAL, AND USER-CENTERED DIGITAL EXPERIENCES.
                   </p>
 
-                  <p className="text-lg md:text-xl font-medium leading-tight text-ink/80">
+                  <p className="text-lg md:text-xl font-medium leading-tight text-paper/80 uppercase tracking-tight">
                     I DON'T JUST CODE; I STAMP BRAND IDENTITY INTO THE WEB.
                   </p>
 
                   <div className="flex gap-4 pt-4">
                     <div className="w-12 h-12 bg-accent chisel-block-accent" />
-                    <div className="w-24 h-12 bg-ink chisel-block" />
+                    <div className="w-24 h-12 bg-paper text-ink p-4 relative" style={{ clipPath: 'polygon(0.5% 1%, 99% 0%, 100% 98%, 1% 100%, 0% 2%)' }} />
                   </div>
                 </motion.div>
 
@@ -109,7 +121,7 @@ export function About() {
                   style={{ x: slide2RightX }}
                   className="flex-1 relative w-full max-w-md md:max-w-none"
                 >
-                  <div className="relative z-10 border-8 border-ink p-4 bg-paper misaligned-right">
+                  <div className="relative z-10 border-8 border-paper p-4 bg-ink misaligned-right shadow-[16px_16px_0px_0px_var(--paper)]">
                     <ImageWithFallback
                       src="https://res.cloudinary.com/ddwt6nl7s/image/upload/v1775989709/IMG_6098_fuhsm3.jpg"
                       alt="Professional portrait"
@@ -145,15 +157,18 @@ export function About() {
               className="w-64 h-2 bg-accent mt-10 origin-center"
             />
 
-            <p className="text-xl md:text-2xl font-bold mt-10 max-w-2xl mx-auto uppercase tracking-tight text-ink/70">
+            <p className="text-xl md:text-2xl font-bold mt-10 max-w-2xl mx-auto uppercase tracking-tight text-paper/70">
               ENSURING EVERY PROJECT IS A RAW STATEMENT OF INTENT.
             </p>
           </motion.div>
 
           {/* Decorative Stamp */}
-          <div className="absolute bottom-20 right-10 rotate-12 opacity-10 pointer-events-none hidden md:block">
-            <p className="font-heading text-9xl">DAT LEE</p>
-          </div>
+          <motion.div 
+            style={{ skew: skewVelocity }}
+            className="absolute bottom-20 right-10 rotate-12 opacity-30 pointer-events-none hidden md:block"
+          >
+            <p className="font-heading text-huge text-transparent" style={{ WebkitTextStroke: '2px var(--paper)' }}>DAT LEE</p>
+          </motion.div>
         </div>
       </div>
     </section>

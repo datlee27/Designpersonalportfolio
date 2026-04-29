@@ -39,7 +39,7 @@ export function Skills() {
           >
             SKILLS /<br />TOOLS
           </motion.h2>
-          <div className="w-full h-8 bg-ink mt-8 misaligned-left" />
+          <div className="w-full h-8 bg-accent border-4 border-ink mt-8 misaligned-left" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-16">
@@ -75,8 +75,8 @@ export function Skills() {
         </div>
 
         {/* Large Background Subject Element */}
-        <div className="absolute -bottom-20 left-0 -translate-x-10 md:-translate-x-20 opacity-5 pointer-events-none select-none">
-          <p className="text-[20rem] font-heading leading-none">CORE</p>
+        <div className="absolute -bottom-20 left-0 -translate-x-10 md:-translate-x-20 opacity-40 pointer-events-none select-none">
+          <p className="text-huge font-heading leading-none text-accent mix-blend-multiply">CORE</p>
         </div>
       </div>
     </section>

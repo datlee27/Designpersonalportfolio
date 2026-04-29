@@ -33,7 +33,7 @@ export function Navigation() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.4, ease: chiselEasing }}
-        className={`fixed top-0 left-0 right-0 z-[999] border-b-4 border-ink transition-colors duration-100 ${isScrolled || location.pathname !== '/' ? 'bg-ink py-4' : 'bg-ink py-6'
+        className={`fixed top-0 left-0 right-0 z-[999] border-b-8 border-ink transition-colors duration-100 ${isScrolled || location.pathname !== '/' ? 'bg-ink py-4' : 'bg-ink py-6'
           }`}
 
       >
@@ -49,7 +49,7 @@ export function Navigation() {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="text-paper px-6 py-2 font-heading text-xl hover:bg-accent hover:text-ink transition-colors duration-75"
+                  className="text-paper px-6 py-2 font-heading text-xl hover:bg-accent hover:text-ink transition-colors duration-75 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent"
                 >
                   {item.name}
                 </Link>
@@ -58,7 +58,8 @@ export function Navigation() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-paper p-2 border-2 border-paper"
+              aria-label="Toggle menu"
+              className="md:hidden text-paper p-2 border-2 border-paper focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}

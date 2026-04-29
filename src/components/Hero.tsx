@@ -21,7 +21,11 @@ export function Hero() {
   const chiselEasing = [0.2, 0, 0, 1] as const;
 
   return (
-    <section id="hero" ref={ref} className="min-h-screen flex flex-col justify-between bg-paper text-ink relative overflow-hidden">
+    <section id="hero" ref={ref} className="min-h-screen flex flex-col justify-between bg-paper bg-brutal-grid animate-pan-grid text-ink relative overflow-hidden">
+      {/* Background Image Overlay */}
+      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none mix-blend-multiply">
+        <img src="/assets/img/screen.png" alt="" className="w-full h-full object-cover" />
+      </div>
       {/* Background Accent Block */}
       <motion.div
         initial={{ clipPath: 'inset(0 0 100% 0)' }}
@@ -56,7 +60,7 @@ export function Hero() {
               <motion.span
                 initial={{ clipPath: 'inset(100% 0 0 0)' }}
                 animate={{ clipPath: 'inset(0% 0 0 0)' }}
-                transition={{ delay: 0.5, duration: 0.5, ease: chiselEasing }}
+                transition={{ delay: 0.2, duration: 0.5, ease: chiselEasing }}
                 className="relative z-10"
               >
                 THINK
@@ -64,15 +68,15 @@ export function Hero() {
               <motion.span
                 initial={{ clipPath: 'inset(100% 0 0 0)' }}
                 animate={{ clipPath: 'inset(0% 0 0 0)' }}
-                transition={{ delay: 0.6, duration: 0.5, ease: chiselEasing }}
-                className="relative z-20 text-accent misaligned-right "
+                transition={{ delay: 0.4, duration: 0.5, ease: chiselEasing }}
+                className="relative z-20 text-stroke misaligned-right scale-110 ml-8"
               >
                 MAKE
               </motion.span>
               <motion.span
                 initial={{ clipPath: 'inset(100% 0 0 0)' }}
                 animate={{ clipPath: 'inset(0% 0 0 0)' }}
-                transition={{ delay: 0.7, duration: 0.5, ease: chiselEasing }}
+                transition={{ delay: 0.6, duration: 0.5, ease: chiselEasing }}
                 className="relative z-30"
               >
                 IMPACT
@@ -87,13 +91,13 @@ export function Hero() {
             transition={{ delay: 0.9, duration: 0.6, ease: chiselEasing }}
             className="mt-8 md:mt-0 md:absolute md:top-1/2 md:right-0 md:max-w-md bg-paper p-8 border-4 border-ink misaligned-right z-40"
           >
-            <p className="text-lg font-bold leading-tight mb-6">
+            <p className="text-lg font-bold leading-tight mb-6 uppercase tracking-tight">
               A creative web developer passionate about building modern, engaging, and user-friendly digital experiences.
             </p>
             <div className="electric-border p-[1px] inline-block">
               <button
                 onClick={scrollToWork}
-                className="group relative px-6 py-3 bg-ink text-paper font-bold uppercase tracking-tighter hover:bg-accent hover:text-ink transition-colors duration-100 flex items-center gap-2"
+                className="group relative px-6 py-3 bg-ink text-paper font-bold uppercase tracking-tighter hover:bg-accent hover:text-ink active:scale-95 transition-all duration-100 flex items-center gap-2"
               >
                 <span>Explore My Work</span>
                 <ArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
@@ -104,16 +108,16 @@ export function Hero() {
       </motion.div>
 
       {/* Mechanical Marquee System */}
-      <div className="relative w-full bg-ink text-paper py-4 border-t-8 border-accent overflow-hidden z-10">
+      <div className="relative w-full bg-accent text-ink py-6 border-t-8 border-ink overflow-hidden z-10">
         <div className="flex whitespace-nowrap animate-marquee">
           {[...Array(6)].map((_, i) => (
-            <div key={i} className="flex items-center gap-8 px-4 font-heading text-4xl uppercase tracking-tighter italic">
+            <div key={i} className="flex items-center gap-12 px-6 font-heading text-6xl uppercase tracking-tighter italic">
               <span>Fullstack Developer</span>
-              <span className="text-accent">★</span>
+              <span className="text-ink">★</span>
               <span>UI Designer</span>
-              <span className="text-accent px-4 opacity-50">/ / /</span>
+              <span className="text-ink px-4 opacity-50">/ / /</span>
               <span>Digital Artisan</span>
-              <span className="text-accent px-8">●</span>
+              <span className="text-ink px-8">●</span>
             </div>
           ))}
         </div>

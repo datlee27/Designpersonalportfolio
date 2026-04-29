@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,7 +8,7 @@
   :root {
     --ink: #111111;
     --paper: #F5F5F5;
-    --accent: #4DA3FF;
+    --accent: #CCFF00;
     --chisel-easing: cubic-bezier(0.2, 0, 0, 1);
   }
 
@@ -17,7 +17,7 @@
     /* Use manual scroll logic in Layout.tsx */
     background-color: var(--paper);
     color: var(--ink);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     height: 100%;
   }
 
@@ -123,8 +123,21 @@
   }
 
   .text-huge {
-    font-size: clamp(2.5rem, 12vw, 12rem);
+    font-size: clamp(3rem, 12vw, 10rem);
     word-break: break-word;
+    line-height: 0.85;
+  }
+
+  .text-stroke {
+    -webkit-text-stroke: 2px var(--ink);
+    color: transparent;
+  }
+
+  .bg-brutal-grid {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(17, 17, 17, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(17, 17, 17, 0.1) 1px, transparent 1px);
   }
 
   .text-tight {
@@ -177,7 +190,7 @@
     width: 300%;
     height: 300%;
     background: conic-gradient(transparent,
-        rgba(77, 163, 255, 0.4),
+        rgba(204, 255, 0, 0.4),
         var(--accent),
         transparent 20%);
     animation: border-run 4s linear infinite;
