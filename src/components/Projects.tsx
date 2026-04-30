@@ -102,11 +102,11 @@ export function Projects() {
           </div>
 
           {/* Horizontal Scroll Container */}
-          <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-8 px-6 pb-12">
+          <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-6 px-6 pb-12">
             {projects.map((project) => (
               <div 
                 key={project.id} 
-                className="flex-shrink-0 w-[85vw] snap-center bg-white/5 backdrop-blur-xl border border-white/10 p-6 shadow-2xl relative"
+                className="flex-shrink-0 w-[88vw] snap-center bg-white/5 backdrop-blur-xl border border-white/10 p-6 shadow-2xl relative"
               >
                 <div className="relative h-64 w-full mb-8 overflow-hidden border border-white/20">
                   <ImageWithFallback
@@ -157,6 +157,8 @@ export function Projects() {
                 </div>
               </div>
             ))}
+            {/* End Spacer to prevent cutting off the last item */}
+            <div className="flex-shrink-0 w-12" />
           </div>
           
           {/* Scroll Indicator */}

@@ -37,7 +37,7 @@ export function Navigation() {
           }`}
 
       >
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="flex items-center justify-between">
             <Link to="/" className="text-paper text-4xl font-heading tracking-tighter hover:text-accent transition-colors">
               DAT LEE<span className="text-accent italic">.</span>
@@ -76,18 +76,24 @@ export function Navigation() {
             animate={{ clipPath: 'inset(0 0 0 0)' }}
             exit={{ clipPath: 'inset(0 0 100% 0)' }}
             transition={{ duration: 0.4, ease: chiselEasing }}
-            className="fixed inset-0 z-40 bg-ink md:hidden flex flex-col items-center justify-center gap-12"
+            className="fixed inset-0 z-40 bg-ink md:hidden flex flex-col items-center pt-32 pb-12 overflow-y-auto gap-6"
           >
+            {/* Background Texture for Mobile Menu */}
+            <div className="absolute inset-0 z-0 opacity-10 grayscale pointer-events-none">
+              <img src="/assets/img/blueprint.png" alt="" className="w-full h-full object-cover" />
+            </div>
+
             {navItems.map((item, index) => (
               <motion.div
                 key={item.name}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
+                className="relative z-10"
               >
                 <Link
                   to={item.href}
-                  className="text-paper text-6xl font-heading tracking-tighter hover:text-accent transition-colors"
+                  className="text-paper text-4xl font-heading tracking-tighter hover:text-accent transition-colors uppercase italic"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}
