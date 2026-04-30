@@ -3,126 +3,177 @@ import { ArrowDown } from 'lucide-react';
 import { useRef } from 'react';
 
 export function Hero() {
-  const ref = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: containerRef,
     offset: ["start start", "end start"]
   });
 
-  // Cinematic 3D Parallax Fade
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  // Parallax and fade effects for smooth transitions
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
+  
+  // Subtle rotation without jitter
+  const rotateX = useTransform(scrollYProgress, [0, 1], [0, 3]);
 
   const scrollToWork = () => {
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const chiselEasing = [0.2, 0, 0, 1] as const;
+  const cinematicEasing = [0.16, 1, 0.3, 1] as const;
+
+  // OKLCH Design Tokens - Sharper accents
+  const colors = {
+    bg: 'oklch(14% 0.015 260)', // Slightly lighter black for depth
+    accent: 'oklch(70% 0.18 250)',
+    accentGlow: 'oklch(70% 0.18 250 / 0.1)', // More transparent
+    text: 'oklch(98% 0.01 260)',
+    textMuted: 'oklch(60% 0.02 260)',
+  };
 
   return (
-    <section id="hero" ref={ref} className="min-h-screen flex flex-col justify-between bg-paper bg-brutal-grid animate-pan-grid text-ink relative overflow-hidden">
-      {/* Background Image Overlay */}
-      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none mix-blend-multiply">
-        <img src="/assets/img/screen.png" alt="" className="w-full h-full object-cover" />
+    <section 
+      id="hero" 
+      ref={containerRef} 
+      className="relative min-h-screen flex flex-col items-center pt-40 pb-24 overflow-hidden"
+      style={{ backgroundColor: colors.bg, color: colors.text }}
+    >
+      {/* Cinematic Background Layer */}
+      <div className="absolute inset-0 z-0">
+        {/* Dynamic Light Leak / Glow - Reduced blur for sharpness */}
+        <motion.div 
+          animate={{ 
+            opacity: [0.2, 0.4, 0.2],
+            x: [-15, 15, -15],
+            y: [-15, 15, -15]
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[5%] -left-[10%] w-[60vw] h-[60vw] rounded-full blur-[80px] pointer-events-none"
+          style={{ backgroundColor: colors.accentGlow }}
+        />
+        <motion.div 
+          animate={{ 
+            opacity: [0.15, 0.3, 0.15],
+            x: [15, -15, 15],
+            y: [15, -15, 15]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[5%] -right-[10%] w-[50vw] h-[50vw] rounded-full blur-[100px] pointer-events-none"
+          style={{ backgroundColor: colors.accentGlow }}
+        />
+        
+        {/* Subtle Technical Texture - Sharper, less hazy */}
+        <div 
+          className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          style={{ 
+            backgroundImage: `radial-gradient(circle at 1px 1px, ${colors.text} 1px, transparent 0)`,
+            backgroundSize: '80px 80px'
+          }} 
+        />
       </div>
-      {/* Background Accent Block */}
-      <motion.div
-        initial={{ clipPath: 'inset(0 0 100% 0)' }}
-        animate={{ clipPath: 'inset(0 0 0% 0)' }}
-        transition={{ duration: 0.6, ease: chiselEasing, delay: 0.2 }}
-        style={{ y, opacity, scale }}
-        className="absolute top-20 right-[10%] w-[30vw] h-[40vh] bg-accent chisel-block-accent opacity-20 -z-10"
-      />
 
       <motion.div 
-        style={{ y, opacity, scale }}
-        className="container mx-auto px-6 pt-32 pb-20 flex-grow flex flex-col justify-center"
+        style={{ y, opacity, scale, rotateX, perspective: 1500 }}
+        className="container mx-auto px-6 relative z-10 flex-grow flex flex-col justify-center"
       >
-        <div className="relative group">
-          {/* Main Title Section */}
+        <div className="max-w-6xl mx-auto flex flex-col items-center">
+          {/* Label with technical detail */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, ease: chiselEasing }}
-            className="flex flex-col items-start"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: cinematicEasing }}
+            className="flex items-center gap-4 mb-8"
           >
-            <motion.span
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.4, ease: chiselEasing }}
-              className="px-2 bg-ink text-paper text-sm font-bold uppercase tracking-widest mb-4 misaligned-left"
-            >
-              Independent Developer
-            </motion.span>
-
-            <h1 className="text-[12vw] sm:text-huge text-tight leading-[0.85] flex flex-col">
-              <motion.span
-                initial={{ clipPath: 'inset(100% 0 0 0)' }}
-                animate={{ clipPath: 'inset(0% 0 0 0)' }}
-                transition={{ delay: 0.2, duration: 0.5, ease: chiselEasing }}
-                className="relative z-10"
-              >
-                THINK
-              </motion.span>
-              <motion.span
-                initial={{ clipPath: 'inset(100% 0 0 0)' }}
-                animate={{ clipPath: 'inset(0% 0 0 0)' }}
-                transition={{ delay: 0.4, duration: 0.5, ease: chiselEasing }}
-                className="relative z-20 text-stroke misaligned-right scale-105 sm:scale-110 ml-4 sm:ml-8"
-              >
-                MAKE
-              </motion.span>
-              <motion.span
-                initial={{ clipPath: 'inset(100% 0 0 0)' }}
-                animate={{ clipPath: 'inset(0% 0 0 0)' }}
-                transition={{ delay: 0.6, duration: 0.5, ease: chiselEasing }}
-                className="relative z-30"
-              >
-                IMPACT
-              </motion.span>
-            </h1>
+            <div className="h-[1px] w-8 bg-current opacity-20" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.6em] opacity-40">
+              Technical Artisan & Fullstack Developer
+            </span>
+            <div className="h-[1px] w-8 bg-current opacity-20" />
           </motion.div>
 
-          {/* Overlapping Description Block */}
+          {/* Main Cinematic Headline */}
+          <h1 className="relative flex flex-col items-center text-center font-heading leading-[0.8] mb-16 select-none">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, ease: cinematicEasing, delay: 0.1 }}
+              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter"
+            >
+              THINK
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, ease: cinematicEasing, delay: 0.3 }}
+              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter italic"
+              style={{ 
+                WebkitTextStroke: `1px ${colors.text}`,
+                color: 'transparent'
+              }}
+            >
+              MAKE
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, ease: cinematicEasing, delay: 0.5 }}
+              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter"
+            >
+              IMPACT
+            </motion.div>
+          </h1>
+
+          {/* Call to Action & Description */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.9, duration: 0.6, ease: chiselEasing }}
-            className="mt-12 lg:mt-0 lg:absolute lg:top-1/2 lg:right-0 lg:-translate-y-1/2 lg:max-w-md bg-paper p-8 border-4 border-ink misaligned-right z-40"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: cinematicEasing, delay: 0.7 }}
+            className="flex flex-col items-center gap-12"
           >
-            <p className="text-lg font-bold leading-tight mb-6 uppercase tracking-tight">
-              A creative web developer passionate about building modern, engaging, and user-friendly digital experiences.
+            <p className="max-w-2xl text-center text-base md:text-lg font-sans leading-relaxed opacity-60">
+              Bridging the gap between <span style={{ color: colors.accent }}>visionary design</span> and <span className="font-bold">flawless engineering</span>. Building digital systems that resonate and endure.
             </p>
-            <div className="electric-border p-[1px] inline-block">
-              <button
-                onClick={scrollToWork}
-                className="group relative px-6 py-3 bg-ink text-paper font-bold uppercase tracking-tighter hover:bg-accent hover:text-ink active:scale-95 transition-all duration-100 flex items-center gap-2"
-              >
-                <span>Explore My Work</span>
-                <ArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
-              </button>
-            </div>
+
+            <button
+              onClick={scrollToWork}
+              className="group relative flex flex-col items-center gap-4 py-5 px-12 overflow-hidden transition-all duration-500"
+            >
+              <div className="absolute inset-0 border border-current opacity-10 group-hover:opacity-30 transition-opacity" />
+              <div 
+                className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-out"
+                style={{ backgroundColor: colors.accent }}
+              />
+              <span className="relative z-10 text-[10px] font-bold uppercase tracking-[0.4em] group-hover:text-black transition-colors duration-300">
+                Initiate Exploration
+              </span>
+              <ArrowDown className="relative z-10 w-3 h-3 group-hover:translate-y-1 transition-all duration-300 group-hover:text-black" />
+            </button>
           </motion.div>
         </div>
       </motion.div>
 
-      {/* Mechanical Marquee System */}
-      <div className="relative w-full bg-accent text-ink py-6 border-t-8 border-ink overflow-hidden z-10">
-        <div className="flex whitespace-nowrap animate-marquee">
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className="flex items-center gap-8 md:gap-12 px-4 md:px-6 font-heading text-4xl md:text-6xl uppercase tracking-tighter italic">
-              <span>Fullstack Developer</span>
-              <span className="text-ink">★</span>
-              <span>UI Designer</span>
-              <span className="text-ink px-4 opacity-50">/ / /</span>
-              <span>Digital Artisan</span>
-              <span className="text-ink px-8">●</span>
-            </div>
-          ))}
-        </div>
+      {/* Floating Meta Information */}
+      <div className="absolute bottom-10 left-10 hidden lg:flex flex-col gap-1 opacity-10 text-[9px] font-mono tracking-[0.3em] uppercase">
+        <div>System Status: Nominal</div>
+        <div style={{ color: colors.accent }}>10.7626° N, 106.6602° E</div>
       </div>
-    </section>
 
+      <div className="absolute bottom-10 right-10 hidden lg:flex flex-col items-end gap-1 opacity-10 text-[9px] font-mono tracking-[0.3em] uppercase text-right">
+        <div>Scroll to Explore</div>
+        <div className="w-8 h-[1px] bg-current opacity-30" />
+      </div>
+
+      {/* Scroll Progress Bar (Bottom) */}
+      <motion.div 
+        className="absolute bottom-0 left-0 h-[2px] z-50 origin-left"
+        style={{ 
+          width: "100%",
+          scaleX: scrollYProgress,
+          backgroundColor: colors.accent,
+          boxShadow: `0 0 10px ${colors.accent}`
+        }}
+      />
+    </section>
   );
 }
