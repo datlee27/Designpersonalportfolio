@@ -12,9 +12,9 @@ export function Contact() {
 
   return (
     <section
-      className="w-full h-full flex items-center bg-paper text-ink overflow-hidden border-t-8 border-ink"
+      className="w-full min-h-screen lg:h-screen flex items-center bg-paper text-ink overflow-hidden border-t-8 border-ink"
     >
-      <div className="container mx-auto px-6 py-24">
+      <div className="container mx-auto px-6 py-16 lg:py-24">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-24 w-full">
           <div className="flex-1">
             <motion.h2

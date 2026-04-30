@@ -13,7 +13,7 @@ export default {
       colors: {
         ink: '#111111',
         paper: '#F5F5F5',
-        accent: '#CCFF00',
+        accent: '#4DA3FF',
       },
       transitionTimingFunction: {
         'chisel': 'cubic-bezier(0.2, 0, 0, 1)',

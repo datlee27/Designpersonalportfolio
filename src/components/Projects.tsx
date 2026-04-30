@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useMotionValue } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef, useEffect, useState } from 'react';
 import { Github, ExternalLink } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
@@ -12,7 +12,7 @@ const projects = [
     tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "FE"],
     github: "https://github.com/datlee27/dev-roadmap",
     deploy: "https://dev-roadmap-brown.vercel.app/",
-    accent: "bg-blue-500",
+    accent: "bg-accent",
     status: "Latest"
   },
   {
@@ -22,7 +22,7 @@ const projects = [
     image: "https://res.cloudinary.com/ddwt6nl7s/image/upload/v1775904892/A%CC%89nh_ma%CC%80n_hi%CC%80nh_2026-04-11_lu%CC%81c_17.52.52_cb9myu.png",
     tags: ["React", "TypeScript", "Tailwind CSS", "Vite", "Educational", "FE"],
     github: "https://github.com/datlee27/Practice-ielts-writing-typing-react",
-    accent: "bg-emerald-500",
+    accent: "bg-accent",
     status: "Latest"
   },
   {
@@ -88,7 +88,7 @@ export function Projects() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
+    const check = () => setIsMobile(window.innerWidth < 1024);
     check();
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
@@ -106,22 +106,72 @@ export function Projects() {
   const x = useTransform(scrollYProgress, [0, 1], ['0vw', `${translateEnd}vw`]);
   const progressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
-  // ─── MOBILE: Vertical stacking full-screen blocks ───
+  // ─── MOBILE/TABLET: Swiper-style horizontal adaptive cards ───
   if (isMobile) {
     return (
-      <section id="projects" className="bg-paper text-ink border-t-8 border-ink overflow-hidden">
-        {/* Title Page */}
-        <div className="min-h-[60vh] flex items-center justify-center border-b-8 border-paper bg-ink text-paper p-6">
-           <h2 className="text-[12vw] leading-none font-heading text-center tracking-tighter">
-             SELECTED<br />WORKS
-           </h2>
+      <section id="projects" className="bg-paper text-ink border-t-8 border-ink overflow-hidden py-12 relative">
+        <div className="container mx-auto px-6 mb-8">
+          <h2 className="text-6xl font-heading tracking-tighter leading-none mb-4 uppercase">
+            SELECTED<br />WORKS
+          </h2>
+          <p className="text-xs font-bold tracking-widest uppercase opacity-60 flex items-center gap-2 animate-pulse">
+            <span>SWIPE LEFT OR RIGHT</span>
+            <span className="text-sm">→</span>
+          </p>
         </div>
 
-        {/* Project Pages */}
-        <div className="flex flex-col">
-          {projects.map((project, index) => (
-            <ProjectSlide key={project.id} project={project} index={index} isMobile={true} />
-          ))}
+        {/* Horizontal Snap Scroll Carousel */}
+        <div className="flex items-stretch gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none px-6 pb-8 select-none">
+           {projects.map((project, index) => {
+             const theme = getTheme(index + 1);
+             const tagTheme = getTagTheme(theme.bg);
+             return (
+               <div key={project.id} className={`w-[85vw] md:w-[65vw] flex-shrink-0 flex flex-col snap-center ${theme.bg} ${theme.text} border-4 ${theme.border} shadow-[12px_12px_0px_0px_currentColor] p-6 relative overflow-hidden`}>
+                 <div className="h-[25vh] md:h-[35vh] w-full border-4 relative overflow-hidden group">
+                    <ImageWithFallback
+                      src={project.image}
+                      alt={project.title}
+                      width={800}
+                      height={600}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className={`absolute top-2 left-2 ${theme.bg} ${theme.text} px-2 py-0.5 font-heading text-xl border-2 ${theme.border}`}>
+                       #{project.id}
+                    </div>
+                 </div>
+
+                 <div className="flex-1 flex flex-col pt-6">
+                   <div className="flex justify-between items-start mb-4">
+                     <h3 className="text-2xl md:text-3xl font-heading tracking-tighter leading-none pr-4 uppercase">
+                       {project.title}
+                     </h3>
+                     <div className="flex gap-3 shrink-0">
+                        {project.deploy && (
+                          <a href={project.deploy} target="_blank" rel="noopener noreferrer" className="hover:opacity-50 transition-opacity active:scale-90 transform">
+                            <ExternalLink className="w-6 h-6" />
+                          </a>
+                        )}
+                        <a href={project.github} target="_blank" rel="noopener noreferrer" className="hover:opacity-50 transition-opacity active:scale-90 transform">
+                          <Github className="w-6 h-6" />
+                        </a>
+                     </div>
+                   </div>
+
+                   <p className="text-sm md:text-base font-bold leading-relaxed mb-6 opacity-80">
+                     {project.description}
+                   </p>
+
+                   <div className="flex flex-wrap gap-2 mt-auto">
+                     {project.tags.map(tag => (
+                        <span key={tag} className={`px-3 py-1 border-2 ${theme.border} text-[10px] font-bold uppercase tracking-wider ${tagTheme}`}>
+                          {tag}
+                        </span>
+                     ))}
+                   </div>
+                 </div>
+               </div>
+             );
+           })}
         </div>
       </section>
     );
@@ -156,7 +206,7 @@ export function Projects() {
           ))}
         </motion.div>
 
-        {/* Global Progress Bar Overlay (mix-blend-difference allows it to be visible on any background) */}
+        {/* Global Progress Bar Overlay */}
         <div className="absolute bottom-8 left-8 right-8 z-50 pointer-events-none mix-blend-difference">
           <div className="h-4 bg-white/20 relative overflow-hidden border-2 border-white">
             <motion.div
@@ -182,7 +232,6 @@ export function Projects() {
 
 // ─── Project Full-Screen Slide Component ───
 function ProjectSlide({ project, index, isMobile }: { project: typeof projects[0], index: number, isMobile?: boolean }) {
-  // Theme starts from index 1 because Title is index 0
   const theme = getTheme(index + 1);
   const tagTheme = getTagTheme(theme.bg);
 

@@ -56,7 +56,7 @@ export function Hero() {
               Independent Developer
             </motion.span>
 
-            <h1 className="text-huge text-tight leading-[0.85] flex flex-col">
+            <h1 className="text-[12vw] sm:text-huge text-tight leading-[0.85] flex flex-col">
               <motion.span
                 initial={{ clipPath: 'inset(100% 0 0 0)' }}
                 animate={{ clipPath: 'inset(0% 0 0 0)' }}
@@ -69,7 +69,7 @@ export function Hero() {
                 initial={{ clipPath: 'inset(100% 0 0 0)' }}
                 animate={{ clipPath: 'inset(0% 0 0 0)' }}
                 transition={{ delay: 0.4, duration: 0.5, ease: chiselEasing }}
-                className="relative z-20 text-stroke misaligned-right scale-110 ml-8"
+                className="relative z-20 text-stroke misaligned-right scale-105 sm:scale-110 ml-4 sm:ml-8"
               >
                 MAKE
               </motion.span>
@@ -89,7 +89,7 @@ export function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.9, duration: 0.6, ease: chiselEasing }}
-            className="mt-8 md:mt-0 md:absolute md:top-1/2 md:right-0 md:max-w-md bg-paper p-8 border-4 border-ink misaligned-right z-40"
+            className="mt-12 lg:mt-0 lg:absolute lg:top-1/2 lg:right-0 lg:-translate-y-1/2 lg:max-w-md bg-paper p-8 border-4 border-ink misaligned-right z-40"
           >
             <p className="text-lg font-bold leading-tight mb-6 uppercase tracking-tight">
               A creative web developer passionate about building modern, engaging, and user-friendly digital experiences.
@@ -111,7 +111,7 @@ export function Hero() {
       <div className="relative w-full bg-accent text-ink py-6 border-t-8 border-ink overflow-hidden z-10">
         <div className="flex whitespace-nowrap animate-marquee">
           {[...Array(6)].map((_, i) => (
-            <div key={i} className="flex items-center gap-12 px-6 font-heading text-6xl uppercase tracking-tighter italic">
+            <div key={i} className="flex items-center gap-8 md:gap-12 px-4 md:px-6 font-heading text-4xl md:text-6xl uppercase tracking-tighter italic">
               <span>Fullstack Developer</span>
               <span className="text-ink">★</span>
               <span>UI Designer</span>

@@ -5,8 +5,29 @@ import { Experience } from '../components/Experience';
 import { Projects } from '../components/Projects';
 import { Contact } from '../components/Contact';
 import { Blog } from '../components/Blog';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 export function HomePage() {
+    const isMobile = useIsMobile(1024);
+
+    if (isMobile) {
+        return (
+            <div className="relative bg-paper">
+                <div className="relative z-10">
+                    <Hero />
+                    <About />
+                    <Skills />
+                    <Experience />
+                    <Projects />
+                    <div className="border-b-8 border-ink">
+                        <Blog />
+                    </div>
+                    <Contact />
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="relative pb-[100vh]">
             {/* The sticky curtain background layer */}

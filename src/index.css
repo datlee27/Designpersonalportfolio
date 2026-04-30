@@ -8,7 +8,7 @@
   :root {
     --ink: #111111;
     --paper: #F5F5F5;
-    --accent: #CCFF00;
+    --accent: #4DA3FF;
     --chisel-easing: cubic-bezier(0.2, 0, 0, 1);
   }
 
@@ -190,7 +190,7 @@
     width: 300%;
     height: 300%;
     background: conic-gradient(transparent,
-        rgba(204, 255, 0, 0.4),
+        rgba(77, 163, 255, 0.4),
         var(--accent),
         transparent 20%);
     animation: border-run 4s linear infinite;
@@ -207,5 +207,15 @@
     margin: 2px;
     height: calc(100% - 4px);
     width: calc(100% - 4px);
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .scrollbar-none {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }
 }
