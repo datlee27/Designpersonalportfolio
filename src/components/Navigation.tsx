@@ -93,7 +93,7 @@ export function Navigation() {
               >
                 <Link
                   to={item.href}
-                  className="text-paper text-4xl font-heading tracking-tighter hover:text-accent transition-colors uppercase italic"
+                  className="inline-block text-paper text-3xl font-heading tracking-tighter hover:text-accent transition-colors uppercase italic pr-4 whitespace-nowrap"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}

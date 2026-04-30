@@ -144,7 +144,7 @@ function AboutDesktop() {
                       <div className="w-8 h-8 border-2 border-ink opacity-40" />
                     </div>
                     <div className="w-32 h-16 bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center" style={{ clipPath: 'polygon(0.5% 1%, 99% 0%, 100% 98%, 1% 100%, 0% 2%)' }}>
-                       <span className="font-mono text-[10px] text-accent tracking-widest font-bold">ARCH-01</span>
+                       <span className="font-mono text-[10px] text-accent tracking-widest font-bold"></span>
                     </div>
                   </div>
                 </motion.div>
@@ -258,7 +258,7 @@ function AboutMobile() {
                    <div className="w-6 h-6 border border-ink/30" />
                 </div>
                 <div className="w-24 h-12 bg-white/5 border border-white/10 flex items-center justify-center" style={{ clipPath: 'polygon(0.5% 1%, 99% 0%, 100% 98%, 1% 100%, 0% 2%)' }}>
-                   <span className="font-mono text-[8px] text-accent tracking-tighter font-bold">ARCH-01</span>
+                   <span className="font-mono text-[8px] text-accent tracking-tighter font-bold"></span>
                 </div>
               </div>
             </div>

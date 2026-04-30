@@ -117,7 +117,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: cinematicEasing, delay: 0.3 }}
-              className="text-[15vw] md:text-[14vw] lg:text-[12vw] tracking-tighter italic will-change-transform optimize-gpu"
+              className="text-[15vw] md:text-[14vw] lg:text-[12vw] tracking-tighter italic will-change-transform optimize-gpu pr-[0.3em]"
             >
               MAKE
             </motion.div>
