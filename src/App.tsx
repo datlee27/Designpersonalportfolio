@@ -7,10 +7,12 @@ import { AdminLoginPage } from './pages/AdminLoginPage';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { Preloader } from './components/Preloader';
 import { Chatbot } from './components/Chatbot';
+import { ScrollToHash } from './components/ScrollToHash';
 
 export default function App() {
   return (
     <>
+      <ScrollToHash />
       <Preloader />
       <Chatbot />
       <Routes>

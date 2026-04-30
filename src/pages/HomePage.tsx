@@ -22,7 +22,9 @@ export function HomePage() {
                     <div className="border-b-8 border-ink">
                         <Blog />
                     </div>
-                    <Contact />
+                    <div id="contact">
+                        <Contact />
+                    </div>
                 </div>
             </div>
         );

@@ -12,7 +12,7 @@ export function Contact() {
 
   return (
     <section
-      id="contact"
+      id="contact-section"
       className="relative w-full min-h-screen flex items-center bg-ink text-white overflow-hidden border-t-8 border-ink"
     >
       {/* Background Layers */}
