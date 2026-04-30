@@ -115,7 +115,7 @@ export function Projects() {
             SELECTED<br />WORKS
           </h2>
           <p className="text-xs font-bold tracking-widest uppercase opacity-60 flex items-center gap-2 animate-pulse">
-            <span>SWIPE LEFT OR RIGHT</span>
+            <span>RIGHT</span>
             <span className="text-sm">→</span>
           </p>
         </div>

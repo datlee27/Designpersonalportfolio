@@ -9,13 +9,28 @@ export function Hero() {
     offset: ["start start", "end start"]
   });
 
-  // Parallax and fade effects for smooth transitions
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  // Global scroll-driven states
   const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
+  const rotateX = useTransform(scrollYProgress, [0, 1], [0, 5]);
   
-  // Subtle rotation without jitter
-  const rotateX = useTransform(scrollYProgress, [0, 1], [0, 3]);
+  // "THINK" - Drifts Left & Up
+  const thinkX = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
+  const thinkY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+  const thinkSpacing = useTransform(scrollYProgress, [0, 1], ["-0.05em", "0.15em"]);
+
+  // "MAKE" - Central, slow expansion
+  const makeScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const makeSpacing = useTransform(scrollYProgress, [0, 1], ["-0.02em", "0.2em"]);
+
+  // "IMPACT" - Drifts Right & Down
+  const impactX = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const impactY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const impactSpacing = useTransform(scrollYProgress, [0, 1], ["-0.05em", "0.15em"]);
+
+  // Background Reactive Elements
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 0.6, 0.2]);
+  const glowY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
   const scrollToWork = () => {
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
@@ -23,49 +38,35 @@ export function Hero() {
 
   const cinematicEasing = [0.16, 1, 0.3, 1] as const;
 
-  // OKLCH Design Tokens - Sharper accents
   const colors = {
-    bg: 'oklch(14% 0.015 260)', // Slightly lighter black for depth
+    bg: 'oklch(14% 0.015 260)',
     accent: 'oklch(70% 0.18 250)',
-    accentGlow: 'oklch(70% 0.18 250 / 0.1)', // More transparent
+    accentGlow: 'oklch(70% 0.18 250 / 0.1)',
     text: 'oklch(98% 0.01 260)',
-    textMuted: 'oklch(60% 0.02 260)',
   };
 
   return (
     <section 
       id="hero" 
       ref={containerRef} 
-      className="relative min-h-screen flex flex-col items-center pt-40 pb-24 overflow-hidden"
+      className="relative min-h-[120vh] flex flex-col items-center pt-40 pb-24 overflow-hidden"
       style={{ backgroundColor: colors.bg, color: colors.text }}
     >
       {/* Cinematic Background Layer */}
       <div className="absolute inset-0 z-0">
-        {/* Dynamic Light Leak / Glow - Reduced blur for sharpness */}
         <motion.div 
-          animate={{ 
-            opacity: [0.2, 0.4, 0.2],
-            x: [-15, 15, -15],
-            y: [-15, 15, -15]
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[5%] -left-[10%] w-[60vw] h-[60vw] rounded-full blur-[80px] pointer-events-none"
+          style={{ opacity: glowOpacity, y: glowY }}
+          className="absolute top-[5%] -left-[10%] w-[70vw] h-[70vw] rounded-full blur-[100px] pointer-events-none bg-accent/10"
           style={{ backgroundColor: colors.accentGlow }}
         />
         <motion.div 
-          animate={{ 
-            opacity: [0.15, 0.3, 0.15],
-            x: [15, -15, 15],
-            y: [15, -15, 15]
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[5%] -right-[10%] w-[50vw] h-[50vw] rounded-full blur-[100px] pointer-events-none"
+          style={{ opacity: glowOpacity, y: useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]) }}
+          className="absolute bottom-[5%] -right-[10%] w-[60vw] h-[60vw] rounded-full blur-[120px] pointer-events-none bg-accent/5"
           style={{ backgroundColor: colors.accentGlow }}
         />
         
-        {/* Subtle Technical Texture - Sharper, less hazy */}
         <div 
-          className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
           style={{ 
             backgroundImage: `radial-gradient(circle at 1px 1px, ${colors.text} 1px, transparent 0)`,
             backgroundSize: '80px 80px'
@@ -74,16 +75,15 @@ export function Hero() {
       </div>
 
       <motion.div 
-        style={{ y, opacity, scale, rotateX, perspective: 1500 }}
+        style={{ opacity, scale, rotateX, perspective: 1500 }}
         className="container mx-auto px-6 relative z-10 flex-grow flex flex-col justify-center"
       >
         <div className="max-w-6xl mx-auto flex flex-col items-center">
-          {/* Label with technical detail */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: cinematicEasing }}
-            className="flex items-center gap-4 mb-8"
+            className="flex items-center gap-4 mb-12"
           >
             <div className="h-[1px] w-8 bg-current opacity-20" />
             <span className="text-[10px] font-bold uppercase tracking-[0.6em] opacity-40">
@@ -92,21 +92,25 @@ export function Hero() {
             <div className="h-[1px] w-8 bg-current opacity-20" />
           </motion.div>
 
-          {/* Main Cinematic Headline */}
-          <h1 className="relative flex flex-col items-center text-center font-heading leading-[0.8] mb-16 select-none">
+          <h1 className="relative flex flex-col items-center text-center font-heading leading-[0.8] mb-20 select-none">
+            {/* THINK */}
             <motion.div
+              style={{ x: thinkX, y: thinkY, letterSpacing: thinkSpacing }}
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: cinematicEasing, delay: 0.1 }}
-              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter"
+              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter will-change-transform"
             >
               THINK
             </motion.div>
+
+            {/* MAKE */}
             <motion.div
+              style={{ scale: makeScale, letterSpacing: makeSpacing }}
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: cinematicEasing, delay: 0.3 }}
-              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter italic"
+              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter italic will-change-transform"
               style={{ 
                 WebkitTextStroke: `1px ${colors.text}`,
                 color: 'transparent'
@@ -114,17 +118,19 @@ export function Hero() {
             >
               MAKE
             </motion.div>
+
+            {/* IMPACT */}
             <motion.div
+              style={{ x: impactX, y: impactY, letterSpacing: impactSpacing }}
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: cinematicEasing, delay: 0.5 }}
-              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter"
+              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter will-change-transform"
             >
               IMPACT
             </motion.div>
           </h1>
 
-          {/* Call to Action & Description */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -137,14 +143,14 @@ export function Hero() {
 
             <button
               onClick={scrollToWork}
-              className="group relative flex flex-col items-center gap-4 py-5 px-12 overflow-hidden transition-all duration-500"
+              className="group relative flex flex-col items-center gap-4 py-6 px-16 overflow-hidden transition-all duration-500"
             >
               <div className="absolute inset-0 border border-current opacity-10 group-hover:opacity-30 transition-opacity" />
               <div 
                 className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-out"
                 style={{ backgroundColor: colors.accent }}
               />
-              <span className="relative z-10 text-[10px] font-bold uppercase tracking-[0.4em] group-hover:text-black transition-colors duration-300">
+              <span className="relative z-10 text-[11px] font-bold uppercase tracking-[0.5em] group-hover:text-black transition-colors duration-300">
                 Initiate Exploration
               </span>
               <ArrowDown className="relative z-10 w-3 h-3 group-hover:translate-y-1 transition-all duration-300 group-hover:text-black" />
@@ -154,17 +160,15 @@ export function Hero() {
       </motion.div>
 
       {/* Floating Meta Information */}
-      <div className="absolute bottom-10 left-10 hidden lg:flex flex-col gap-1 opacity-10 text-[9px] font-mono tracking-[0.3em] uppercase">
+      <motion.div 
+        style={{ opacity: useTransform(scrollYProgress, [0, 0.2], [0.1, 0]) }}
+        className="absolute bottom-10 left-10 hidden lg:flex flex-col gap-1 text-[9px] font-mono tracking-[0.3em] uppercase"
+      >
         <div>System Status: Nominal</div>
         <div style={{ color: colors.accent }}>10.7626° N, 106.6602° E</div>
-      </div>
+      </motion.div>
 
-      <div className="absolute bottom-10 right-10 hidden lg:flex flex-col items-end gap-1 opacity-10 text-[9px] font-mono tracking-[0.3em] uppercase text-right">
-        <div>Scroll to Explore</div>
-        <div className="w-8 h-[1px] bg-current opacity-30" />
-      </div>
-
-      {/* Scroll Progress Bar (Bottom) */}
+      {/* Scroll Progress Indicator */}
       <motion.div 
         className="absolute bottom-0 left-0 h-[2px] z-50 origin-left"
         style={{ 
