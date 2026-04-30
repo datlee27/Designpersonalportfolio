@@ -134,9 +134,9 @@
   }
 
   .text-huge {
-    font-size: clamp(3rem, 12vw, 10rem);
-    word-break: break-word;
-    line-height: 0.85;
+    font-size: clamp(4rem, 15vw, 12rem);
+    font-family: var(--font-heading);
+    font-weight: 900;
   }
 
   .text-stroke {

@@ -271,10 +271,6 @@ export function Projects() {
 
         {/* Improved Progress Bar */}
         <div className="absolute bottom-12 left-12 right-12 z-50">
-          <div className="flex justify-between items-end mb-4 font-mono text-[10px] tracking-[0.5em] uppercase opacity-80 text-white font-bold">
-            <span>Scroll Status</span>
-            <span className="text-accent">Slide 0{Math.floor(scrollYProgress.get() * totalSlides) + 1} / 0{totalSlides}</span>
-          </div>
           <div className="h-[2px] bg-white/20 relative overflow-hidden">
             <motion.div
               className="absolute top-0 left-0 h-full bg-accent"

@@ -68,7 +68,7 @@ function AboutDesktop() {
           <div className="absolute inset-0 z-0 optimize-gpu">
             {/* Blueprint Texture */}
             <div className="absolute inset-0 opacity-10 grayscale brightness-150">
-              <img src="/assets/img/blueprint.png" alt="" className="w-full h-full object-cover" />
+              <img src="/assets/img/blueprint.png" alt="" className="w-full h-full object-cover grayscale brightness-150" />
             </div>
             {/* Navy Ambient Glows */}
             <motion.div 
@@ -158,7 +158,7 @@ function AboutDesktop() {
                     <ImageWithFallback
                       src="https://res.cloudinary.com/ddwt6nl7s/image/upload/v1775989709/IMG_6098_fuhsm3.jpg"
                       alt="Professional portrait"
-                      className="w-full aspect-[3/4] object-cover transition-all duration-700"
+                      className="w-full aspect-[3/4] object-cover transition-all duration-700 group-hover:scale-105"
                     />
                   </div>
                   {/* Chisel Accent Underlay with parallax */}

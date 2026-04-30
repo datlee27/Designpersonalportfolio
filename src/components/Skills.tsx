@@ -27,7 +27,7 @@ export function Skills() {
   const chiselEasing = [0.2, 0, 0, 1] as const;
 
   return (
-    <section id="skills" className="relative py-40 bg-ink text-white overflow-hidden border-t-8 border-ink">
+    <section id="skills" className="relative py-24 md:py-40 bg-ink text-white overflow-hidden border-t-8 border-ink">
       {/* Background Layers */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 opacity-[0.07] grayscale contrast-125">
@@ -51,7 +51,7 @@ export function Skills() {
           <div className="w-64 h-2 bg-accent mt-12 shadow-[0_0_20px_var(--accent)]" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-32 gap-y-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-32 gap-y-16 md:gap-y-24">
           {skills.map((skill, index) => (
             <motion.div
               key={skill.category}
@@ -61,11 +61,11 @@ export function Skills() {
               transition={{ duration: 0.6, ease: chiselEasing, delay: index * 0.1 }}
               className="origin-left group"
             >
-              <div className="flex items-end gap-8 mb-8">
-                <span className="text-huge leading-none font-heading text-accent/10 group-hover:text-accent transition-all duration-500 scale-90 group-hover:scale-100">0{index + 1}</span>
+              <div className="flex items-end gap-4 md:gap-8 mb-6 md:mb-8">
+                <span className="text-6xl md:text-huge leading-none font-heading text-accent/10 group-hover:text-accent transition-all duration-500 scale-90 group-hover:scale-100">0{index + 1}</span>
                 <div className="flex flex-col">
                   <div className="w-8 h-[2px] bg-accent mb-2" />
-                  <h3 className="text-5xl font-heading leading-none tracking-tighter uppercase text-white group-hover:text-accent transition-colors">
+                  <h3 className="text-3xl md:text-5xl font-heading leading-none tracking-tighter uppercase text-white group-hover:text-accent transition-colors">
                     {skill.category}
                   </h3>
                 </div>

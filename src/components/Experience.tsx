@@ -111,7 +111,7 @@ export function Experience() {
         <div className="absolute left-6 md:left-[50%] lg:left-[calc(50%-450px)] top-0 w-[2px] h-full bg-gradient-to-b from-accent/50 via-accent to-accent/50 opacity-20" />
       </div>
 
-      <div className="sticky top-0 z-10 pointer-events-none">
+      <div className="sticky top-0 z-0 pointer-events-none">
         <div className="container mx-auto px-6 pt-24 md:pt-32 pb-12">
           <div className="mb-12 md:mb-20 flex flex-col items-start gap-4 pointer-events-auto">
             <motion.h2
@@ -119,16 +119,16 @@ export function Experience() {
               whileInView={{ clipPath: 'inset(0 0 0 0)' }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: chiselEasing }}
-              className="text-7xl md:text-huge leading-none uppercase text-white optimize-gpu"
+              className="text-7xl md:text-huge leading-none uppercase text-white/20 optimize-gpu"
             >
-              CHRONO<br /><span className="text-accent">LOGY</span>
+              CHRONO<br /><span className="text-accent/20">LOGY</span>
             </motion.h2>
             <div className="w-24 md:w-32 h-[4px] bg-accent shadow-[0_0_15px_var(--accent)]" />
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-0 md:px-6 relative z-20 -mt-20">
+      <div className="container mx-auto px-0 md:px-6 relative z-10 -mt-32">
         {experiences.map((exp, index) => (
           <StackingCard
             key={index}

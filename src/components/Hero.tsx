@@ -101,7 +101,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: cinematicEasing, delay: 0.1 }}
-              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter will-change-transform optimize-gpu"
+              className="text-[15vw] md:text-[14vw] lg:text-[12vw] tracking-tighter will-change-transform optimize-gpu"
             >
               THINK
             </motion.div>
@@ -117,7 +117,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: cinematicEasing, delay: 0.3 }}
-              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter italic will-change-transform optimize-gpu"
+              className="text-[15vw] md:text-[14vw] lg:text-[12vw] tracking-tighter italic will-change-transform optimize-gpu"
             >
               MAKE
             </motion.div>
@@ -128,7 +128,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: cinematicEasing, delay: 0.5 }}
-              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter will-change-transform optimize-gpu"
+              className="text-[15vw] md:text-[14vw] lg:text-[12vw] tracking-tighter will-change-transform optimize-gpu"
             >
               IMPACT
             </motion.div>
@@ -172,7 +172,7 @@ export function Hero() {
       </motion.div>
 
       {/* Scroll Progress Indicator */}
-      <motion.div 
+      {/* <motion.div 
         className="absolute bottom-0 left-0 h-[2px] z-50 origin-left"
         style={{ 
           width: "100%",
@@ -180,7 +180,7 @@ export function Hero() {
           backgroundColor: colors.accent,
           boxShadow: `0 0 10px ${colors.accent}`
         }}
-      />
+      /> */}
     </section>
   );
 }

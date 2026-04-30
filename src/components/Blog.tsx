@@ -23,7 +23,7 @@ export function Blog() {
 
 
   return (
-    <section id="blog" className="py-32 bg-ink text-white overflow-hidden border-t-8 border-ink">
+    <section id="blog" className="py-20 md:py-32 bg-ink text-white overflow-hidden border-t-8 border-ink">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-24">
           <motion.h2
@@ -43,6 +43,14 @@ export function Blog() {
               ALL POSTS <ArrowRight className="group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>
+          <div className="md:hidden mt-8 w-full">
+            <Link
+              to="/blog"
+              className="group flex items-center justify-between bg-white/5 border border-white/10 text-white px-6 py-4 font-heading text-xl hover:bg-accent hover:text-ink transition-colors"
+            >
+              VIEW ALL INSIGHTS <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+            </Link>
+          </div>
         </div>
 
         <div className="flex flex-col gap-24">
@@ -56,9 +64,9 @@ export function Blog() {
               className={`relative group ${index % 2 !== 0 ? 'md:self-end' : ''}`}
             >
               <Link to={`/blog/${post.slug}`} className="block max-w-5xl">
-                <div className="grid md:grid-cols-[1fr_400px] gap-8 bg-white/5 border border-white/10 p-8 hover:misaligned-right transition-all duration-300 backdrop-blur-xl">
+                <div className="grid grid-cols-1 md:grid-cols-[1fr_400px] gap-6 md:gap-8 bg-white/5 border border-white/10 p-6 md:p-8 hover:misaligned-right transition-all duration-300 backdrop-blur-xl">
                   <div className="order-2 md:order-1 flex flex-col justify-center">
-                    <div className="flex items-center gap-6 mb-6 font-bold text-sm tracking-tighter text-accent">
+                    <div className="flex items-center gap-4 md:gap-6 mb-4 md:mb-6 font-bold text-xs md:text-sm tracking-tighter text-accent">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
                         <span>{post.published_date}</span>
@@ -69,21 +77,21 @@ export function Blog() {
                       </div>
                     </div>
 
-                    <h3 className="text-4xl md:text-5xl font-bold uppercase mb-6 leading-tight tracking-tight text-white group-hover:text-accent transition-colors">
+                    <h3 className="text-2xl md:text-5xl font-bold uppercase mb-4 md:mb-6 leading-tight tracking-tight text-white group-hover:text-accent transition-colors">
                       {post.title}
                     </h3>
 
-                    <p className="text-xl font-medium leading-tight mb-8 line-clamp-3 text-white/60">
+                    <p className="text-base md:text-xl font-medium leading-tight mb-6 md:mb-8 line-clamp-3 text-white/60">
                       {post.excerpt}
                     </p>
 
-                    <div className="flex items-center gap-4 text-2xl font-heading tracking-widest text-accent group-hover:gap-8 transition-all">
+                    <div className="flex items-center gap-4 text-xl md:text-2xl font-heading tracking-widest text-accent group-hover:gap-8 transition-all">
                       <span>READ TRANSCRIPT</span>
-                      <ArrowRight className="w-6 h-6" />
+                      <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
                     </div>
                   </div>
 
-                  <div className="order-1 md:order-2 h-80 overflow-hidden border border-white/20 misaligned-left">
+                  <div className="order-1 md:order-2 h-64 md:h-80 overflow-hidden border border-white/20 misaligned-left">
                     <ImageWithFallback
                       src={post.image_url}
                       alt={post.title}
