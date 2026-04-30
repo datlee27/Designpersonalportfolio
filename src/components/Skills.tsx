@@ -27,56 +27,70 @@ export function Skills() {
   const chiselEasing = [0.2, 0, 0, 1] as const;
 
   return (
-    <section id="skills" className="py-32 bg-paper text-ink overflow-hidden border-t-8 border-ink">
-      <div className="container mx-auto px-6">
-        <div className="mb-24">
+    <section id="skills" className="relative py-40 bg-ink text-white overflow-hidden border-t-8 border-ink">
+      {/* Background Layers */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 opacity-[0.07] grayscale contrast-125">
+          <img src="/assets/img/blueprint.png" alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="absolute top-1/4 -right-1/4 w-[50vw] h-[50vw] bg-accent/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 -left-1/4 w-[50vw] h-[50vw] bg-accent/5 rounded-full blur-[100px]" />
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="mb-32 flex flex-col items-end">
           <motion.h2
             initial={{ clipPath: 'inset(0 0 100% 0)' }}
             whileInView={{ clipPath: 'inset(0 0 0% 0)' }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: chiselEasing }}
-            className="text-huge leading-none text-right"
+            transition={{ duration: 0.8, ease: chiselEasing }}
+            className="text-huge leading-none text-right uppercase text-white drop-shadow-2xl"
           >
-            SKILLS /<br />TOOLS
+            TECHNICAL<br /><span className="text-accent italic">ARSENAL</span>
           </motion.h2>
-          <div className="w-full h-8 bg-accent border-4 border-ink mt-8 misaligned-left" />
+          <div className="w-64 h-2 bg-accent mt-12 shadow-[0_0_20px_var(--accent)]" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-32 gap-y-24">
           {skills.map((skill, index) => (
             <motion.div
               key={skill.category}
-              initial={{ opacity: 0, scaleX: 0 }}
-              whileInView={{ opacity: 1, scaleX: 1 }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, ease: chiselEasing, delay: index * 0.1 }}
+              transition={{ duration: 0.6, ease: chiselEasing, delay: index * 0.1 }}
               className="origin-left group"
             >
-              <div className="flex items-end gap-6 mb-4">
-                <span className="text-huge leading-none font-heading text-accent/20 group-hover:text-accent transition-colors duration-100">0{index + 1}</span>
-                <h3 className="text-5xl font-heading mb-2 leading-none tracking-tighter">{skill.category}</h3>
+              <div className="flex items-end gap-8 mb-8">
+                <span className="text-huge leading-none font-heading text-accent/10 group-hover:text-accent transition-all duration-500 scale-90 group-hover:scale-100">0{index + 1}</span>
+                <div className="flex flex-col">
+                  <div className="w-8 h-[2px] bg-accent mb-2" />
+                  <h3 className="text-5xl font-heading leading-none tracking-tighter uppercase text-white group-hover:text-accent transition-colors">
+                    {skill.category}
+                  </h3>
+                </div>
               </div>
 
               <div className="flex flex-wrap gap-4">
                 {skill.items.map((item) => (
                   <motion.span
                     key={item}
-                    whileHover={{ scale: 1.05, rotate: index % 2 === 0 ? 2 : -2 }}
-                    className="px-6 py-2 bg-ink text-paper font-bold tracking-tighter hover:bg-accent hover:text-ink transition-colors duration-100"
+                    whileHover={{ scale: 1.1, y: -5 }}
+                    className="px-8 py-3 bg-white/5 border border-white/10 text-white font-mono text-xs uppercase tracking-[0.3em] hover:bg-accent hover:border-accent hover:text-ink transition-all duration-300 backdrop-blur-sm font-bold"
                   >
                     {item}
                   </motion.span>
                 ))}
               </div>
 
-              <div className="w-full h-1 bg-ink/10 mt-12" />
+              <div className="w-full h-[1px] bg-white/10 mt-16 group-hover:bg-accent/40 transition-colors" />
             </motion.div>
           ))}
         </div>
 
         {/* Large Background Subject Element */}
-        <div className="absolute -bottom-20 left-0 -translate-x-10 md:-translate-x-20 opacity-40 pointer-events-none select-none">
-          <p className="text-huge font-heading leading-none text-accent mix-blend-multiply">CORE</p>
+        <div className="absolute -bottom-20 left-0 -translate-x-10 md:-translate-x-20 opacity-5 pointer-events-none select-none">
+          <p className="text-[25vw] font-heading leading-none text-white uppercase">SYSTEM</p>
         </div>
       </div>
     </section>

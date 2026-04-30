@@ -33,53 +33,61 @@ function StackingCard({
     offset: ['start start', 'end end'],
   });
 
-  // Each card occupies a range of scroll progress
-  const cardStart = index / total;
-  const cardEnd = (index + 1) / total;
+  // Mapping for stacking within a more compact space
+  const cardStart = (index * 0.4); 
+  const cardEnd = ((index + 1) * 0.4);
 
-  // Scale down when a later card stacks on top
   const scale = useTransform(
     scrollYProgress,
-    [cardStart, cardEnd, Math.min(cardEnd + 0.1, 1)],
-    [1, 1, index < total - 1 ? 0.95 : 1]
+    [cardStart, cardEnd, 0.9, 1],
+    [1, 1, 0.95, 0.9]
   );
 
-  // Dim when covered by a later card
   const opacity = useTransform(
     scrollYProgress,
-    [cardStart, cardEnd, Math.min(cardEnd + 0.1, 1)],
-    [1, 1, index < total - 1 ? 0.6 : 1]
-  );
-
-  // Slight downward push for depth
-  const y = useTransform(
-    scrollYProgress,
-    [cardStart, cardEnd, Math.min(cardEnd + 0.1, 1)],
-    [0, 0, index < total - 1 ? 10 : 0]
+    [cardStart, cardEnd, 0.9, 1],
+    [1, 1, 0.8, 0.6]
   );
 
   return (
     <motion.div
-      style={{ scale, opacity, y }}
+      style={{ scale, opacity }}
       className="sticky w-full"
-      // Each card stacks a little lower so you can see the cascade
       data-card-index={index}
     >
       <div
-        style={{ top: `calc(20vh + ${index * 2}rem)` }}
+        style={{ top: `calc(20vh + ${index * 2.5}rem)` }}
         className="sticky"
       >
-        <div className="max-w-5xl mx-auto">
-          <div className="chisel-block p-10 group hover:misaligned-right transition-transform duration-100">
-            <div className="flex justify-between items-start mb-6">
-              <span className="text-accent font-heading text-4xl">{exp.period}</span>
-              <GraduationCap className="w-10 h-10 opacity-20 group-hover:opacity-100 transition-opacity" />
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="relative group">
+            <div className="absolute -left-4 md:-left-12 top-1/2 w-4 md:w-12 h-[2px] bg-accent/30 group-hover:bg-accent transition-colors" />
+            
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 group-hover:border-accent/50 transition-all duration-500 shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl group-hover:bg-accent/10 transition-colors" />
+              
+              <div className="flex justify-between items-start mb-8">
+                <div className="space-y-2">
+                  <span className="text-accent font-mono text-sm tracking-[0.3em] font-bold uppercase">{exp.period}</span>
+                  <div className="w-12 h-[2px] bg-accent/50" />
+                </div>
+                <GraduationCap className="w-10 h-10 md:w-12 md:h-12 text-accent opacity-20 group-hover:opacity-100 transition-all duration-500 transform group-hover:rotate-12" />
+              </div>
+              
+              <h3 className="text-4xl md:text-6xl font-heading mb-4 md:mb-6 leading-none tracking-tighter text-white uppercase italic">
+                {exp.title}
+              </h3>
+              
+              <p className="text-xl md:text-2xl font-bold uppercase mb-4 md:mb-6 text-accent tracking-widest">{exp.company}</p>
+              
+              <p className="text-lg md:text-xl font-medium leading-relaxed text-white/60 max-w-2xl">
+                {exp.description}
+              </p>
+
+              <div className="absolute bottom-4 right-8 opacity-10">
+                <span className="font-mono text-xs tracking-tighter uppercase">MOD-EXP-0{index + 1}</span>
+              </div>
             </div>
-            <h3 className="text-5xl font-heading mb-4 leading-none tracking-tighter">{exp.title}</h3>
-            <p className="text-xl font-bold uppercase mb-4 text-accent">{exp.company}</p>
-            <p className="text-lg font-medium leading-tight opacity-80">
-              {exp.description}
-            </p>
           </div>
         </div>
       </div>
@@ -95,30 +103,34 @@ export function Experience() {
     <section
       id="experience"
       ref={containerRef}
-      className="relative bg-accent text-ink border-t-8 border-ink"
-      style={{ height: `${(experiences.length) * 100}vh` }}
+      className="relative bg-ink text-white border-t-8 border-ink"
+      style={{ height: '160vh' }} // Shorter height to allow dragging the next section sooner
     >
-      <div className="sticky top-0">
-        {/* Header — stays visible at top */}
-        <div className="container mx-auto px-6 pt-24 pb-8">
-          <div className="mb-12 flex items-center gap-8">
+      <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0 opacity-[0.05] grayscale brightness-150">
+          <img src="/assets/img/blueprint.png" alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="absolute left-6 md:left-[50%] lg:left-[calc(50%-450px)] top-0 w-[2px] h-full bg-gradient-to-b from-accent/50 via-accent to-accent/50 opacity-20" />
+      </div>
+
+      <div className="sticky top-0 z-10 pointer-events-none">
+        <div className="container mx-auto px-6 pt-24 md:pt-32 pb-12">
+          <div className="mb-12 md:mb-20 flex flex-col items-start gap-4 pointer-events-auto">
             <motion.h2
               initial={{ clipPath: 'inset(0 100% 0 0)' }}
               whileInView={{ clipPath: 'inset(0 0 0 0)' }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: chiselEasing }}
-              className="text-huge leading-none"
+              transition={{ duration: 0.8, ease: chiselEasing }}
+              className="text-7xl md:text-huge leading-none uppercase text-white"
             >
-              JOURNEY
+              CHRONO<br /><span className="text-accent">LOGY</span>
             </motion.h2>
-            <div className="flex-1 h-1 bg-ink" />
-            <div className="hidden md:block chisel-block w-24 h-12" />
+            <div className="w-24 md:w-32 h-[4px] bg-accent shadow-[0_0_15px_var(--accent)]" />
           </div>
         </div>
       </div>
 
-      {/* Stacking cards area */}
-      <div className="container mx-auto px-6 relative">
+      <div className="container mx-auto px-0 md:px-6 relative z-20 -mt-20">
         {experiences.map((exp, index) => (
           <StackingCard
             key={index}

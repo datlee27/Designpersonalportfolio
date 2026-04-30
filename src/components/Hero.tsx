@@ -55,14 +55,16 @@ export function Hero() {
       {/* Cinematic Background Layer */}
       <div className="absolute inset-0 z-0">
         <motion.div 
-          style={{ opacity: glowOpacity, y: glowY }}
-          className="absolute top-[5%] -left-[10%] w-[70vw] h-[70vw] rounded-full blur-[100px] pointer-events-none bg-accent/10"
-          style={{ backgroundColor: colors.accentGlow }}
+          style={{ opacity: glowOpacity, y: glowY, backgroundColor: colors.accentGlow }}
+          className="absolute top-[5%] -left-[10%] w-[70vw] h-[70vw] rounded-full blur-[100px] pointer-events-none"
         />
         <motion.div 
-          style={{ opacity: glowOpacity, y: useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]) }}
-          className="absolute bottom-[5%] -right-[10%] w-[60vw] h-[60vw] rounded-full blur-[120px] pointer-events-none bg-accent/5"
-          style={{ backgroundColor: colors.accentGlow }}
+          style={{ 
+            opacity: glowOpacity, 
+            y: useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]),
+            backgroundColor: colors.accentGlow 
+          }}
+          className="absolute bottom-[5%] -right-[10%] w-[60vw] h-[60vw] rounded-full blur-[120px] pointer-events-none"
         />
         
         <div 
@@ -106,15 +108,16 @@ export function Hero() {
 
             {/* MAKE */}
             <motion.div
-              style={{ scale: makeScale, letterSpacing: makeSpacing }}
+              style={{ 
+                scale: makeScale, 
+                letterSpacing: makeSpacing,
+                WebkitTextStroke: `1px ${colors.text}`,
+                color: 'transparent'
+              }}
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: cinematicEasing, delay: 0.3 }}
               className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter italic will-change-transform"
-              style={{ 
-                WebkitTextStroke: `1px ${colors.text}`,
-                color: 'transparent'
-              }}
             >
               MAKE
             </motion.div>

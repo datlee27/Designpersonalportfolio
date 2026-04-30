@@ -12,34 +12,44 @@ export function Contact() {
 
   return (
     <section
-      className="w-full min-h-screen lg:h-screen flex items-center bg-paper text-ink overflow-hidden border-t-8 border-ink"
+      id="contact"
+      className="relative w-full min-h-screen flex items-center bg-ink text-white overflow-hidden border-t-8 border-ink"
     >
-      <div className="container mx-auto px-6 py-16 lg:py-24">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-24 w-full">
+      {/* Background Layers */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 opacity-[0.05] grayscale brightness-150">
+          <img src="/assets/img/blueprint.png" alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-radial-gradient from-accent/10 to-transparent blur-3xl" />
+      </div>
+
+      <div className="container mx-auto px-6 py-24 relative z-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-32 w-full items-center">
           <div className="flex-1">
             <motion.h2
               initial={{ clipPath: 'inset(100% 0 0 0)' }}
               whileInView={{ clipPath: 'inset(0% 0 0 0)' }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: chiselEasing }}
-              className="text-huge leading-[0.85] mb-12"
+              transition={{ duration: 0.8, ease: chiselEasing }}
+              className="text-[12vw] md:text-[8vw] leading-[0.8] mb-16 font-heading uppercase italic"
             >
-              LET'S<br />WORK<br /><span className="text-accent misaligned-right inline-block">FIX</span>
+              LET'S<br />BUILD<br /><span className="text-accent drop-shadow-[0_0_20px_rgba(33,68,105,0.5)]">FUTURE</span>
             </motion.h2>
 
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, delay: 0.4 }}
-              className="p-8 border-4 border-ink misaligned-left bg-paper"
+              className="p-10 border border-white/10 bg-white/5 backdrop-blur-xl relative overflow-hidden"
             >
-              <p className="text-2xl font-bold uppercase tracking-tighter">
+              <div className="absolute top-0 left-0 w-2 h-full bg-accent" />
+              <p className="text-2xl font-bold uppercase tracking-tighter text-white/90">
                 AVAILABLE FOR INDEPENDENT CONTRACTS & BOLD COLLABORATIONS.
               </p>
             </motion.div>
           </div>
 
-          <div className="flex-1 space-y-4">
+          <div className="flex-1 w-full space-y-6">
             {contactLinks.map((link, index) => {
               const Icon = link.icon;
               return (
@@ -48,18 +58,24 @@ export function Contact() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ transform: 'translateX(100%)', opacity: 0 }}
-                  whileInView={{ transform: 'translateX(0%)', opacity: 1 }}
+                  initial={{ x: 50, opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, ease: chiselEasing, delay: 0.1 * index }}
-                  className="block group focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent"
+                  whileHover={{ x: 10 }}
+                  transition={{ duration: 0.5, ease: chiselEasing, delay: 0.1 * index }}
+                  className="block group outline-none"
                 >
-                  <div className="chisel-block p-8 flex items-center justify-between group-hover:bg-accent group-hover:text-ink transition-colors duration-100">
-                    <div>
-                      <h3 className="text-4xl font-heading leading-none mb-2">{link.name}</h3>
-                      <p className="font-bold opacity-60 group-hover:opacity-100 transition-opacity">{link.value}</p>
+                  <div className="bg-white/5 border border-white/10 p-10 flex items-center justify-between group-hover:border-accent group-hover:bg-accent/10 transition-all duration-300 relative">
+                    <div className="space-y-2">
+                       <div className="flex items-center gap-3">
+                        <div className="w-6 h-[1px] bg-accent/50 group-hover:bg-accent" />
+                        <span className="font-mono text-[10px] text-accent tracking-[0.3em] font-bold">{link.name}</span>
+                       </div>
+                      <h3 className="text-4xl font-heading leading-none text-white">{link.value}</h3>
                     </div>
-                    <Icon className="w-12 h-12 opacity-20 group-hover:opacity-100 transition-opacity" />
+                    <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center group-hover:border-accent group-hover:bg-accent transition-all duration-300">
+                      <Icon className="w-6 h-6 text-white group-hover:text-ink transition-colors" />
+                    </div>
                   </div>
                 </motion.a>
               );
