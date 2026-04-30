@@ -65,16 +65,18 @@ export function Contact() {
                   transition={{ duration: 0.5, ease: chiselEasing, delay: 0.1 * index }}
                   className="block group outline-none"
                 >
-                  <div className="bg-white/5 border border-white/10 p-10 flex items-center justify-between group-hover:border-accent group-hover:bg-accent/10 transition-all duration-300 relative">
-                    <div className="space-y-2">
+                  <div className="bg-white/5 border border-white/10 p-6 md:p-10 flex items-center justify-between group-hover:border-accent group-hover:bg-accent/10 transition-all duration-300 relative overflow-hidden">
+                    <div className="space-y-2 flex-1 min-w-0 pr-4">
                        <div className="flex items-center gap-3">
                         <div className="w-6 h-[1px] bg-accent/50 group-hover:bg-accent" />
                         <span className="font-mono text-[10px] text-accent tracking-[0.3em] font-bold">{link.name}</span>
                        </div>
-                      <h3 className="text-4xl font-heading leading-none text-white">{link.value}</h3>
+                      <h3 className="text-xl md:text-4xl font-heading leading-none text-white truncate lg:overflow-visible">
+                        {link.value}
+                      </h3>
                     </div>
-                    <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center group-hover:border-accent group-hover:bg-accent transition-all duration-300">
-                      <Icon className="w-6 h-6 text-white group-hover:text-ink transition-colors" />
+                    <div className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0 rounded-full border border-white/10 flex items-center justify-center group-hover:border-accent group-hover:bg-accent transition-all duration-300">
+                      <Icon className="w-5 h-5 md:w-6 md:h-6 text-white group-hover:text-ink transition-colors" />
                     </div>
                   </div>
                 </motion.a>

@@ -12,7 +12,7 @@ export function HomePage() {
 
     if (isMobile) {
         return (
-            <div className="relative bg-paper">
+            <div className="relative bg-ink">
                 <div className="relative z-10">
                     <Hero />
                     <About />
@@ -38,7 +38,7 @@ export function HomePage() {
             </div>
 
             {/* The "Curtain" - All content that scrolls up to reveal Contact */}
-            <div className="relative z-10 bg-paper shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            <div className="relative z-10 bg-ink shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                 <Hero />
                 <About />
                 <Skills />

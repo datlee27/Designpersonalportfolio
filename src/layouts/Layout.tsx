@@ -47,10 +47,13 @@ export function Layout({ children }: LayoutProps) {
         }
     }, [pathname, hash]);
 
-    // Initialize Lenis for global smooth scrolling
+    // Initialize Lenis for global smooth scrolling (Desktop only)
     useEffect(() => {
+        // Only initialize on desktop for better mobile performance
+        if (window.innerWidth < 1024) return;
+
         const lenis = new Lenis({
-            lerp: 0.07,
+            lerp: 0.1, // Slightly faster lerp for snappier feel
             smoothWheel: true,
         });
 
@@ -67,7 +70,7 @@ export function Layout({ children }: LayoutProps) {
     }, []);
 
     return (
-        <div className="flex flex-col min-h-screen overflow-x-clip selection:bg-accent selection:text-ink bg-paper">
+        <div className="flex flex-col min-h-screen overflow-x-clip selection:bg-accent selection:text-ink bg-ink">
             <Navigation />
             <main className="flex-grow">
                 {children}

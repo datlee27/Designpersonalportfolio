@@ -13,12 +13,13 @@
   }
 
   html {
-    scroll-behavior: smooth;
-    /* Use manual scroll logic in Layout.tsx */
-    background-color: var(--paper);
-    color: var(--ink);
+    scroll-behavior: auto;
+    background-color: var(--ink); /* Changed to dark to prevent white flashes */
+    color: var(--paper); /* Default text to light for dark theme */
     font-family: 'Space Grotesk', sans-serif;
     height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
@@ -26,6 +27,16 @@
     position: relative;
     height: 100%;
     margin: 0;
+    background-color: var(--ink);
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .optimize-gpu {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+    will-change: transform, opacity;
   }
 
 

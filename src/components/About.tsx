@@ -65,7 +65,7 @@ function AboutDesktop() {
           style={{ overflow: 'clip' }}
         >
           {/* Layered Technical Background */}
-          <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 z-0 optimize-gpu">
             {/* Blueprint Texture */}
             <div className="absolute inset-0 opacity-10 grayscale brightness-150">
               <img src="/assets/img/blueprint.png" alt="" className="w-full h-full object-cover" />
@@ -73,11 +73,11 @@ function AboutDesktop() {
             {/* Navy Ambient Glows */}
             <motion.div 
               style={{ opacity: bgOpacity }}
-              className="absolute -top-[10%] -left-[10%] w-[60vw] h-[60vw] bg-accent/40 rounded-full blur-[120px]" 
+              className="absolute -top-[10%] -left-[10%] w-[60vw] h-[60vw] bg-accent/40 rounded-full blur-[120px] optimize-gpu" 
             />
             <motion.div 
               style={{ opacity: bgOpacity }}
-              className="absolute -bottom-[10%] -right-[10%] w-[50vw] h-[50vw] bg-accent/30 rounded-full blur-[100px]" 
+              className="absolute -bottom-[10%] -right-[10%] w-[50vw] h-[50vw] bg-accent/30 rounded-full blur-[100px] optimize-gpu" 
             />
             {/* Vignette */}
             <div className="absolute inset-0 bg-gradient-to-b from-ink via-transparent to-ink opacity-80" />
@@ -216,11 +216,11 @@ function AboutMobile() {
   return (
     <section id="about" className="relative border-t-8 border-ink bg-ink text-white py-32 overflow-hidden">
       {/* Background Layers - Fixed */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
+      <div className="fixed inset-0 z-0 pointer-events-none optimize-gpu">
         <div className="absolute inset-0 opacity-10 grayscale brightness-150">
           <img src="/assets/img/blueprint.png" alt="" className="w-full h-full object-cover" />
         </div>
-        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-accent/20 to-transparent blur-3xl" />
+        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-accent/20 to-transparent blur-3xl optimize-gpu" />
       </div>
 
       <div className="relative z-10">

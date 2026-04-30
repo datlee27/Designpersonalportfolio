@@ -56,7 +56,7 @@ export function Hero() {
       <div className="absolute inset-0 z-0">
         <motion.div 
           style={{ opacity: glowOpacity, y: glowY, backgroundColor: colors.accentGlow }}
-          className="absolute top-[5%] -left-[10%] w-[70vw] h-[70vw] rounded-full blur-[100px] pointer-events-none"
+          className="absolute top-[5%] -left-[10%] w-[70vw] h-[70vw] rounded-full blur-[100px] pointer-events-none optimize-gpu"
         />
         <motion.div 
           style={{ 
@@ -64,7 +64,7 @@ export function Hero() {
             y: useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]),
             backgroundColor: colors.accentGlow 
           }}
-          className="absolute bottom-[5%] -right-[10%] w-[60vw] h-[60vw] rounded-full blur-[120px] pointer-events-none"
+          className="absolute bottom-[5%] -right-[10%] w-[60vw] h-[60vw] rounded-full blur-[120px] pointer-events-none optimize-gpu"
         />
         
         <div 
@@ -78,7 +78,7 @@ export function Hero() {
 
       <motion.div 
         style={{ opacity, scale, rotateX, perspective: 1500 }}
-        className="container mx-auto px-6 relative z-10 flex-grow flex flex-col justify-center"
+        className="container mx-auto px-6 relative z-10 flex-grow flex flex-col justify-center optimize-gpu"
       >
         <div className="max-w-6xl mx-auto flex flex-col items-center">
           <motion.div
@@ -101,7 +101,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: cinematicEasing, delay: 0.1 }}
-              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter will-change-transform"
+              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter will-change-transform optimize-gpu"
             >
               THINK
             </motion.div>
@@ -117,7 +117,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: cinematicEasing, delay: 0.3 }}
-              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter italic will-change-transform"
+              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter italic will-change-transform optimize-gpu"
             >
               MAKE
             </motion.div>
@@ -128,7 +128,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: cinematicEasing, delay: 0.5 }}
-              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter will-change-transform"
+              className="text-[18vw] md:text-[14vw] lg:text-[12vw] tracking-tighter will-change-transform optimize-gpu"
             >
               IMPACT
             </motion.div>

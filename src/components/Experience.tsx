@@ -20,7 +20,6 @@ const experiences = [
 function StackingCard({
   exp,
   index,
-  total,
   containerRef,
 }: {
   exp: typeof experiences[0];
@@ -33,7 +32,6 @@ function StackingCard({
     offset: ['start start', 'end end'],
   });
 
-  // Mapping for stacking within a more compact space
   const cardStart = (index * 0.4); 
   const cardEnd = ((index + 1) * 0.4);
 
@@ -52,7 +50,7 @@ function StackingCard({
   return (
     <motion.div
       style={{ scale, opacity }}
-      className="sticky w-full"
+      className="sticky w-full optimize-gpu"
       data-card-index={index}
     >
       <div
@@ -64,7 +62,7 @@ function StackingCard({
             <div className="absolute -left-4 md:-left-12 top-1/2 w-4 md:w-12 h-[2px] bg-accent/30 group-hover:bg-accent transition-colors" />
             
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 group-hover:border-accent/50 transition-all duration-500 shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl group-hover:bg-accent/10 transition-colors" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl group-hover:bg-accent/10 transition-colors optimize-gpu" />
               
               <div className="flex justify-between items-start mb-8">
                 <div className="space-y-2">
@@ -104,7 +102,7 @@ export function Experience() {
       id="experience"
       ref={containerRef}
       className="relative bg-ink text-white border-t-8 border-ink"
-      style={{ height: '160vh' }} // Shorter height to allow dragging the next section sooner
+      style={{ height: '160vh' }}
     >
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 opacity-[0.05] grayscale brightness-150">
@@ -121,7 +119,7 @@ export function Experience() {
               whileInView={{ clipPath: 'inset(0 0 0 0)' }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: chiselEasing }}
-              className="text-7xl md:text-huge leading-none uppercase text-white"
+              className="text-7xl md:text-huge leading-none uppercase text-white optimize-gpu"
             >
               CHRONO<br /><span className="text-accent">LOGY</span>
             </motion.h2>
