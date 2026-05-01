@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionTemplate } from 'motion/react';
 import { Menu, X } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 const navItems = [
   { name: 'HOME', href: '/#hero', coord: '00' },
@@ -15,7 +15,7 @@ const navItems = [
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
-  const location = useLocation();
+
 
   // Smooth scroll interpolation for the frame contraction
   const smoothY = useSpring(scrollY, {
@@ -25,9 +25,9 @@ export function Header() {
   });
 
   // Frame padding: 16px at top -> 4px on scroll
-  const framePadding = useTransform(smoothY, [0, 400], ['16px', '4px']);
+ 
   const borderOpacity = useTransform(smoothY, [0, 200], [0, 1]);
-  const borderColor = useMotionTemplate`rgba(77, 163, 255, ${borderOpacity})`;
+  
   // Logo scale: 1.2 at top -> 0.9 on scroll
   const logoScale = useTransform(smoothY, [0, 150], [1.2, 0.9]);
 
@@ -36,7 +36,7 @@ export function Header() {
   return (
     <>
       {/* Viewport Overlay (No border, just layout container) */}
-      <div className="fixed inset-0 pointer-events-none z-[998] p-8">
+      <div className="fixed inset-0 pointer-events-none z-[998] p-6 md:p-8">
         <div className="w-full h-full relative">
           {/* Top-Left: Logo */}
           <div className="absolute top-0 left-0 pointer-events-auto origin-top-left">
@@ -74,9 +74,9 @@ export function Header() {
       {/* Mobile Menu Trigger */}
       <motion.button
         onClick={() => setIsMobileMenuOpen(true)}
-        className="md:hidden fixed top-8 right-8 z-[1000] p-4 bg-accent text-ink rounded-none active:scale-95 transition-transform"
+        className="md:hidden fixed top-6 right-6 z-[1000] p-2 bg-accent text-ink rounded-none active:scale-95 transition-transform"
       >
-        <Menu className="w-6 h-6" />
+        <Menu className="w-5 h-5" />
       </motion.button>
 
       {/* Mobile Menu Overlay */}

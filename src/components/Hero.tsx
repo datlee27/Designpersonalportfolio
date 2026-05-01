@@ -49,7 +49,7 @@ export function Hero() {
     <section 
       id="hero" 
       ref={containerRef} 
-      className="relative min-h-[120vh] flex flex-col items-center pt-40 pb-24 overflow-hidden"
+      className="relative min-h-[120vh] flex flex-col items-center pt-20 md:pt-40 pb-24 overflow-hidden"
       style={{ backgroundColor: colors.bg, color: colors.text }}
     >
       {/* Cinematic Background Layer */}
@@ -85,13 +85,13 @@ export function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: cinematicEasing }}
-            className="flex items-center gap-4 mb-12"
+            className="flex items-center justify-center gap-2 md:gap-4 mb-8 md:mb-12 w-full px-4"
           >
-            <div className="h-[1px] w-8 bg-current opacity-20" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.6em] opacity-40">
+            <div className="h-[1px] w-4 md:w-8 bg-current opacity-20 shrink-0" />
+            <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] md:tracking-[0.6em] opacity-40 text-center">
               Technical Artisan & Fullstack Developer
             </span>
-            <div className="h-[1px] w-8 bg-current opacity-20" />
+            <div className="h-[1px] w-4 md:w-8 bg-current opacity-20 shrink-0" />
           </motion.div>
 
           <h1 className="relative flex flex-col items-center text-center font-heading leading-[0.8] mb-20 select-none">
@@ -146,14 +146,14 @@ export function Hero() {
 
             <button
               onClick={scrollToWork}
-              className="group relative flex flex-col items-center gap-4 py-6 px-16 overflow-hidden transition-all duration-500"
+              className="group relative flex flex-col items-center gap-4 py-4 px-8 md:py-6 md:px-16 overflow-hidden transition-all duration-500"
             >
               <div className="absolute inset-0 border border-current opacity-10 group-hover:opacity-30 transition-opacity" />
               <div 
                 className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-out"
                 style={{ backgroundColor: colors.accent }}
               />
-              <span className="relative z-10 text-[11px] font-bold uppercase tracking-[0.5em] group-hover:text-black transition-colors duration-300">
+              <span className="relative z-10 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] md:tracking-[0.5em] group-hover:text-black transition-colors duration-300">
                 Initiate Exploration
               </span>
               <ArrowDown className="relative z-10 w-3 h-3 group-hover:translate-y-1 transition-all duration-300 group-hover:text-black" />

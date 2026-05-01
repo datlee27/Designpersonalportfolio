@@ -21,7 +21,7 @@ export function Contact() {
       </div>
 
       <div className="container mx-auto px-6 py-24 relative z-10">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-32 w-full items-center">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-32 w-full items-center">
           <div className="flex-1">
             <motion.h2
               initial={{ clipPath: 'inset(100% 0 0 0)' }}
@@ -37,10 +37,10 @@ export function Contact() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, delay: 0.4 }}
-              className="p-10 border border-white/10 bg-white/5 backdrop-blur-xl relative overflow-hidden"
+              className="p-6 md:p-10 border border-white/10 bg-white/5 backdrop-blur-xl relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-2 h-full bg-accent" />
-              <p className="text-2xl font-bold uppercase tracking-tighter text-white/90">
+              <p className="text-lg md:text-2xl font-bold uppercase tracking-tighter text-white/90">
                 AVAILABLE FOR INDEPENDENT CONTRACTS & BOLD COLLABORATIONS.
               </p>
             </motion.div>

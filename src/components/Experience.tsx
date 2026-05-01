@@ -54,7 +54,7 @@ function StackingCard({
       data-card-index={index}
     >
       <div
-        style={{ top: `calc(20vh + ${index * 2.5}rem)` }}
+        style={{ top: `calc(25vh + ${index * 2.5}rem)` }}
         className="sticky"
       >
         <div className="max-w-5xl mx-auto px-6">
@@ -112,7 +112,7 @@ export function Experience() {
               whileInView={{ clipPath: 'inset(0 0 0 0)' }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: chiselEasing }}
-              className="text-huge md:text-huge leading-none uppercase text-white/20 optimize-gpu"
+              className="text-6xl md:text-huge leading-none uppercase text-white/20 optimize-gpu"
             >
               CHRONO<br /><span className="text-accent/20">LOGY</span>
             </motion.h2>
@@ -120,7 +120,7 @@ export function Experience() {
         </div>
       </div>
 
-      <div className="container mx-auto px-0 md:px-6 relative z-10 -mt-32">
+      <div className="container mx-auto px-0 md:px-6 relative z-10 mt-0 md:-mt-32">
         {experiences.map((exp, index) => (
           <StackingCard
             key={index}

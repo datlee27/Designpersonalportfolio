@@ -119,14 +119,14 @@ export function Projects() {
           {/* Horizontal Scroll Container */}
           <div 
             ref={scrollContainerRef}
-            className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-8 px-6 pb-12"
+            className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-8 px-6 pb-6"
           >
             {projects.map((project) => (
               <div 
                 key={project.id} 
                 className="flex-shrink-0 w-[85vw] snap-center bg-white/5 backdrop-blur-xl border border-white/10 p-6 shadow-2xl relative optimize-gpu"
               >
-                <div className="relative h-64 w-full mb-8 overflow-hidden border border-white/20">
+                <div className="relative h-52 w-full mb-8 overflow-hidden border border-white/20">
                   <ImageWithFallback
                     src={project.image}
                     alt={project.title}
@@ -180,24 +180,24 @@ export function Projects() {
           </div>
           
           {/* Controls & Indicators */}
-          <div className="px-6 space-y-8">
+          <div className="px-6 space-y-4">
           
 
             {/* Navigation Buttons */}
-            <div className="flex justify-center gap-6">
+            <div className="flex justify-center gap-4">
               <button 
                 onClick={() => scroll('left')}
-                className="w-16 h-16 border-2 border-white/10 bg-white/5 flex items-center justify-center text-white active:bg-accent active:border-accent active:text-ink transition-all chisel-block"
+                className="w-12 h-12 border-2 border-white/10 bg-white/5 flex items-center justify-center text-white active:bg-accent active:border-accent active:text-ink transition-all chisel-block"
                 aria-label="Previous Project"
               >
-                <ChevronLeft size={32} strokeWidth={1.5} />
+                <ChevronLeft size={24} strokeWidth={1.5} />
               </button>
               <button 
                 onClick={() => scroll('right')}
-                className="w-16 h-16 border-2 border-white/10 bg-white/5 flex items-center justify-center text-white active:bg-accent active:border-accent active:text-ink transition-all chisel-block"
+                className="w-12 h-12 border-2 border-white/10 bg-white/5 flex items-center justify-center text-white active:bg-accent active:border-accent active:text-ink transition-all chisel-block"
                 aria-label="Next Project"
               >
-                <ChevronRight size={32} strokeWidth={1.5} />
+                <ChevronRight size={24} strokeWidth={1.5} />
               </button>
             </div>
           </div>
