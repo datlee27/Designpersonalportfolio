@@ -22,6 +22,25 @@ export function Preloader() {
     return () => clearInterval(interval);
   }, []);
 
+  // Handle scroll lock
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      window.dispatchEvent(new CustomEvent('lock-scroll'));
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      window.dispatchEvent(new CustomEvent('unlock-scroll'));
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      window.dispatchEvent(new CustomEvent('unlock-scroll'));
+    };
+  }, [isLoading]);
+
   const name = "DAT LEE".split("");
 
   return (

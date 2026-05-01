@@ -64,8 +64,16 @@ export function Layout({ children }: LayoutProps) {
 
         requestAnimationFrame(raf);
 
+        const handleLock = () => lenis.stop();
+        const handleUnlock = () => lenis.start();
+
+        window.addEventListener('lock-scroll', handleLock);
+        window.addEventListener('unlock-scroll', handleUnlock);
+
         return () => {
             lenis.destroy();
+            window.removeEventListener('lock-scroll', handleLock);
+            window.removeEventListener('unlock-scroll', handleUnlock);
         };
     }, []);
 
