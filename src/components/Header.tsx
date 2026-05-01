@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionTemplate } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'motion/react';
 import { Menu, X } from 'lucide-react';
-import { Link} from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const navItems = [
   { name: 'HOME', href: '/#hero', coord: '00' },
@@ -15,6 +15,9 @@ const navItems = [
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isBlog = location.pathname.startsWith('/blog');
 
 
   // Smooth scroll interpolation for the frame contraction
@@ -33,6 +36,14 @@ export function Header() {
 
   const chiselEasing = [0.2, 0, 0, 1] as const;
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.location.pathname !== '/') {
+      navigate('/');
+    }
+  };
+
   return (
     <>
       {/* Viewport Overlay (No border, just layout container) */}
@@ -43,10 +54,11 @@ export function Header() {
             <motion.div style={{ scale: logoScale }}>
               <Link 
                 to="/" 
-                className="text-[32px] font-heading leading-none tracking-tighter text-white hover:text-accent transition-colors duration-300 flex flex-col"
+                onClick={handleLogoClick}
+                className={`text-[32px] font-heading leading-none tracking-tighter hover:text-accent transition-colors duration-300 flex flex-col ${isBlog ? 'text-accent' : 'text-white'}`}
               >
                 <span>DAT LEE</span>
-                <span className="text-[10px] font-mono tracking-widest text-accent opacity-60 mt-1">.</span>
+                <span className={`text-[10px] font-mono tracking-widest opacity-60 mt-1 ${isBlog ? 'text-accent' : 'text-accent'}`}>.</span>
               </Link>
             </motion.div>
           </div>
@@ -57,11 +69,11 @@ export function Header() {
               <Link
                 key={item.name}
                 to={item.href}
-                className="group flex items-center gap-4 text-[14px] font-heading tracking-[0.2em] text-white/40 hover:text-accent transition-all duration-300"
+                className={`group flex items-center gap-4 text-[14px] font-heading tracking-[0.2em] hover:text-accent transition-all duration-300 ${isBlog ? 'text-accent/60' : 'text-white/40'}`}
               >
                 <span className="text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity">[{item.coord}]</span>
                 <span className="group-hover:translate-x-[-8px] transition-transform">{item.name}</span>
-                <div className="w-2 h-2 rounded-full border border-accent/20 group-hover:bg-accent group-hover:border-accent transition-all" />
+                <div className={`w-2 h-2 rounded-full border transition-all ${isBlog ? 'border-accent/40 group-hover:bg-accent group-hover:border-accent' : 'border-accent/20 group-hover:bg-accent group-hover:border-accent'}`} />
               </Link>
             ))}
           </div>
@@ -74,7 +86,7 @@ export function Header() {
       {/* Mobile Menu Trigger */}
       <motion.button
         onClick={() => setIsMobileMenuOpen(true)}
-        className="md:hidden fixed top-6 right-6 z-[1000] p-2 bg-accent text-ink rounded-none active:scale-95 transition-transform"
+        className={`md:hidden fixed top-6 right-6 z-[1000] p-2 rounded-none active:scale-95 transition-all ${isBlog ? 'bg-accent text-white' : 'bg-accent text-ink'}`}
       >
         <Menu className="w-5 h-5" />
       </motion.button>
