@@ -94,7 +94,7 @@ export function Layout({ children }: LayoutProps) {
                     <div className="flex whitespace-nowrap animate-marquee">
                         {[...Array(10)].map((_, i) => (
                             <span key={i} className="mx-4 font-bold text-[10px] uppercase tracking-widest">
-                                DAT LEE © 2026 ・ BRUTALIST BY DESIGN ・ INK ON PAPER ・ TRUTH IN ARCHITECTURE ・
+                                DAT LEE © 2026 ★ Fullstack Developer ・ UI Designer ★
                             </span>
                         ))}
                     </div>

@@ -44,8 +44,7 @@ function AboutDesktop() {
   const slide3Opacity = useTransform(scrollYProgress, [0.70, 0.85, 1], [0, 1, 1]);
   const slide3Y = useTransform(scrollYProgress, [0.70, 0.85], [40, 0]);
 
-  // Divider lines
-  const dividerScaleX = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
+  
   const divider3ScaleX = useTransform(scrollYProgress, [0.85, 0.95], [0, 1]);
 
   // Parallax for accent block behind image
