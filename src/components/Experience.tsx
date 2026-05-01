@@ -119,7 +119,7 @@ export function Experience() {
               whileInView={{ clipPath: 'inset(0 0 0 0)' }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: chiselEasing }}
-              className="text-7xl md:text-huge leading-none uppercase text-white/20 optimize-gpu"
+              className="text-huge md:text-huge leading-none uppercase text-white/20 optimize-gpu"
             >
               CHRONO<br /><span className="text-accent/20">LOGY</span>
             </motion.h2>

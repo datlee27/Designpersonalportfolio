@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef, useEffect, useState } from 'react';
-import { Github, ExternalLink } from 'lucide-react';
+import { Github, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 const projects = [
@@ -63,6 +63,7 @@ const projects = [
 
 export function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -84,6 +85,20 @@ export function Projects() {
   const x = useTransform(scrollYProgress, [0, 1], ['0vw', `${translateEnd}vw`]);
   const progressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, clientWidth } = scrollContainerRef.current;
+      const scrollTo = direction === 'left' 
+        ? scrollLeft - clientWidth * 0.85 
+        : scrollLeft + clientWidth * 0.85;
+      
+      scrollContainerRef.current.scrollTo({
+        left: scrollTo,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   if (isMobile) {
     return (
       <section id="projects" className="relative min-h-screen bg-ink py-32 overflow-hidden border-t-8 border-ink">
@@ -95,14 +110,17 @@ export function Projects() {
         <div className="relative z-10">
           <div className="px-6 mb-16">
             <span className="text-accent font-mono text-[10px] tracking-[0.8em] uppercase mb-4 block font-bold">Selected Works</span>
-            <h2 className="text-6xl font-heading tracking-tighter leading-none uppercase text-white">
+            <h2 className="text-huge font-heading tracking-tighter leading-none uppercase text-white">
               GALLERY<br /><span className="text-accent">PROJECTS</span>
             </h2>
             <div className="w-24 h-1 bg-accent mt-8 shadow-[0_0_10px_var(--accent)]" />
           </div>
 
           {/* Horizontal Scroll Container */}
-          <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-8 px-6 pb-12">
+          <div 
+            ref={scrollContainerRef}
+            className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-8 px-6 pb-12"
+          >
             {projects.map((project) => (
               <div 
                 key={project.id} 
@@ -138,9 +156,11 @@ export function Projects() {
                     </div>
                   </div>
 
-                  <p className="text-base text-white/60 leading-relaxed font-medium">
-                    {project.description}
-                  </p>
+                  <div className="max-h-[4.5rem] overflow-y-auto scrollbar-none">
+                    <p className="text-base text-white/60 leading-relaxed font-medium">
+                      {project.description}
+                    </p>
+                  </div>
 
                   <div className="flex flex-wrap gap-2 pt-4">
                     {project.tags.map(tag => (
@@ -159,11 +179,27 @@ export function Projects() {
             ))}
           </div>
           
-          {/* Scroll Indicator */}
-          <div className="px-6 flex items-center gap-4 mt-4 opacity-30">
-            <div className="h-[1px] flex-1 bg-white" />
-            <span className="font-mono text-[8px] uppercase tracking-[0.5em] text-white">Swipe to explore</span>
-            <div className="h-[1px] flex-1 bg-white" />
+          {/* Controls & Indicators */}
+          <div className="px-6 space-y-8">
+          
+
+            {/* Navigation Buttons */}
+            <div className="flex justify-center gap-6">
+              <button 
+                onClick={() => scroll('left')}
+                className="w-16 h-16 border-2 border-white/10 bg-white/5 flex items-center justify-center text-white active:bg-accent active:border-accent active:text-ink transition-all chisel-block"
+                aria-label="Previous Project"
+              >
+                <ChevronLeft size={32} strokeWidth={1.5} />
+              </button>
+              <button 
+                onClick={() => scroll('right')}
+                className="w-16 h-16 border-2 border-white/10 bg-white/5 flex items-center justify-center text-white active:bg-accent active:border-accent active:text-ink transition-all chisel-block"
+                aria-label="Next Project"
+              >
+                <ChevronRight size={32} strokeWidth={1.5} />
+              </button>
+            </div>
           </div>
         </div>
       </section>

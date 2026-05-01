@@ -31,7 +31,7 @@ export function Contact() {
               whileInView={{ clipPath: 'inset(0% 0 0 0)' }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: chiselEasing }}
-              className="text-[12vw] md:text-[8vw] leading-[0.8] mb-16 font-heading uppercase italic"
+              className="text-huge md:text-[8vw] leading-[0.8] mb-16 font-heading uppercase italic"
             >
               LET'S<br />BUILD<br /><span className="text-accent drop-shadow-[0_0_20px_rgba(33,68,105,0.5)]">FUTURE</span>
             </motion.h2>
