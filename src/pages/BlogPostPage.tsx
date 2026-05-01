@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { Clock, ArrowLeft, Heart, Share2, MoreHorizontal } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
-import { Navigation } from '../components/Navigation';
+import { Header } from '../components/Header';
 import { usePostAnalytics } from '../hooks/useBlogAnalytics';
 import { blogService, Post } from '../services/blogService';
 import { commentService, Comment } from '../services/commentService';
@@ -107,7 +107,7 @@ export function BlogPostPage() {
 
     return (
         <div className="min-h-screen bg-paper text-ink selection:bg-accent selection:text-ink pb-32">
-            <Navigation />
+            <Header />
 
             <section className="pt-40 pb-20">
                 <div className="container mx-auto px-6 max-w-4xl">

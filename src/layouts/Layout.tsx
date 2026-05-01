@@ -1,5 +1,5 @@
 import { ReactNode, useEffect } from 'react';
-import { Navigation } from '../components/Navigation';
+import { Header } from '../components/Header';
 import { useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 
@@ -79,7 +79,7 @@ export function Layout({ children }: LayoutProps) {
 
     return (
         <div className="flex flex-col min-h-screen overflow-x-clip selection:bg-accent selection:text-ink bg-ink">
-            <Navigation />
+            <Header />
             <main className="flex-grow">
                 {children}
             </main>

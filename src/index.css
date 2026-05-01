@@ -6,9 +6,10 @@
 
 @layer base {
   :root {
-    --ink: #111111;
-    --paper: #F5F5F5;
-    --accent: #214469;
+    --ink: #0A0A0B;
+    --paper: #F2F2F7;
+    --accent: #214469; /* Original sophisticated navy */
+    --accent-glow: rgba(33, 68, 105, 0.1);
     --font-heading: 'Bebas Neue', sans-serif;
     --chisel-easing: cubic-bezier(0.2, 0, 0, 1);
   }
@@ -145,81 +146,6 @@
     color: transparent;
   }
 
-  .bg-brutal-grid {
-    background-size: 40px 40px;
-    background-image: 
-      linear-gradient(to right, rgba(17, 17, 17, 0.1) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(17, 17, 17, 0.1) 1px, transparent 1px);
-  }
-
-  .text-tight {
-    letter-spacing: -0.05em;
-  }
-
-  .misaligned-right {
-    transform: rotate(1deg) translate(5px, 2px);
-  }
-
-  .misaligned-left {
-    transform: rotate(-0.5deg) translate(-3px, 1px);
-  }
-
-  /* Brutalist Scrollbar */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: rgba(17, 17, 17, 0.05);
-    /* Very faint ink bar */
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: var(--ink);
-  }
-
-  /* Electric Running Light Animation */
-  @keyframes border-run {
-    0% {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
-
-    100% {
-      transform: translate(-50%, -50%) rotate(360deg);
-    }
-  }
-
-  .electric-border {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .electric-border::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 300%;
-    height: 300%;
-    background: conic-gradient(transparent,
-        rgba(77, 163, 255, 0.4),
-        var(--accent),
-        transparent 20%);
-    animation: border-run 4s linear infinite;
-    z-index: 0;
-  }
-
-  .electric-border>* {
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Inner background to keep content clean */
-  .electric-border-inner {
-    margin: 2px;
-    height: calc(100% - 4px);
-    width: calc(100% - 4px);
-  }
 
   /* Hide scrollbar for Chrome, Safari and Opera */
   .scrollbar-none::-webkit-scrollbar {

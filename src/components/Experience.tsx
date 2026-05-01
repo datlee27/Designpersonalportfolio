@@ -104,13 +104,6 @@ export function Experience() {
       className="relative bg-ink text-white border-t-8 border-ink"
       style={{ height: '160vh' }}
     >
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 opacity-[0.05] grayscale brightness-150">
-          <img src="/assets/img/blueprint.png" alt="" className="w-full h-full object-cover" />
-        </div>
-        <div className="absolute left-6 md:left-[50%] lg:left-[calc(50%-450px)] top-0 w-[2px] h-full bg-gradient-to-b from-accent/50 via-accent to-accent/50 opacity-20" />
-      </div>
-
       <div className="sticky top-0 z-0 pointer-events-none">
         <div className="container mx-auto px-6 pt-24 md:pt-32 pb-12">
           <div className="mb-12 md:mb-20 flex flex-col items-start gap-4 pointer-events-auto">
@@ -123,7 +116,6 @@ export function Experience() {
             >
               CHRONO<br /><span className="text-accent/20">LOGY</span>
             </motion.h2>
-            <div className="w-24 md:w-32 h-[4px] bg-accent shadow-[0_0_15px_var(--accent)]" />
           </div>
         </div>
       </div>

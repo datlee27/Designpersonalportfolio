@@ -4,7 +4,7 @@ import { Eye, Heart, MessageSquare, Share2, MoreHorizontal } from 'lucide-react'
 import { Link } from 'react-router-dom';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { blogService, Post } from '../services/blogService';
-import { Navigation } from '../components/Navigation';
+import { Header } from '../components/Header';
 
 export function BlogPage() {
     const [posts, setPosts] = useState<Post[]>([]);
@@ -47,7 +47,7 @@ export function BlogPage() {
 
     return (
         <div className="min-h-screen bg-paper text-ink selection:bg-accent selection:text-ink">
-            <Navigation />
+            <Header />
 
             {/* Header Area */}
             <header className="pt-48 pb-20 border-b-8 border-ink">

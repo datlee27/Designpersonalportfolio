@@ -30,9 +30,6 @@ export function Skills() {
     <section id="skills" className="relative py-24 md:py-40 bg-ink text-white overflow-hidden border-t-8 border-ink">
       {/* Background Layers */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 opacity-[0.07] grayscale contrast-125">
-          <img src="/assets/img/blueprint.png" alt="" className="w-full h-full object-cover" />
-        </div>
         <div className="absolute top-1/4 -right-1/4 w-[50vw] h-[50vw] bg-accent/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-1/4 -left-1/4 w-[50vw] h-[50vw] bg-accent/5 rounded-full blur-[100px]" />
       </div>
@@ -48,7 +45,6 @@ export function Skills() {
           >
             TECHNICAL<br /><span className="text-accent italic">ARSENAL</span>
           </motion.h2>
-          <div className="w-64 h-2 bg-accent mt-12 shadow-[0_0_20px_var(--accent)]" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-32 gap-y-16 md:gap-y-24">

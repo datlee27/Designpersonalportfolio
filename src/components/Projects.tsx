@@ -310,7 +310,7 @@ export function Projects() {
           <div className="h-[2px] bg-white/20 relative overflow-hidden">
             <motion.div
               className="absolute top-0 left-0 h-full bg-accent"
-              style={{ width: progressWidth, boxShadow: '0 0 20px var(--accent)' }}
+              style={{ width: progressWidth }}
             />
           </div>
         </div>

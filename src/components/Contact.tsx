@@ -17,9 +17,6 @@ export function Contact() {
     >
       {/* Background Layers */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 opacity-[0.05] grayscale brightness-150">
-          <img src="/assets/img/blueprint.png" alt="" className="w-full h-full object-cover" />
-        </div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-radial-gradient from-accent/10 to-transparent blur-3xl" />
       </div>
 

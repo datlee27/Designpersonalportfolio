@@ -66,10 +66,8 @@ export function Preloader() {
             className="absolute left-0 right-0 h-[2px] bg-accent/20 blur-[2px] z-50 pointer-events-none"
           />
 
-          {/* Technical Background */}
-          <div className="absolute inset-0 opacity-[0.07] pointer-events-none grayscale contrast-125">
-            <img src="/assets/img/blueprint.png" alt="" className="w-full h-full object-cover" />
-          </div>
+          
+         
 
           <div className="relative w-full max-w-5xl px-8 md:px-12 space-y-16">
             {/* Brand Header */}

@@ -66,10 +66,7 @@ function AboutDesktop() {
         >
           {/* Layered Technical Background */}
           <div className="absolute inset-0 z-0 optimize-gpu">
-            {/* Blueprint Texture */}
-            <div className="absolute inset-0 opacity-10 grayscale brightness-150">
-              <img src="/assets/img/blueprint.png" alt="" className="w-full h-full object-cover grayscale brightness-150" />
-            </div>
+            
             {/* Navy Ambient Glows */}
             <motion.div 
               style={{ opacity: bgOpacity }}
@@ -95,13 +92,8 @@ function AboutDesktop() {
             }}
             className="absolute inset-0 flex flex-col justify-center items-center text-center px-6 z-10"
           >
-             <span className="text-accent font-mono tracking-[1.2em] uppercase text-[10px] mb-8 block font-bold">Evolution Analysis</span>
+             <span className="text-accent/60 font-mono tracking-[1.2em] uppercase text-[10px] mb-8 block font-bold">Evolution Analysis</span>
             <h2 className="text-huge leading-none font-heading text-white drop-shadow-2xl">THE MAKER</h2>
-
-            <motion.div
-              style={{ scaleX: dividerScaleX }}
-              className="w-48 h-2 bg-accent mt-8 origin-left"
-            />
           </motion.div>
 
           {/* ═══════════════════════════════════════════════
@@ -164,8 +156,14 @@ function AboutDesktop() {
                   {/* Chisel Accent Underlay with parallax */}
                   <motion.div
                     style={{ y: accentY }}
-                    className="absolute top-10 right-0 w-full h-full bg-accent -z-10 chisel-block-accent translate-x-4 md:translate-x-12 opacity-80"
-                  />
+                    className="absolute top-10 right-0 w-full h-full bg-accent -z-10 chisel-block-accent translate-x-4 md:translate-x-12 opacity-80 overflow-hidden"
+                  >
+                    <img 
+                      src="/assets/img/blueprint.png" 
+                      alt="" 
+                      className="absolute inset-0 w-full h-full object-cover opacity-20 grayscale brightness-150 mix-blend-overlay" 
+                    />
+                  </motion.div>
                 </motion.div>
               </div>
             </div>
@@ -215,13 +213,8 @@ function AboutDesktop() {
 function AboutMobile() {
   return (
     <section id="about" className="relative border-t-8 border-ink bg-ink text-white py-32 overflow-hidden">
-      {/* Background Layers - Fixed */}
-      <div className="fixed inset-0 z-0 pointer-events-none optimize-gpu">
-        <div className="absolute inset-0 opacity-10 grayscale brightness-150">
-          <img src="/assets/img/blueprint.png" alt="" className="w-full h-full object-cover" />
-        </div>
-        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-accent/20 to-transparent blur-3xl optimize-gpu" />
-      </div>
+      {/* Background Layers - Ambient Only */}
+      <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-accent/20 to-transparent blur-3xl optimize-gpu pointer-events-none" />
 
       <div className="relative z-10">
         {/* SLIDE 1 */}
@@ -272,7 +265,13 @@ function AboutMobile() {
                   className="w-full aspect-[3/4] object-cover"
                 />
               </div>
-              <div className="absolute top-6 right-0 w-full h-full bg-accent -z-10 chisel-block-accent translate-x-4 opacity-50" />
+              <div className="absolute top-6 right-0 w-full h-full bg-accent -z-10 chisel-block-accent translate-x-4 opacity-50 overflow-hidden">
+                <img 
+                  src="/assets/img/blueprint.png" 
+                  alt="" 
+                  className="absolute inset-0 w-full h-full object-cover opacity-30 grayscale brightness-150 mix-blend-overlay" 
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -77,10 +77,7 @@ export function Chatbot() {
                                 />
                             </div>
                         </div>
-                        {/* Status Label */}
-                        <div className="absolute top-0 right-full mr-4 opacity-0 group-hover:opacity-100 transition-opacity bg-ink text-paper px-4 py-2 font-heading text-xl whitespace-nowrap misaligned-left">
-                            TALK TO INTEL
-                        </div>
+                      
                     </motion.button>
                 )}
             </AnimatePresence>
