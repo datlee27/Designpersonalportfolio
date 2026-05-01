@@ -71,15 +71,9 @@ export function Preloader() {
 
           <div className="relative w-full max-w-5xl px-8 md:px-12 space-y-16">
             {/* Brand Header */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
-              <div className="space-y-4">
-                 <motion.div
-                   initial={{ width: 0 }}
-                   animate={{ width: '100%' }}
-                   transition={{ duration: 1, ease: chiselEasing }}
-                   className="h-[1px] bg-accent/30"
-                 />
-                 <div className="flex gap-1 overflow-hidden">
+            <div className="flex flex-col items-center gap-8">
+              <div className="space-y-4 flex flex-col items-center">
+                 <div className="flex gap-1 overflow-hidden justify-center">
                    {name.map((char, i) => (
                      <motion.span
                        key={i}
@@ -103,32 +97,12 @@ export function Preloader() {
                    >★</motion.span>
                  </div>
               </div>
-              
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1 }}
-                className="text-left md:text-right font-mono text-[9px] text-white/30 space-y-1"
-              >
-                <div className="flex items-center gap-2 justify-start md:justify-end">
-                  <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                  <p>TERMINAL_SESSION: ACTIVE</p>
-                </div>
-                <p>PROTOCOL_V.03_BYPASS</p>
-                <p className="text-accent/50 uppercase">Lat: 16.0544 / Lng: 108.2022</p>
-              </motion.div>
             </div>
 
             {/* Progress Bar Container */}
-            <div className="space-y-6">
+            <div className="max-w-md mx-auto w-full space-y-6">
               <div className="flex justify-between items-end font-mono text-[10px] tracking-[0.4em] font-bold">
-                <div className="flex gap-4">
-                  <span className="text-accent">CORE_INIT</span>
-                  <span className="text-white/20">|</span>
-                  <span className="text-white/60 animate-pulse">
-                    {progress < 30 ? 'LOADING_ASSETS' : progress < 70 ? 'COMPILING_SHADERS' : 'FINALIZING_LAYOUT'}
-                  </span>
-                </div>
+                <span className="text-accent/60 uppercase">System_Initializing</span>
                 <span className="text-accent text-2xl">{progress}%</span>
               </div>
               
@@ -140,39 +114,7 @@ export function Preloader() {
                   className="absolute top-0 left-0 h-full bg-accent origin-left shadow-[0_0_20px_var(--accent)]"
                 />
               </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono text-[8px] text-white/20 uppercase tracking-widest border-t border-white/5 pt-6">
-                <div className="flex items-center gap-2">
-                  <div className={`w-1.5 h-1.5 ${progress > 20 ? 'bg-accent' : 'bg-white/10'}`} />
-                  <span>Brutalist_UI</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className={`w-1.5 h-1.5 ${progress > 50 ? 'bg-accent' : 'bg-white/10'}`} />
-                  <span>Motion_Engine</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className={`w-1.5 h-1.5 ${progress > 80 ? 'bg-accent' : 'bg-white/10'}`} />
-                  <span>Cinematic_Core</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className={`w-1.5 h-1.5 ${progress === 100 ? 'bg-accent' : 'bg-white/10'}`} />
-                  <span>Ready_State</span>
-                </div>
-              </div>
             </div>
-
-            {/* Decorative Corner Markers */}
-            <div className="absolute -top-12 -left-4 w-12 h-12 border-t border-l border-accent/30" />
-            <div className="absolute -bottom-12 -right-4 w-12 h-12 border-b border-r border-accent/30" />
-          </div>
-
-          {/* Footer Meta */}
-          <div className="absolute bottom-12 left-12 right-12 flex justify-between items-center font-mono text-[8px] text-white/10 uppercase tracking-widest pointer-events-none">
-             <div className="flex gap-8">
-               <p>© 2026 TECHNICAL_ARTISAN</p>
-               <p className="hidden md:block">BUILD_HASH: 0X4F3A2B</p>
-             </div>
-             <p className="animate-pulse">Awaiting final handshake...</p>
           </div>
         </motion.div>
       )}

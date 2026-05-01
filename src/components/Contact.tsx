@@ -36,7 +36,8 @@ export function Contact() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, delay: 0.4 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
               className="p-6 md:p-10 border border-white/10 bg-white/5 backdrop-blur-xl relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-2 h-full bg-accent" />
