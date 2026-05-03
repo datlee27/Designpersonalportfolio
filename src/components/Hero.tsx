@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'motion/react';
-import { ArrowDown } from 'lucide-react';
+
 import { useRef } from 'react';
 
 export function Hero() {
