@@ -29,7 +29,7 @@ export function Header() {
 
   // Frame padding: 16px at top -> 4px on scroll
  
-  const borderOpacity = useTransform(smoothY, [0, 200], [0, 1]);
+
   
   // Logo scale: 1.2 at top -> 0.9 on scroll
   const logoScale = useTransform(smoothY, [0, 150], [1.2, 0.9]);
@@ -65,7 +65,7 @@ export function Header() {
 
           {/* Top-Right: Desktop Navigation */}
           <div className="hidden md:flex absolute top-0 right-0 pointer-events-auto flex-col items-end gap-1">
-            {navItems.map((item, index) => (
+            {navItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}

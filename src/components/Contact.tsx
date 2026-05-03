@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Mail, Github, Facebook, Phone } from 'lucide-react';
+import { Mail, Github, Facebook} from 'lucide-react';
 
 const contactLinks = [
   { name: "EMAIL", value: "LVD27012004@GMAIL.COM", href: "mailto:lvd27012004@gmail.com", icon: Mail },
